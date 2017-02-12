@@ -17,6 +17,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 return Redirect(Url.Content("~/User/MyAccount"));
             }
             return Redirect(Url.Content("~/Employer/Index"));
+
         }
         public ActionResult Index()
         {
