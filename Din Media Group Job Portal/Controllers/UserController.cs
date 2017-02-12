@@ -12,10 +12,6 @@ namespace Din_Media_Group_Job_Portal.Controllers
         //
         // GET: /User/
 
-
-
-
-
         public ActionResult Home()
         {
             if (Session["type"] == null)
@@ -37,14 +33,12 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             if(userName=="mohsin")
             {
-               
                 Session["user"] = userName;
                 Session["type"] = "jobseeker";
                return Redirect(Url.Content("~/User/Home"));
             }
             else if (userName == "dinnews")
             {
-
                 Session["user"] = userName;
                 Session["type"] = "employer";
                 return Redirect(Url.Content("~/Employer"));
