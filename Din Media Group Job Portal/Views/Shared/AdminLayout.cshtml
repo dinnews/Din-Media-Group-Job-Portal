@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="@Url.Content("~/Content/userContent/images/logo.ico")" />
+    <title>@ViewBag.Title</title>
+   <!-- <link rel="stylesheet" href="@Url.Content("~/Content/userContent/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/userContent/css/colors/green.css")" id="colors">-->
+    <link href="@Url.Content("~/Content/adminContent/css/style.default.css")" rel="stylesheet">
+</head>
+<body>
+
+
+    <script src="@Url.Content("~/Scripts/adminScripts/js/jquery-1.11.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/jquery-migrate-1.2.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/jquery-ui-1.10.3.min.js")"></script>
+ 
+    <script src="@Url.Content("~/Scripts/adminScripts/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/modernizr.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/jquery.sparkline.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/toggles.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/retina.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/jquery.cookies.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/flot/jquery.flot.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/flot/jquery.flot.resize.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/flot/jquery.flot.spline.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/morris.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/raphael-2.1.0.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/custom.js")"></script>
+    <script src="@Url.Content("~/Scripts/adminScripts/js/dashboard.js")"></script>
+
+
+
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@{
+    if (Session["type"] == "jobseeker")
+    {
+        @Html.Partial("~/Views/Header/_partialLoggedInUserHeader.cshtml")
+    }
+    else if (Session["type"] == "employer")
+    {
+        
+       @Html.Partial("~/Views/Header/_partialLoggedInEmployerHeader.cshtml")
+
+    }
+    else
+    {
+     
+        @Html.Partial("~/Views/Header/_partialUserHeader.cshtml")
+        
+
+
+    }
+}
