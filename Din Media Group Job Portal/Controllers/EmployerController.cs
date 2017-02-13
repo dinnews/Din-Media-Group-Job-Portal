@@ -10,16 +10,8 @@ namespace Din_Media_Group_Job_Portal.Controllers
     {
         //
         // GET: /Employer/
-        public ActionResult Home()
-        {
-            if (Session["type"] == null )
-            {
-                return Redirect(Url.Content("~/User/MyAccount"));
-            }
-            return Redirect(Url.Content("~/Employer/Index"));
-
-        }
-        public ActionResult Index()
+       
+        public ActionResult EmployerHome()
         {
             return View("EmployerHome");
         }
@@ -38,8 +30,6 @@ namespace Din_Media_Group_Job_Portal.Controllers
         public ActionResult BrowseResume()
         {
             return View();
-        }
-       
-
+        }       
     }
 }

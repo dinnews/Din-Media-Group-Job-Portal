@@ -16,7 +16,7 @@ namespace Din_Media_Group_Job_Portal
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Home", id = UrlParameter.Optional }
             );
         }
     }

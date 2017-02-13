@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Din_Media_Group_Job_Portal.Models;
+
 
 namespace Din_Media_Group_Job_Portal.Controllers
 {
@@ -14,14 +14,9 @@ namespace Din_Media_Group_Job_Portal.Controllers
 
         public ActionResult Home()
         {
-            if (Session["type"] == null)
-            {
-                return Redirect(Url.Content("~/User/MyAccount"));
-            }
-            return View("BrowseJob");
+
+            return View();
         }
-       
-        //jobseeker.userName="mohsin";
        
         public ActionResult Index()
         {
@@ -35,31 +30,19 @@ namespace Din_Media_Group_Job_Portal.Controllers
             {
                 Session["user"] = userName;
                 Session["type"] = "jobseeker";
-               return Redirect(Url.Content("~/User/Home"));
+               return RedirectToAction("Home", "User");
             }
             else if (userName == "dinnews")
             {
                 Session["user"] = userName;
                 Session["type"] = "employer";
-                return Redirect(Url.Content("~/Employer"));
+                return RedirectToAction("EmployerHome", "Employer");
             }
             ViewBag.ErrorLogin = "Kindly Check Username or Password";
             return View("MyAccount");
-
            
         }
-        public ActionResult UserProfile()
-        {
-            return View("UserProfile");
-        }
-        public ActionResult BrowseJob()
-        {
-            return View();
-        }
-        public ActionResult JobDetails()
-        {
-            return View();
-        }
+        
         public ActionResult ContactUs()
         {
             return View();
@@ -68,28 +51,14 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             return View();
         }
-        public ActionResult AddResume()
-        {
-            return View();
-        }
-        public ActionResult ManageResume()
-        {
-            return View();
-        }
-
-        public ActionResult BuyPremiumServices()
+        public ActionResult Premium()
         {
             return View("Premium");
-        }
-        public ActionResult AllCatagories()
-        {
-            return View("Catagories");
-        }
-        
+        }      
        public ActionResult LogOut()
         {
             Session.Abandon();
-            return Redirect(Url.Content("~/User/Index"));
+            return RedirectToAction("Home", "User");
         }
 
     }

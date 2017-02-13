@@ -133,12 +133,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
+    <Compile Include="Controllers\JobSeekerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin\AdminConstants.cs" />
-    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -382,7 +381,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\userContent\css\base.css" />
-    <Content Include="Content\userContent\css\colors\green - Copy.css" />
+    <Content Include="Content\userContent\css\colors\green-changed.css" />
     <Content Include="Content\userContent\css\colors\green.css" />
     <Content Include="Content\userContent\css\font-awesome.css" />
     <Content Include="Content\userContent\css\responsive.css" />
@@ -679,21 +678,21 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\Header\_partialUserHeader.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\Home.cshtml" />
+    <Content Include="Views\JobSeeker\UserProfile.cshtml" />
     <Content Include="Views\Footer\_partialUserFooter.cshtml" />
-    <Content Include="Views\User\BrowseJob.cshtml" />
-    <Content Include="Views\User\JobDetails.cshtml" />
+    <Content Include="Views\JobSeeker\BrowseJob.cshtml" />
+    <Content Include="Views\JobSeeker\JobDetails.cshtml" />
     <Content Include="Views\User\MyAccount.cshtml" />
-    <Content Include="Views\User\AddResume.cshtml" />
+    <Content Include="Views\JobSeeker\AddResume.cshtml" />
     <Content Include="Views\User\ContactUs.cshtml" />
-    <Content Include="Views\User\ManageResume.cshtml" />
+    <Content Include="Views\JobSeeker\ManageResume.cshtml" />
     <Content Include="Views\Employer\PostJob.cshtml" />
     <Content Include="Views\Employer\ManageJobs.cshtml" />
     <Content Include="Views\Employer\ManageApplications.cshtml" />
     <Content Include="Views\Employer\BrowseResume.cshtml" />
     <Content Include="Views\User\Premium.cshtml" />
-    <Content Include="Views\User\Catagories.cshtml" />
+    <Content Include="Views\JobSeeker\Catagories.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Header\_partialAdminHeader.cshtml" />
@@ -706,6 +705,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

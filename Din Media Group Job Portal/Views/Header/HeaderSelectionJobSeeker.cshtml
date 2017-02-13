@@ -6,19 +6,12 @@
     }
     else if (Session["type"] == "employer")
     {
-
         //@Html.Partial("~/Views/Header/_partialLoggedInEmployerHeader.cshtml")
         Response.Redirect("~/User/MyAccount");
 
     }
     else
     {
-
-
-        // Session.Abandon();
         Response.Redirect("~/User/MyAccount");
-
-
-
     }
 }

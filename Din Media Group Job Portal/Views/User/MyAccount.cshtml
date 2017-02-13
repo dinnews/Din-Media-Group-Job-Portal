@@ -10,7 +10,7 @@
     }
     else if (Session["type"] == "employer")
     {
-        Response.Redirect("~/Employer/");
+        Response.Redirect("~/Employer/EmployerHome");
     }
     else
     {
@@ -33,7 +33,6 @@
     <script>
         $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
     </script>
-
 
     <!-- Titlebar
     ================================================== -->
@@ -76,7 +75,7 @@
                             <label for="username">
                                 Username:
                                 <i class="ln ln-icon-Male"></i>
-                                <input type="text" class="input-text" name="userName" id="username" value="" />
+                                <input type="text" class="input-text" name="userName" id="username" value="" required />
                             </label>
                         </p>
 
@@ -84,19 +83,19 @@
                             <label for="password">
                                 Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" />
+                                <input class="input-text" type="password" name="password" id="password" required/>
                             </label>
                         </p>
 
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="login" value="Login" />
-                            <label for="errorLogin" class="danger">
-                                @ViewBag.ErrorLogin
-                            </label>
+                            <p class="lost_password">
+                               @ViewBag.ErrorLogin
+                            </p>
                             <label for="rememberme" class="rememberme">
                                 <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember Me
                             </label>
-                        </p>
+                        
 
                         <p class="lost_password">
                             <a href="#">Lost Your Password?</a>
@@ -151,8 +150,6 @@
             </div>
         </div>
     </div>
-
-
 
     <!-- Footer
     ================================================== -->
