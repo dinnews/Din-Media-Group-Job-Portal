@@ -693,7 +693,7 @@
     <Content Include="Views\Employer\BrowseResume.cshtml" />
     <Content Include="Views\User\Premium.cshtml" />
     <Content Include="Views\JobSeeker\Catagories.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Header\_partialAdminHeader.cshtml" />
     <Content Include="Views\Header\_partialLoggedInUserHeader.cshtml" />
@@ -702,6 +702,11 @@
     <Content Include="Views\Employer\EmployerHome.cshtml" />
     <Content Include="Views\Header\HeaderSelectionEmployer.cshtml" />
     <Content Include="Views\Header\HeaderSelectionJobSeeker.cshtml" />
+    <Content Include="Views\Admin\ViewEmployers.cshtml" />
+    <Content Include="Views\Admin\ViewJobSeekers.cshtml" />
+    <Content Include="Views\Admin\ViewComplaints.cshtml" />
+    <Content Include="Views\Admin\ReadComplain.cshtml" />
+    <Content Include="Views\JobSeeker\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

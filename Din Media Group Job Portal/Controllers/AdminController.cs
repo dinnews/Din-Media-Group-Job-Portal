@@ -11,10 +11,27 @@ namespace Din_Media_Group_Job_Portal.Controllers
         //
         // GET: /Admin/
 
-        public ActionResult Index()
+        public ActionResult AdminDashboard()
         {
             return View();
         }
+        public ActionResult ViewEmployers()
+        {
+            return View();
+        }
+        public ActionResult ViewJobSeekers()
+        {
+            return View();
+        }
+        public ActionResult ViewComplaints()
+        {
+            return View();
+        }
+        public ActionResult ReadComplain()
+        {
+            return View();
+        }
+
 
     }
 }
