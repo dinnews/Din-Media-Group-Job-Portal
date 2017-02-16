@@ -169,6 +169,7 @@
     <Content Include="Content\adminContent\css\style.default.css" />
     <Content Include="Content\adminContent\css\toggles.css" />
     <Content Include="Content\adminContent\css\weather-icons.min.css" />
+    <Content Include="Content\adminContent\css\wysiwyg-color.css" />
     <Content Include="Content\adminContent\fonts\fontawesome-webfont862f.svg" />
     <Content Include="Content\adminContent\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\adminContent\fonts\lato\Lato-Bla-webfont.svg" />
@@ -707,9 +708,13 @@
     <Content Include="Views\Admin\ViewComplaints.cshtml" />
     <Content Include="Views\Admin\ReadComplain.cshtml" />
     <Content Include="Views\JobSeeker\Dashboard.cshtml" />
+    <Content Include="Views\Admin\SendEmail.cshtml" />
+    <Content Include="Views\Admin\ViewJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Employer_Profile_images\" />
+    <Folder Include="JobSeeker_Profile_images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
