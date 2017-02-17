@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Account Setting";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div id="wrapper">
+
+    <!-- Header
+    ================================================== -->
+    <header class="sticky-header full-width">
+        @Html.Partial("~/Views/Header/HeaderSelectionJobSeeker.cshtml")
+    </header>
+    <div class="clearfix"></div>
+    <script>
+        $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
+    </script>
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="single">
+        <div class="container">
+
+            <div class="sixteen columns">
+                <h2>Account Setting</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li>You are here:</li>
+                        <li><a href="#">Home</a></li>
+                        <li>Account Setting</li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Content
+    ================================================== -->
+    <!-- Container -->
+    <div class="container">
+
+        <div class="my-account">
+            <ul class="tabs-nav">
+                <li class=""><a href="#tab2">Account Settings</a></li>
+                <li><a href="#tab1">Change Password</a></li>
+            </ul>
+
+            <div class="tabs-container">
+                <!-- udate Accout Setting -->
+                <div class="tab-content" id="tab2" style="display: none;">
+                    <form method="post" class="register">
+                        <div class="single">
+                            <p class="form-row form-row-wide">
+                                <label for="first-name">
+                                    First Name
+                                    <i class="ln ln-icon-Male"></i>
+                                    <input type="text" class="input-text" name="firtName" id="first-name" value="Dr Allama" />
+                                </label>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="first-name">
+                                    Last Name
+                                    <i class="ln ln-icon-Male"></i>
+                                    <input type="text" class="input-text" name="lastName" id="last-name" value="iqbal" />
+                                </label>
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="email2">
+                                    Email Address:
+                                    <i class="ln ln-icon-Mail"></i>
+                                    <input type="text" class="input-text" name="email" id="email2" value="someone@gmail.com" />
+                                </label>
+                            </p>
+                        </div>
+                        <div class="mainpanel single">
+                            <p class="form-row form-row-wide">
+                                <h3>
+                                    What were You looking for......
+                                </h3>
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="work-location">
+                                    Preferred Work Location:
+                                    <i class="ln ln-icon-Location-2"></i>
+                                    <input type="text" class="input-text" name="work-location" id="work-location" value="Lahore" />
+                                </label>
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    Desired Job Title:
+                                    <i class="ln ln-icon-Suitcase"></i>
+                                    <input class="input-text" type="text" name="job-title" id="job-title" value="Software Engineer" />
+                                </label>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    I'm interested in (Please select at least one option)
+                                </label>
+                                <div class="row">
+                                    <input class="checkboxes" type="checkbox" name="fulltime" id="interests" checked />Full Time
+                                    <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Part Time
+                                    <input class="checkboxes" type="checkbox" name="internship" id="interests" />Internship
+                                    <input class="checkboxes" type="checkbox" name="freelance" id="interests" checked />Freelance
+                                </div>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    Select Your Catagory
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                                        <option value="">Select your Catagory</option>
+                                        <option value="Software Engineer">Software Engineer</option>
+                                        <option value="Qualit Manager" selected="selected">Qualit Manager</option>
+                                        <option value="Content Writer">Content Writer</option>
+                                    </select>
+                                </label>
+                            </p>
+
+                        </div>
+                        <p class="form-row">
+                            <input type="submit" class="button border fw margin-top-10" name="register" value="Update" />
+                        </p>
+
+                    </form>
+                </div>
+                <!-- Login -->
+                <div class="tab-content" id="tab1" style="display: none;">
+                    <form method="post" class="login" action="#">
+
+                        <p class="form-row form-row-wide">
+                            <label for="old-password">
+                                Old Password:
+                                <i class="ln ln-icon-Lock-2"></i>
+                                <input class="input-text" type="password" name="password" id="password" required />
+                            </label>
+                        </p>
+
+                        <p class="form-row form-row-wide">
+                            <label for="password">
+                                New Password:
+                                <i class="ln ln-icon-Lock-2"></i>
+                                <input class="input-text" type="password" name="password" id="password" required />
+                            </label>
+                        </p>
+                        <p class="form-row form-row-wide">
+                            <label for="repeat-password">
+                                Repeat Password:
+                                <i class="ln ln-icon-Lock-2"></i>
+                                <input class="input-text" type="password" name="repeat-password" id="repeat-password" required />
+                            </label>
+                        </p>
+
+                        <p class="form-row">
+                            <input type="submit" class="button border fw margin-top-10" name="login" value="Update Password" />
+                        <p class="lost_password">
+                            @ViewBag.ErrorLogin
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer
+    ================================================== -->
+    <div class="margin-top-30"></div>
+
+    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->
