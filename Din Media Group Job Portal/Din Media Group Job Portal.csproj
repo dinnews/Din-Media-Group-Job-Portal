@@ -710,6 +710,10 @@
     <Content Include="Views\JobSeeker\Dashboard.cshtml" />
     <Content Include="Views\Admin\ViewJobs.cshtml" />
     <Content Include="Views\Admin\SendEmail.cshtml" />
+    <Content Include="Views\JobSeeker\AccountSetting.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\JobSeeker\AppliedJobs.cshtml" />
+    <Content Include="Views\JobSeeker\SavedJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

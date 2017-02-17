@@ -134,19 +134,39 @@
 
                         <div class="small-dialog-content">
                             <form action="#" method="get">
-                                <input type="text" placeholder="Full Name" value="" />
-                                <input type="text" placeholder="Email Address" value="" />
+                                <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                                    <option value="">Epected Salary</option>
+                                    <option value="10000">10000</option>
+                                    <option value="10000">20000</option>
+                                    <option value="10000">30000</option>
+                                    <option value="10000">40000</option>
+                                    <option value="10000">50000</option>
+                                    <option value="10000">60000</option>
+                                    <option value="10000">70000</option>
+                                    <option value="10000">80000</option>
+                                </select><br />
+                                <input type="text" placeholder="Mobile No e.g 0312xxxxxxx" value="" />
                                 <textarea placeholder="Your message / cover letter sent to the employer"></textarea>
 
                                 <!-- Upload CV -->
-                                <div class="upload-info"><strong>Upload your CV (optional)</strong> <span>Max. file size: 5MB</span></div>
+                                    <div class="nine columns" id="select_cv">
+                                            Select CV:
+                                           <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                                                <option>Select</option>
+                                                <option>Default</option>
+                                                <option>abc</option>
+                                            </select>
+                                        </div>
+                                <strong>OR</strong>
+                                    <div class="col-sm-3">
+                                        
+                                        <label class="upload-btn">
+                                            <input type="file" multiple />
+                                            <i class="fa fa-upload"></i> Browse
+                                        </label>
+                                        <span class="fake-input">No file selected</span>
+                                    </div>
                                 <div class="clearfix"></div>
-
-                                <label class="upload-btn">
-                                    <input type="file" multiple />
-                                    <i class="fa fa-upload"></i> Browse
-                                </label>
-                                <span class="fake-input">No file selected</span>
 
                                 <div class="divider"></div>
 

@@ -98,7 +98,7 @@
                         
 
                         <p class="lost_password">
-                            <a href="#">Lost Your Password?</a>
+                            <a href="#small-dialog" class="popup-with-zoom-anim">Lost Your Password?</a>
                         </p>
 
                     </form>
@@ -106,47 +106,105 @@
 
                 <!-- Register -->
                 <div class="tab-content" id="tab2" style="display: none;">
-
                     <form method="post" class="register">
+                        <div class="single">
+                            <p class="form-row form-row-wide">
+                                <label for="first-name">
+                                    First Name
+                                    <i class="ln ln-icon-Male"></i>
+                                    <input type="text" class="input-text" name="firtName" id="first-name" value="" />
+                                </label>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="first-name">
+                                    Last Name
+                                    <i class="ln ln-icon-Male"></i>
+                                    <input type="text" class="input-text" name="lastName" id="last-name" value="" />
+                                </label>
+                            </p>
 
-                        <p class="form-row form-row-wide">
-                            <label for="username2">
-                                Username:
-                                <i class="ln ln-icon-Male"></i>
-                                <input type="text" class="input-text" name="username" id="username2" value="" />
-                            </label>
-                        </p>
+                            <p class="form-row form-row-wide">
+                                <label for="email2">
+                                    Email Address:
+                                    <i class="ln ln-icon-Mail"></i>
+                                    <input type="text" class="input-text" name="email" id="email2" value="" />
+                                </label>
+                            </p>
 
-                        <p class="form-row form-row-wide">
-                            <label for="email2">
-                                Email Address:
-                                <i class="ln ln-icon-Mail"></i>
-                                <input type="text" class="input-text" name="email" id="email2" value="" />
-                            </label>
-                        </p>
+                            <p class="form-row form-row-wide">
+                                <label for="password1">
+                                    Password:
+                                    <i class="ln ln-icon-Lock-2"></i>
+                                    <input class="input-text" type="password" name="password1" id="password1" />
+                                </label>
+                            </p>
 
-                        <p class="form-row form-row-wide">
-                            <label for="password1">
-                                Password:
-                                <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password1" id="password1" />
-                            </label>
-                        </p>
+                            <p class="form-row form-row-wide">
+                                <label for="password2">
+                                    Repeat Password:
+                                    <i class="ln ln-icon-Lock-2"></i>
+                                    <input class="input-text" type="password" name="password2" id="password2" />
+                                </label>
+                            </p>
+                        </div>
+                        <div class="mainpanel single">
+                            <p class="form-row form-row-wide">
+                                <h3>
+                                    What are You looking for......
+                                </h3>
+                            </p>
 
-                        <p class="form-row form-row-wide">
-                            <label for="password2">
-                                Repeat Password:
-                                <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password2" id="password2" />
-                            </label>
-                        </p>
+                            <p class="form-row form-row-wide">
+                                <label for="work-location">
+                                    Preferred Work Location:
+                                    <i class="ln ln-icon-Location-2"></i>
+                                    <input type="text" class="input-text" name="work-location" id="work-location" value="" />
+                                </label>
+                            </p>
 
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    Desired Job Title:
+                                    <i class="ln ln-icon-Suitcase"></i>
+                                    <input class="input-text" type="text" name="job-title" id="job-title" />
+                                </label>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    I'm interested in (Please select at least one option)
+                                </label>
+                                <div class="row">
+                                   <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />Full Time
+                                   <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Part Time
+                                   <input class="checkboxes" type="checkbox" name="internship" id="interests" />Internship
+                                   <input class="checkboxes" type="checkbox" name="freelance" id="interests" />Freelance
+                               </div>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="job-title">
+                                    Select Your Catagory
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                                        <option selected="selected" value="">Select your Catagory</option>
+                                        <option value="Software Engineer">Software Engineer</option>
+                                        <option value="Qualit Manager">Qualit Manager</option>
+                                        <option value="Content Writer">Content Writer</option>
+                                    </select>
+                                </label>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                
+                                <div class="row">
+                                    <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />
+                                    I agree with <a href="#">Terms and Conditions</a>.
+                                </div>
+                            </p>
+                        </div>
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
                         </p>
 
                     </form>
-                </div>
+                 </div>
             </div>
         </div>
     </div>
@@ -162,3 +220,31 @@
 
 </div>
 <!-- Wrapper / End -->
+
+<!-- Modal for Lost Password
+    ================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+    <div class="small-dialog-headline">
+        <h2>Reset Password</h2>
+        Provide your email below to get insruction to update your Password.
+    </div>
+    <div class="my-account">
+        <div class="small-dialog-content">
+            <form action="#" method="post">
+                <p class="form-row form-row-wide">
+                    <label for="email-forgot-password">
+                        Your Email:
+
+                        <i class="ln ln-icon-Email"></i>
+                        <input class="input-text" type="email" name="email-forgot-password" id="email-forgot-password" required />
+                    </label>
+                </p>
+                <p class="form-row">
+                    <input type="submit" class="button border fw margin-top-10" name="login" value="Submit" />
+                <p class="lost_password">
+
+            </form>
+        </div>
+        </div>
+
+    </div>
