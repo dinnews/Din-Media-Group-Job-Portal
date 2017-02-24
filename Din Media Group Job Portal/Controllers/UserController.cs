@@ -17,29 +17,32 @@ namespace Din_Media_Group_Job_Portal.Controllers
 
             return View();
         }
-       
-        public ActionResult Index()
-        {
-            
-           return View();
-        }
         [HttpPost]
          public ActionResult MyAccount(string userName, string password)
         {
-            if(userName=="mohsin")
+            try
             {
-                Session["user"] = userName;
-                Session["type"] = "jobseeker";
-               return RedirectToAction("Home", "User");
+                if (userName == "mohsin")
+                {
+                    Session["user"] = userName;
+                    Session["type"] = "jobseeker";
+                    return RedirectToAction("Home", "User");
+                }
+                else if (userName == "dinnews")
+                {
+                    Session["user"] = userName;
+                    Session["type"] = "employer";
+                    return RedirectToAction("EmployerHome", "Employer");
+                }
+                ViewBag.ErrorLogin = "Kindly Check Username or Password";
+                return View("MyAccount");
+
             }
-            else if (userName == "dinnews")
+            catch(Exception e)
             {
-                Session["user"] = userName;
-                Session["type"] = "employer";
-                return RedirectToAction("EmployerHome", "Employer");
+                return View("MyAccount");
             }
-            ViewBag.ErrorLogin = "Kindly Check Username or Password";
-            return View("MyAccount");
+            
            
         }
         
@@ -48,6 +51,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
             return View();
         }
         public ActionResult myAccount()
+        {
+            return View();
+        }
+        public ActionResult ResetPassword()
         {
             return View();
         }

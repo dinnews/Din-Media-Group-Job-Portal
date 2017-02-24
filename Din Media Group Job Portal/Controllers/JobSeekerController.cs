@@ -14,6 +14,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             return View("Catagories");
         }
+       public ActionResult Dashboard()
+       {
+           return View();
+       }
         public ActionResult UserProfile()
         {
             return View("UserProfile");
@@ -35,6 +39,21 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             return View();
         }
-
+        public ActionResult AccountSetting()
+        {
+            return View();
+        }
+        public ActionResult AppliedJobs()
+        {
+            return View();
+        }
+        public ActionResult SavedJobs()
+        {
+            return View();
+        }
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
     }
 }

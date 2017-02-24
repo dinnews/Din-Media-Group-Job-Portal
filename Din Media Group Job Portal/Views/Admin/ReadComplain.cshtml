@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "ReadComplain";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<section>
+    <!-- This is only visible to small devices -->
+    @Html.Partial("~/Views/Header/_partialAdminHeader.cshtml")
+
+    <!-- headerbar -->
+    <div class="pageheader">
+        <h2><i class="fa fa-envelope-o"></i> Read Complain</h2>
+    </div>
+    <div class="contentpanel panel-email">
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="pull-right">
+                            <div class="btn-group mr10">
+                                <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Archive"><i class="glyphicon glyphicon-hdd"></i></button>
+                                <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Report Spam"><i class="glyphicon glyphicon-exclamation-sign"></i></button>
+                                <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+                            </div>
+
+                            <div class="btn-group mr5">
+                                <button class="btn btn-sm btn-white" type="button" title="Reply"><i class="fa fa-reply"></i></button>
+                            </div>
+
+                        </div><!-- pull-right -->
+
+                        <div class="btn-group mr10">
+                            <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Read Previous Email"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                            <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Read Next Email"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        </div>
+
+                        <div class="read-panel">
+
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img alt="" src="/Content/adminContent/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <span class="media-meta pull-right">Yesterday at 1:30am</span>
+                                    <h4 class="text-primary">Nusja Nawancali</h4>
+                                    <small class="text-muted">From: hisemail@hisemail.com</small>
+                                </div>
+                            </div><!-- media -->
+
+                            <h4 class="email-subject">Complaint against your Services</h4>
+                            <p>10 August2013</p><p>Dear Mr. Smith,</p><p>&nbsp;</p>
+                            <p>In view of the oncoming school-fest on 14October2013, this school placed an order for the following costumes from your store:</p>
+                            <ul>
+                                <li>Boys costume for sun-dance-45</li>
+                                <li>Girls costume for&nbsp; boogie-woogie dance-35</li>
+                                <li>Gowns for School choir- 25</li>
+                            </ul>
+                            <p>Your tailor had visited our school and took measurements of children on 15August2013. The sample pieces due for trials on 02September2013 have not been delivered till date. The bulk stitching is withheld pending our approval.</p>
+                            <p>Your tailor has quoted reasons like about non-availability of fabric, non-availability of assistants and his own health issues for this delay. It is too late to ask parents to make their own arrangements at this stage.</p>
+                            <p>Repeated calls to your office by my staff and attempts to contact your tailor have not been answered. I request you to intervene urgently and instruct your tailor or make alternate arrangements to complete the task for which advance payment has already been made.</p>
+                            <p>Thanking You,</p><p>_____________</p>
+                            <p>Serena Wills</p>
+                            <br />
+
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img alt="" src="/Content/adminContent/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <textarea class="form-control" placeholder="Reply here..."></textarea>
+                                </div>
+                            </div><!-- media -->
+
+                        </div><!-- read-panel -->
+
+                    </div><!-- panel-body -->
+                </div><!-- panel -->
+
+            </div><!-- col-sm-9 -->
+
+        </div><!-- row -->
+
+    </div>
+    </div><!-- mainpanel -->
+</section>

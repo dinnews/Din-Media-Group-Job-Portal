@@ -169,6 +169,7 @@
     <Content Include="Content\adminContent\css\style.default.css" />
     <Content Include="Content\adminContent\css\toggles.css" />
     <Content Include="Content\adminContent\css\weather-icons.min.css" />
+    <Content Include="Content\adminContent\css\wysiwyg-color.css" />
     <Content Include="Content\adminContent\fonts\fontawesome-webfont862f.svg" />
     <Content Include="Content\adminContent\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\adminContent\fonts\lato\Lato-Bla-webfont.svg" />
@@ -693,7 +694,7 @@
     <Content Include="Views\Employer\BrowseResume.cshtml" />
     <Content Include="Views\User\Premium.cshtml" />
     <Content Include="Views\JobSeeker\Catagories.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Header\_partialAdminHeader.cshtml" />
     <Content Include="Views\Header\_partialLoggedInUserHeader.cshtml" />
@@ -702,9 +703,22 @@
     <Content Include="Views\Employer\EmployerHome.cshtml" />
     <Content Include="Views\Header\HeaderSelectionEmployer.cshtml" />
     <Content Include="Views\Header\HeaderSelectionJobSeeker.cshtml" />
+    <Content Include="Views\Admin\ViewEmployers.cshtml" />
+    <Content Include="Views\Admin\ViewJobSeekers.cshtml" />
+    <Content Include="Views\Admin\ViewComplaints.cshtml" />
+    <Content Include="Views\Admin\ReadComplain.cshtml" />
+    <Content Include="Views\JobSeeker\Dashboard.cshtml" />
+    <Content Include="Views\Admin\ViewJobs.cshtml" />
+    <Content Include="Views\Admin\SendEmail.cshtml" />
+    <Content Include="Views\JobSeeker\AccountSetting.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\JobSeeker\AppliedJobs.cshtml" />
+    <Content Include="Views\JobSeeker\SavedJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Employer_Profile_images\" />
+    <Folder Include="JobSeeker_Profile_images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

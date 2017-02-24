@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "SendEmail";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="/Content/adminContent/css/bootstrap-wysihtml5.css" />
+<section>
+    <!-- This is only visible to small devices -->
+    @Html.Partial("~/Views/Header/_partialAdminHeader.cshtml")
+
+    <!-- headerbar -->
+
+    <div class="pageheader">
+        <h2><i class="fa fa-envelope"></i> Compose Email</h2>
+        <div class="breadcrumb-wrapper">
+            <span class="label">You are here:</span>
+            <ol class="breadcrumb">
+                <li><a href="index-2.html">Bracket</a></li>
+                <li><a href="email.html">Email</a></li>
+                <li class="active">Compose Email</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="contentpanel panel-email">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group mb5">
+                            <select class="form-control" data-placeholder="Recipients" id="select-email-recipients">
+                                <option value="All">All</option>
+                                <option value="One">One</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" class="form-control" id="email-subject" />
+                        </div>
+
+                        <textarea id="wysiwyg" placeholder="Your message here..." class="form-control" rows="20"></textarea>
+
+                    </div><!-- panel-body -->
+                    <div class="panel-footer">
+                        <button class="btn btn-primary">Send</button>
+                    </div>
+                </div><!-- panel -->
+
+            </div><!-- col-sm-9 -->
+
+        </div><!-- row -->
+
+    </div>
+
+</section>
+<script>
+    jQuery(document).ready(function () {
+        // HTML5 WYSIWYG Editor
+        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+
+        $('#select-email-recipients').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            if (valueSelected == "One") {
+                $(this).parent().before().append().html('<div class="form-group"><input type="text" name="subject" placeholder="Email" class="form-control" /></div>')
+                //$(this).parent().find(
+            }
+        });
+    });
+
+</script>

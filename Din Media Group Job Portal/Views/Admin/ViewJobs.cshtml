@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "ViewJobs";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<section>
+    <!-- This is only visible to small devices -->
+    @Html.Partial("~/Views/Header/_partialAdminHeader.cshtml")
+
+    <!-- headerbar -->
+    <div class="pageheader">
+        <h2><i class="fa fa-briefcase"></i> View Jobs</h2>
+
+    </div>
+
+    <div class="contentpanel">
+        <div class="mb30"></div>
+
+        <div class="people-list">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="people-item">
+                        <span class="pull-right part-time">Part-Time</span>
+                        <a href="#"><h4>Social Media: Advertising Coordinator</h4></a>
+
+                        <div class="social-list">
+                            <span><i class="fa fa-briefcase fa-2x"></i> <strong>Microsoft</strong></span><br />
+                            <span><i class="fa fa-money fa-2x"></i> <strong>$20 / hour</strong></span>
+                            <span><i class="fa fa-map-marker fa-2x"></i><strong>New York</strong></span>
+                        </div>
+                        <p>As advertising &amp; content coordinator, you will support our social media team in producing high quality social content for a range of media channels.</p>
+                        <br />
+                        <div class="btn-group mr10">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-ban mr5"></i> Deactivate</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-archive mr5"></i> Archive</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-trash-o mr5"></i> Delete</button>
+                            <a href="#viewjob" class="btn btn-success mr5" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-eye mr5"></i>View</a>
+                        </div>
+                    </div>
+                </div><!-- col-md-6 -->
+
+                <div class="col-md-6">
+                    <div class="people-item">
+                        <span class="pull-right freelance">Freelance</span>
+                        <a href="#"><h4>Social Media: Advertising Coordinator</h4></a>
+
+                        <div class="social-list">
+                            <span><i class="fa fa-briefcase fa-2x"></i> <strong>Microsoft</strong></span><br />
+                            <span><i class="fa fa-money fa-2x"></i> <strong>$20 / hour</strong></span>
+                            <span><i class="fa fa-map-marker fa-2x"></i><strong>New York</strong></span>
+                        </div>
+                        <p>As advertising &amp; content coordinator, you will support our social media team in producing high quality social content for a range of media channels.</p>
+                        <br />
+                        <div class="btn-group mr10">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-ban mr5"></i> Deactivate</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-archive mr5"></i> Archive</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-trash-o mr5"></i> Delete</button>
+                            <a href="#viewjob" class="btn btn-success mr5" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-eye mr5"></i>View</a>
+                        </div>
+                    </div>
+                </div><!-- col-md-6 -->
+
+                <div class="col-md-6">
+                    <div class="people-item">
+                        <span class="pull-right internship">Internship</span>
+                        <a href="#"><h4>Social Media: Advertising Coordinator</h4></a>
+                        <div class="social-list">
+                            <span><i class="fa fa-briefcase fa-2x"></i> <strong>Microsoft</strong></span><br />
+                            <span><i class="fa fa-money fa-2x"></i> <strong>$20 / hour</strong></span>
+                            <span><i class="fa fa-map-marker fa-2x"></i><strong>New York</strong></span>
+                        </div>
+                        <p>As advertising &amp; content coordinator, you will support our social media team in producing high quality social content for a range of media channels.</p>
+                        <br />
+                        <div class="btn-group mr10">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-ban mr5"></i> Deactivate</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-archive mr5"></i> Archive</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-trash-o mr5"></i> Delete</button>
+                            <a href="#viewjob" class="btn btn-success mr5" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-eye mr5"></i>View</a>
+                        </div>
+                    </div>
+                </div><!-- col-md-6 -->
+
+                <div class="col-md-6">
+                    <div class="people-item">
+                        <span class="pull-right full-time">Full Time</span>
+                        <a href="#"><h4>Software Engineer: .Net Developer</h4></a>
+
+                        <div class="social-list">
+                            <span><i class="fa fa-briefcase fa-2x"></i> <strong>Microsoft</strong></span><br />
+                            <span><i class="fa fa-money fa-2x"></i> <strong>$20 / hour</strong></span>
+                            <span><i class="fa fa-map-marker fa-2x"></i><strong>New York</strong></span>
+                        </div>
+                        <p>We need software engineers on urgent basis for our company. A good Salary Package, Health and insurance. Minimum experience of 2 years.</p>
+                        <br />
+                        <div class="btn-group mr10">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-ban mr5"></i> Deactivate</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-archive mr5"></i> Archive</button>
+                            <button class="btn btn-primary" type="button"><i class="fa fa-trash-o mr5"></i> Delete</button>
+                            <a href="#viewjob" class="btn btn-success mr5" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-eye mr5"></i>View</a>
+                        </div>
+
+                    </div>
+                </div><!-- col-md-6 -->
+
+            </div><!-- row -->
+        </div><!-- people-list -->
+
+    </div><!-- contentpanel -->
+    </div><!-- mainpanel -->
+
+</section>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Job details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-sm-8 modal-photo-left">
+                        <div class="modal-photo">
+                            <p class="margin-reset">
+                                The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!
+                            </p>
+
+                            <br>
+                            <p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
+
+                            <ul class="list-1">
+                                <li>
+                                    Executing the Food Service program, including preparing and presenting our wonderful food offerings
+                                    to hungry customers on the go!
+                                </li>
+                                <li>Greeting customers in a friendly manner and suggestive selling and sampling items to help increase sales.</li>
+                                <li>
+                                    Keeping our Store food area looking terrific and ready for our valued customers by managing product
+                                    inventory, stocking, cleaning, etc.
+                                </li>
+                                <li>We’re looking for associates who enjoy interacting with people and working in a fast-paced environment!</li>
+                            </ul>
+
+                            <br>
+
+                            <h4 class="margin-bottom-10">Job Requirment</h4>
+
+                            <ul class="list-1">
+                                <li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
+                                <li>Must be available to work required shifts including weekends, evenings and holidays.</li>
+                                <li>Must be able to perform repeated bending, standing and reaching.</li>
+                                <li> Must be able to occasionally lift up to 50 pounds</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 modal-photo-right">
+                        <div class="media-details">
+                     
+                            <span class="categ">Microsoft</span>
+                            <h3 class="media-title">Marketing Manger</h3>
+                            <p>Executing the Food Service program, including preparing and presenting our wonderful food offerings
+                                    to hungry customers on the go!</p>
+
+                            <div class="details">
+                                <h4>Photo Details</h4>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%"><span class="fa fa-map-marker"></span> <strong>Location</strong></td>
+                                            <td width="60%" style="text-align: right;">New York</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="fa fa-calendar"></span> &nbsp;<strong>Posted on</strong></td>
+                                            <td style="text-align: right;">12-02-2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="fa fa-calendar-o"></span> &nbsp;<strong>Last Date</strong></td>
+                                            <td style="text-align: right;">22-02-2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="fa fa-money"></span> &nbsp;<strong>Rate</strong></td>
+                                            <td style="text-align: right;">$500</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div><!--details-->
+                        </div><!-- media-details -->
+                    </div><!-- modal-photo-right -->
+
+                </div><!-- row -->
+
+            </div><!-- media-details -->
+        </div>
+    </div>
+    </div>
