@@ -60,7 +60,7 @@
                     <td>Front End Web Developer</td>
                     <td>September 30, 2015</td>
                     <td class="action">
-                        <a href="#update-cv-dialog" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href=".cv-update" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i> Edit</a>
                         <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
                         <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
                     </td>
@@ -72,7 +72,7 @@
                     <td>Logo Designer</td>
                     <td>August 12, 2015</td>
                     <td class="action">
-                        <a href="#update-cv-dialog" class="popup-with-zoom-anim"><i class=" fa fa-pencil"></i> Edit</a>
+                        <a href=".cv-update" class="popup-with-zoom-anim"><i class=" fa fa-pencil"></i> Edit</a>
                         <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
                         <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
                     </td>
@@ -82,24 +82,29 @@
 
             <br>
 
-            <a href="#small-dialog" class="popup-with-zoom-anim button">Add Resume</a>
+            <a href=".cv-add" class="popup-with-zoom-anim button">Add Resume</a>
             <!--
         Add New CV Modal
             -->
-            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cv-add">
                 <div class="small-dialog-headline">
                     <h2>Add Your CV</h2>
                 </div>
                 <div class="small-dialog-content">
                     <form action="#" method="get">
-                        <input type="text" placeholder="CV Name" value="" />
-                        <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option value="Default">Default</option>
-                            <option value="Public">Public</option>
-                            <option value="Private">Private</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <input id="cv-catagory-other" type="text" placeholder="If others" value="" disabled />
+                        <label for="CV-Name">
+                            CV Name:
+                            <input type="text" placeholder="QA CV" value="" />
+                        </label>
+                        <label for="cv-catagory">
+                            Select Catagory:
+                            <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
+                                <option value="Default">Default</option>
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                                
+                            </select>
+                        </label>
                         <!-- Upload CV -->
                         <div class="upload-info"><strong>Upload your CV </strong> <span>Max. file size: 5MB</span></div>
                         <div class="clearfix"></div>
@@ -117,22 +122,25 @@
         Update CV Modal
              -->
             
-            <div id="update-cv-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
-                <div id="small-dialog">
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cv-update">
+                <div id="">
                     <div class="small-dialog-headline">
-                        <h2>Add Your CV</h2>
+                        <h2>Update Your CV</h2>
                     </div>
                     <div class="small-dialog-content">
                         <form action="#" method="get">
-                            <input type="text" placeholder="CV Name" value="" />
-
-                            <select id="cv-update-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
-                                <option value="Default">Default</option>
-                                <option value="Public">Public</option>
-                                <option value="Private">Private</option>
-                                <option value="Other" selected>Other</option>
-                            </select>
-                            <input id="cv-update-catagory-other" type="text" placeholder="If others" value="Research" disabled />
+                            <label for="CV-Name">
+                                CV Name:
+                                <input type="text" placeholder="QA CV" value="QA CV" />
+                            </label>
+                            <label for="cv-catagory">
+                                Select Catagory:
+                                <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
+                                    <option value="Default">Default</option>
+                                    <option value="Public">Public</option>
+                                    <option value="Private">Private</option>
+                                </select>
+                            </label>
                             <!-- Upload CV -->
                             <div class="upload-info"><i class="fa fa-file-text"></i><strong> abc.docx</strong> </div>
                             <div class="clearfix"></div>
@@ -145,8 +153,6 @@
 
         </div>
      </div>
-    
-
 
     <!-- Footer
     ================================================== -->
@@ -159,31 +165,3 @@
 
 </div>
 <!-- Wrapper / End -->
-<script>
-    jQuery(document).ready(function () {
-
-        $('#cv-catagory').change(function () {
-            var optionSelected = $(this).find("option:selected");
-            var valueSelected = optionSelected.val();
-            if (valueSelected.toUpperCase() == "OTHER")
-            {
-                $('#cv-catagory-other').prop('disabled', false);
-            }
-            else
-            {
-                $('#cv-catagory-other').prop('disabled', true);
-            }
-        });
-        $('#cv-update-catagory').change(function () {
-            var optionSelected = $(this).find("option:selected");
-            var valueSelected = optionSelected.val();
-            if (valueSelected.toUpperCase() == "OTHER") {
-                $('#cv-update-catagory-other').prop('disabled', false);
-            }
-            else {
-                $('#cv-update-catagory-other').prop('disabled', true);
-            }
-        });
-       
-    });
-</script>

@@ -3,6 +3,18 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+<style>
+    .ui-datepicker {
+        position: relative;
+        z-index: 10000 !important;
+    }
+    .datepicker {
+        z-index: 999999 !important;
+    }
+</style>
 <div id="wrapper">
 
     <!-- Header
@@ -134,18 +146,59 @@
 
                         <div class="small-dialog-content">
                             <form action="#" method="get">
-                                <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                                    <option value="">Epected Salary</option>
-                                    <option value="10000">10000</option>
-                                    <option value="10000">20000</option>
-                                    <option value="10000">30000</option>
-                                    <option value="10000">40000</option>
-                                    <option value="10000">50000</option>
-                                    <option value="10000">60000</option>
-                                    <option value="10000">70000</option>
-                                    <option value="10000">80000</option>
-                                </select><br />
-                                <input type="text" placeholder="Mobile No e.g 0312xxxxxxx" value="" />
+                                <label for="catagory">
+                                    <select data-placeholder="Expected Salary" class="chosen-select-no-single">
+                                        <option value="">Epected Salary</option>
+                                        <option value="10000">10000-15000</option>
+                                        <option value="10000">16000-20000</option>
+                                        <option value="10000">20000-25000</option>
+                                        <option value="10000">26000-30000</option>
+                                        <option value="10000">31000-35000</option>
+                                        <option value="10000">36000-40000</option>
+                                        <option value="10000">41000-50000</option>
+                                        <option value="10000">51000-60000</option>
+                                        <option value="10000">61000-80000</option>
+                                    </select>
+                                </label>
+                                <label for="currently-working">
+                                    <select data-placeholder="Currently Working" class="chosen-select-no-single" id="currently-working">
+                                        <option value="">Currently Working</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                        
+                                    </select>
+                                </label>
+                                <label id="current-work" class="form-row form-row-wide" style="display:none;">
+                                    <span style="float:right">
+                                        <label for="working-time">
+                                            Working Duration:
+                                            <select class=" chosen-select-no-single" name="workExp" id="workExp">
+                                                <option value="">Select One</option>
+                                                <option value="1">Less than 1 Year</option>
+                                                <option value="2">1 Year</option>
+                                                <option value="3">2 Years</option>
+                                                <option value="4">3 Years</option>
+                                                <option value="5">4 Years</option>
+                                                <option value="6">5+ Years</option>
+                                            </select>
+                                        </label>
+                                        <label for="working-time">
+                                            Availability (if you are selected):
+                                            <input type="text" name="last-name" class="form-last-name" placeholder="2017-02-22" id="datepicker1" data-date-format="mm/dd/yy" />
+                                        </label>
+                                    </span>
+                                    <span style="float:left">
+                                        <label for="working-time">
+                                            Comapny Name:
+                                            <input type="text" name="last-name" class="form-last-name" placeholder="e.g. Din Media Group" />
+                                        </label>
+                                        <label for="working-time">
+                                            Current Salary:
+                                            <input type="text" name="last-name" class="form-last-name" placeholder="e.g. 20000" />
+                                        </label>
+                                    </span>
+                                    
+                                </label>
                                 <textarea placeholder="Your message / cover letter sent to the employer"></textarea>
 
                                 <!-- Upload CV -->
@@ -198,3 +251,18 @@
 
 </div>
 <!-- Wrapper / End -->
+<script>
+    jQuery(document).ready(function () {
+        $('#datepicker1').datepicker();
+        $('#currently-working').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            if (valueSelected.toUpperCase() == "YES") {
+                $('#current-work').show();
+            }
+            else {
+                $('#current-work').hide();
+            }
+        });
+    });
+</script>

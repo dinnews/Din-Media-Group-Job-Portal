@@ -47,47 +47,46 @@
 
                 <tr>
                     <th><i class="fa fa-file-text"></i> Title</th>
-                    <th><i class="fa fa-check-square-o"></i> Shortlisted?</th>
                     <th><i class="fa fa-calendar"></i> Date Posted</th>
+                    <th><i class="fa fa-calendar"></i> Expire Date</th>
                     <th><i class="fa fa-calendar"></i> Date Applied</th>
                     <th><i class="fa fa-user"></i> Applications</th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
 
                 <!-- Item #1 -->
                 <tr>
                     <td class="title"><a href="#">Marketing Coordinator - SEO / SEM Experience </a></td>
-                    <td class="centered">-</td>
                     <td>September 30, 2015</td>
+                    <td>October 20, 2015</td>
                     <td>October 10, 2015</td>
-                    <td class="centered">-</td>
+                    <td class="centered"><a href="#small-dialog" class="popup-with-zoom-anim button">Show</a></td>
                     <td class="action">
-                        <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                        <a href="#" class="delete"><i class="fa fa-remove"></i> Remove</a>
                     </td>
                 </tr>
 
                 <!-- Item #2 -->
                 <tr>
                     <td class="title"><a href="#">Web Developer - Front End Web Development, Relational Databases</a></td>
-                    <td class="centered">-</td>
                     <td>September 30, 2015</td>
+                    <td>October 20, 2015</td>
                     <td>October 10, 2015</td>
-                    <td class="centered"><a href="#" class="button">Show</a></td>
+                    <td class="centered"><a href="#small-dialog" class="popup-with-zoom-anim button">Show</a></td>
                     <td class="action">
-                        <a href="#"><i class="fa fa-pencil"></i> Edit</a>
-                        <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                        <a href="#" class="delete"><i class="fa fa-remove"></i> Remove</a>
                     </td>
                 </tr>
 
                 <!-- Item #2 -->
                 <tr>
                     <td class="title"><a href="#">Power Systems User Experience Designer</a></td>
-                    <td class="centered"><i class="fa fa-check"></i></td>
                     <td>May 16, 2015</td>
+                    <td>October 20, 2015</td>
                     <td>June 30, 2015</td>
-                    <td class="centered"><a href="#" class="button">Show</a></td>
+                    <td class="centered"><a href="#small-dialog" class="popup-with-zoom-anim button" >Show</a></td>
                     <td class="action">
-                        <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                        <a href="#" class="delete"><i class="fa fa-remove"></i> Remove</a>
                     </td>
                 </tr>
 
@@ -112,3 +111,62 @@
 
 </div>
 <!-- Wrapper / End -->
+
+<!--
+    View Application Popup
+-->
+
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+    <div class="small-dialog-headline">
+        <h2>Application View</h2>
+    </div>
+
+    <div class="small-dialog-content">
+            <label for="salary-expectation">
+                Expected Salary:
+                <input type="text" value="35000-40000" readonly/>
+            </label>
+        
+            <label for="currently-working">
+                Currently Working: <span>Yes</span>
+            </label>
+
+        <span style="float:right">
+            <label for="working-duration">
+                Working Duration:
+                <input type="text" name="last-name" class="form-last-name" placeholder="e.g. 9AM -5PM" value="Less than 1 year" readonly />
+            </label>
+            <label for="availabitiy">
+                Availability (if you are selected):
+                <input type="text" name="last-name" class="form-last-name" placeholder="2017-02-22" id="datepicker1" value="2017-02-22" readonly />
+            </label>
+
+        </span>
+        <span style="float:left">
+            <label for="company-name">
+                Comapny Name:
+                <input type="text" name="last-name" class="form-last-name" placeholder="e.g. Din Media Group" value="Din Media Group" readonly />
+            </label>
+            <label for="current Salary">
+                Current Salary:
+                <input type="text" name="last-name" class="form-last-name" placeholder="e.g. 20000" value="35000" readonly />
+            </label>
+        </span>
+        <span>
+            <label for="textarea">
+               
+                <textarea id="cover-letter" readonly></textarea>
+            </label>
+        </span>
+       
+            <script>
+    document.getElementById("cover-letter").value = "A job application letter, also known as a cover letter, should be sent or uploaded with your resume when applying for jobs. The job application letters you send explain to the employer why you are qualified for the position and why you should be selected for an interview.";
+            </script>
+
+            <!-- Upload CV -->
+        <div class="upload-info"><i class="fa fa-file-text"></i><strong> abc.docx</strong> </div>
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+    </div>
+
+</div>

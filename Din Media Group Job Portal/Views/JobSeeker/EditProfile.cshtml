@@ -1,0 +1,803 @@
+﻿@{
+    ViewBag.Title = "Job Portal || A Project of Din Media Group";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<style>
+   
+</style>
+<div id="wrapper">
+
+    <!-- Header
+    ================================================== -->
+    <header class="sticky-header full-width">
+        @Html.Partial("~/Views/Header/HeaderSelectionJobSeeker.cshtml")
+    </header>
+    <div class="clearfix"></div>
+    <script>
+        $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
+    </script>
+    <!-- Titlebar
+    ================================================== -->
+    
+    <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
+        
+        <div class="container">
+            <span style="float:right; ">
+                <a href=".profile-upload" class="popup-with-zoom-anim"><i class="fa fa-pencil-square-o"></i></a>
+            </span>
+            <div class="ten columns">
+                <div class="resume-titlebar">
+                    
+                    <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
+                    <span style="position:absolute; left:50px; top:80px; background-color:black; width:30px;" class="centered" id="image-upload-edit-profile">
+                        <a href=".profile-upload" class="popup-with-zoom-anim"><i class="fa fa-pencil-square-o"></i></a>
+                    </span>
+                    <div class="resumes-list-content">
+                      <h4 style="color:white;">John Doe 
+                          <a href=".profile-edit" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>
+                        <span style="color:white;">UX/UI Graphic Designer</span>
+                         
+                      </h4>
+                        <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i> Mountain View, CA</span>
+                        <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
+                        <div class="skills">
+                            <span>JavaScript</span>
+                            <span>PHP</span>
+                            <span>WordPress</span>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="six columns">
+                <div class="two-buttons">
+                    <a href="#small-dialog" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-envelope"></i> Send Message</a>
+
+                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+                        <div class="small-dialog-headline">
+                            <h2>Send Message to John Doe</h2>
+                        </div>
+
+                        <div class="small-dialog-content">
+                            <form action="#" method="post">
+                                <input type="text" placeholder="Full Name" value="" />
+                                <input type="text" placeholder="Email Address" value="" />
+                                <textarea placeholder="Message"></textarea>
+
+                                <button class="send">Submit Query</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <a href="#" class="button dark" style="width:150px;" ><i class="fa fa-print"></i> Print Profile</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Content
+    ================================================== -->
+    <div class="container">
+        <!-- Recent Jobs -->
+        <div class="eight columns">
+            <div class="padding-right">
+                <span style="float:left;">
+                    <strong class="margin-bottom-15">About Me</strong>
+                </span>
+                <span style="float:right;">
+                    <a href=".aboutme-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                </span><br />
+                <p class="margin-reset">
+                    The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!
+                </p>
+                <br>
+                <p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
+                <ul class="list-1">
+                    <li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
+                    <li>Must be available to work required shifts including weekends, evenings and holidays.</li>
+                    <li>Must be able to perform repeated bending, standing and reaching.</li>
+                    <li>Must be able to occasionally lift up to 50 pounds</li>
+                </ul>
+
+            </div>
+        </div>
+
+
+        <!-- Widgets -->
+        <div class="eight columns">
+            <span style="float:left;">
+                <strong class="margin-bottom-15">Education</strong>
+            </span>
+            <span style="float:right;">
+                <a href=".education-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+            </span><br />
+            
+
+            <!-- Resume Table -->
+            <dl class="resume-table">
+                <dt>
+                    <span style="float:right;">
+                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span >
+                        <small class="date">2012 - 2015</small>
+                        <strong>Bsc Computing at College of West Anglia</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    <p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
+                </dd>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">2006 - 2010</small>
+                        <strong>GCSE something at King Edward 7th</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    <p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
+                </dd>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">2004 - 2006</small>
+                        <strong>Test 2 at Test</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    <p>Phasellus vestibulum metus orci, ut facilisis dolor interdum eget. Pellentesque magna sem, hendrerit nec elit sit amet, ornare efficitur est.</p>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="eight columns">
+
+            <span style="float:left;">
+                <strong class="margin-bottom-15">Exprience</strong>
+            </span>
+            <span style="float:right;">
+                <a href=".experience-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+            </span><br />
+
+            <!-- Resume Table -->
+            <dl class="resume-table">
+                <dt>
+                    <span style="float:right;">
+                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">Feb 2012 - Jan 2013</small><br />
+                        <small>.NET Developer</small>
+                        <strong>Microsoft pvt. Ltd.</strong>
+                    </span>
+                </dt>
+                <dd>
+                    Experience at Microsoft was mind blowing and had great opportunity to learn and move forward.
+                </dd>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">Feb 2014 - Jan 2015</small><br />
+                        <small>.NET Developer</small>
+                        <strong>Texel Pvt. Ltd.</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    Experience at Texel was mind blowing and had great opportunity to learn and move forward.
+                </dd>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">Feb 2015 - Jan 2016</small><br />
+                        <small>Project Manager</small>
+                        <strong>PlanX pvt. Ltd.</strong>
+                    </span>
+                   
+                </dt>
+                <dd>
+                    Experience at Planx was mind blowing and had great opportunity to learn and move forward.
+                </dd>
+            </dl>
+        </div>
+        <div class="eight columns">
+
+            <span style="float:left;">
+                <strong class="margin-bottom-15">Projects</strong>
+            </span>
+            <span style="float:right;">
+                <a href=".project-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+            </span><br />
+
+            <!-- Resume Table -->
+            <dl class="resume-table">
+                <dt>
+                    <span style="float:right;">
+                        <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">Jun 2016 - Aug 2016</small> <br />
+                        <small>Magnetic character recognition From Cheques</small>
+                        <strong>Project Manager at College of West Anglia</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    <p>Completeing this project was considered a high achievement for us</p>
+                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
+                </dd>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <small class="date">Jun 2016 - Aug 2016</small> <br />
+                        <small>barcode recognition From Exam</small>
+                        <strong>Project Manager at Microsoft</strong>
+                    </span>
+                    
+                </dt>
+                <dd>
+                    <p>Completeing this project was considered a high achievement for us</p>
+                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
+                </dd>
+
+            </dl>
+        </div>
+
+        <!-- Languages and Skilss-->
+        <div class="nine columns">
+
+            <span style="float:left;">
+                <strong class="margin-bottom-15">Skills</strong>
+            </span>
+            <span style="float:right;">
+                <a href=".skill-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+            </span><br />
+
+            <!-- Resume Table -->
+            <dl class="resume-table">
+                <dt>
+                    <span style="float:right;">
+                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Data Structure<small> - 3 years Experience</small></strong>
+                    </span>
+                </dt>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Image Processing<small> - Less than one year Experience</small></strong>
+                    </span>
+                </dt>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Asp.NET MVC<small> - 5+ years Experience</small></strong>
+                    </span>
+                </dt>
+
+            </dl>
+        </div>
+        <div class="seven columns">
+
+            <span style="float:left;">
+                <strong class="margin-bottom-15">Languages</strong>
+            </span>
+            <span style="float:right;">
+                <a href=".language-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+            </span><br />
+
+            <!-- Resume Table -->
+            <dl class="resume-table">
+
+                <dt>
+                    <span style="float:right;">
+                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Urdu<small> - Beginner</small></strong>
+                    </span>
+                </dt>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Balochi<small> - Expert</small></strong>
+                    </span>
+                </dt>
+                <dt>
+                    <span style="float:right;">
+                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">Balochi<small> - Expert</small></strong>
+                    </span>
+                </dt>
+            </dl>
+        </div>
+
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <div class="margin-top-45"></div>
+
+    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!--About me edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup aboutme-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>About Me</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                <label for="about-me">
+                    Summary:
+                    <textarea placeholder="Summary about you..">The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!</textarea>
+                </label>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Education Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup education-add">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Education</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Institution Name
+                <input class="search-field" type="text" placeholder="e.g. University of the Punjab" value="" />
+                Degree Title
+                <input class="search-field" type="text" placeholder="e.g. BS Hons" value="" />
+                Field of Study
+                <input class="search-field" type="text" placeholder="e.g. Computer Science" value="" />
+                <span style="float:left; width:45%;">
+                    From Year
+                    <input class="search-field" type="text" placeholder="e.g. 2107" value="" />
+                </span>
+                <span style="float: right; width: 45%;" id="end-date">
+                    To Year (or expected)
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                </span>
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Education edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup education-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Education</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Institution Name
+                <input class="search-field" type="text" placeholder="e.g. University of the Punjab" value="University of the Punjab" />
+                Degree Title
+                <input class="search-field" type="text" placeholder="e.g. BS Hons" value="BS Hons" />
+                Field of Study
+                <input class="search-field" type="text" placeholder="e.g. Computer Science" value="Computer Science" />
+                <span style="float:left; width:45%;">
+                    From Year
+                    <input class="search-field" type="text" placeholder="e.g. 2107" value="2012" />
+                </span>
+                <span style="float: right; width: 45%;" id="end-date">
+                    To Year (or expected)
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="2016" />
+                </span>
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Experience Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup experience-add">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Experience</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="" />
+                Company
+                <input class="search-field" type="text" placeholder="e.g. Microsoft" value="" />
+                Location
+                <input class="search-field" type="text" placeholder="e.g. Lahore" value="" />
+                <label for="current-job" id="current-job-checkbox">
+                    <input type="checkbox" class="search-field" /> I currently work here
+                </label>
+                <span style="float:left; width:45%;">
+                    From
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                </span>
+                <span style="float: right; width: 45%;" id="end-date" class="end-date-current-job">
+                    To
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                </span>
+
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Experience Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup experience-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Experience</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
+                Company
+                <input class="search-field" type="text" placeholder="e.g. Microsoft" value="Microsoft" />
+                Location
+                <input class="search-field" type="text" placeholder="e.g. Lahore" value="Lahore" />
+                <label for="current-job" id="current-job-checkbox">
+                    <input type="checkbox" class="search-field" /> I currently work here
+                </label>
+                <span style="float:left; width:45%;">
+                    From
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" value="June 2016" />
+                </span>
+                <span style="float: right; width: 45%;" id="end-date" class="end-date-current-job">
+                    To
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="December 2016" />
+                </span>
+
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Project Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup project-add">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Project</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" value="" />
+                Position
+                <input class="search-field" type="text" placeholder="e.g. Project Manager" value="" />
+                URL
+                <input class="search-field" type="text" placeholder="e.g. https://" value="" />
+                <label for="current-job" id="current-job-checkbox">
+                    <input type="checkbox" class="search-field" /> Currently Working
+                </label>
+                <span style="float:left; width:45%;">
+                    From
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                </span>
+                <span style="float: right; width: 45%;" id="end-date">
+                    To
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                </span>
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Project Edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup project-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Project</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" value="Job Portal Desktop" />
+                Position
+                <input class="search-field" type="text" placeholder="e.g. Project Manager" value="Project Manager" />
+                URL
+                <input class="search-field" type="text" placeholder="e.g. https://" value="https://abc.com" />
+                <label for="current-job" id="current-job-checkbox">
+                    <input type="checkbox" class="search-field" /> Currently Working
+                </label>
+                <span style="float:left; width:45%;">
+                    From
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" value="June 2015"/>
+                </span>
+                <span style="float: right; width: 45%;" id="end-date">
+                    To
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="March 2017" />
+                </span>
+                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Skill Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup skill-add">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Skill</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Add a new skill
+                <input class="search-field" type="text" placeholder="" value="" />
+                Experience with this skill
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value="">Select One</option>
+                    <option value="1">Less than 1 Year</option>
+                    <option value="2">1 Year</option>
+                    <option value="3">2 Years</option>
+                    <option value="4">3 Years</option>
+                    <option value="5">4 Years</option>
+                    <option value="6">5+ Years</option>
+                </select>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Skill Edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup skill-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Skill</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Add a new skill
+                <input class="search-field" type="text" placeholder="" value="OOP" />
+                Experience with this skill
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value="">Select One</option>
+                    <option value="1">Less than 1 Year</option>
+                    <option value="2" selected>1 Year</option>
+                    <option value="3">2 Years</option>
+                    <option value="4">3 Years</option>
+                    <option value="5">4 Years</option>
+                    <option value="6">5+ Years</option>
+                </select>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Language Add popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup language-add">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Add Language</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Add a new language
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value=""> Select One </option>
+                    <option value="557"> Albanian </option>
+                    <option value="553"> Arabic </option>
+                    <option value="559"> Armenian </option>
+                    <option value="1167"> Balochi </option>
+                    <option value="561"> Belarusan </option>
+                    <option value="549"> Bosnian </option>
+                    <option value="499"> Bulgarian </option>
+                    <option value="473"> Cantonese </option>
+                    <option value="475"> Catalan </option>
+                    <option value="1338"> Chinese </option>
+                    <option value="477"> Czech </option>
+                    <option value="478"> Urdu </option>
+                </select>
+                Proficiency with this language
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value="">Select One</option>
+                    <option value="1">Beginner</option>
+                    <option value="2">Intermediate</option>
+                    <option value="3">Expert</option>
+                </select>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Language Edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup language-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Language</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Change language
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value=""> Select One </option>
+                    <option value="557"> Albanian </option>
+                    <option value="553" selected> Arabic </option>
+                    <option value="559"> Armenian </option>
+                    <option value="1167"> Balochi </option>
+                    <option value="561"> Belarusan </option>
+                    <option value="549"> Bosnian </option>
+                    <option value="499"> Bulgarian </option>
+                    <option value="473"> Cantonese </option>
+                    <option value="475"> Catalan </option>
+                    <option value="1338"> Chinese </option>
+                    <option value="477"> Czech </option>
+                    <option value="478"> Urdu </option>
+                </select>
+                Proficiency with this language
+                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                    <option value="">Select One</option>
+                    <option value="1" selected>Beginner</option>
+                    <option value="2">Intermediate</option>
+                    <option value="3">Expert</option>
+                </select>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Profile edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Profile</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Name
+                <input class="search-field" type="text" placeholder="e.g. John Doe" value="John Doe" />
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
+                Location
+                <input class="search-field" type="text" placeholder="e.g. Lahore, Pakistan" value="Lahore, Pakistan" />
+                My Video Link
+                <input class="search-field" type="text" placeholder="e.g.http://" value="http://youtu.e/ghas" />
+               
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Profile Pic popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-upload">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Change Picture</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                <label class="upload-btn">
+                    <input type="file" multiple id="imageName" />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input" id="input-name">No file selected</span>
+                <div id="dvPreview" style="height:300px; width:300px; overflow:hidden;">
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#imageName").change(function () {
+            var _URL = window.URL || window.webkitURL;
+
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+                   
+                            $("#dvPreview").html("");
+                            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                            if (regex.test(file.name.toLowerCase())) {
+                                /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                                    $("#dvPreview").show();
+                                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                                }
+                                else {*/
+                                if (typeof (FileReader) != "undefined") {
+                                    $("#dvPreview").show();
+                                    $("#dvPreview").append("<img height='200' width='200' />");
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $("#dvPreview img").attr("src", e.target.result);
+                                        $("#dvPreview img").attr("height", "200");
+                                        $('#input-name').text(name);
+                                    }
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    alert("This browser does not support FileReader.");
+                                }
+                                //}
+                            } else {
+                                alert("Please upload a valid image file.");
+                                contactForm.reset();
+                            }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+
+
+
+
+
+        });
+    });
+</script>

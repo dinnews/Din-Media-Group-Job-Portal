@@ -7,120 +7,202 @@
     <!-- Header
     ================================================== -->
     <header class="sticky-header full-width">
-        @Html.Partial("~/Views/Header/HeaderSelectionUser.cshtml")
-
+        @Html.Partial("~/Views/Header/HeaderSelectionJobSeeker.cshtml")
     </header>
     <div class="clearfix"></div>
     <script>
         $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
     </script>
-    <!-- Titlebar
-    ================================================== -->
-    <div id="titlebar" class="single">
-        <div class="container">
+    <div class="container">
+        <div class="sixteen columns">
+            <!-- Content
+            ================================================== -->
+            <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
+                <div class="container">
+                    <div class="ten columns">
+                        <div class="resume-titlebar">
+                            <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
+                            <div class="resumes-list-content">
+                                <h4 style="color:white;">
+                                    John Doe
 
-            <div class="sixteen columns">
-                <h1>Candidate Dashboard</h1>
-                <nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
-                    <ul>
-                        <!-- Breadcrumb NavXT 5.6.0 -->
-                        <li class="home"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to WorkScout." href="https://workscout.in" class="home"><span property="name">WorkScout</span></a><meta property="position" content="1"></span></li>
-                        <li class="current_item"><span property="itemListElement" typeof="ListItem"><span property="name">Candidate Dashboard</span><meta property="position" content="2"></span></li>
-                    </ul>
-                </nav>
+                                    <span style="color:white;">UX/UI Graphic Designer</span>
+
+                                </h4>
+                                <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i> Mountain View, CA</span>
+                                <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
+                                <div class="skills">
+                                    <span>JavaScript</span>
+                                    <span>PHP</span>
+                                    <span>WordPress</span>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="eleven columns">
+            <span style="float:right;"><a href="@Url.Content("~/JobSeeker/AppliedJobs")">View All</a></span>
+            <h4>My Job Applications</h4>
+            <div class="clearfix"></div>
 
-    <div class="jPanelMenu-menu container full-width">
-       
-            <div class="four columns">
-                <nav id="navigation" class="menu">
-                    <ul id="responsive">
-                        <li class="is-active"><a href="https://workscout.in/job-dashboard/">Employer Dashboard </a></li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/">Dashboard</a>
-                        </li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/orders/">Orders</a>
-                        </li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/downloads/">Downloads</a>
-                        </li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/edit-address/">Addresses</a>
-                        </li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/edit-account/">Account Details</a>
-                        </li>
-                        <li class="">
-                            <a href="https://workscout.in/my-account/customer-logout/">Logout</a>
-                        </li>
-                    </ul>
-                </nav>
+            <ul class="job-list full">
+                <li>
+                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">  
+                        <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                            <div class="job-list-content">
+                                <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                                <div class="job-icons">
+                                    <span><i class="fa fa-briefcase"></i> King</span>
+                                    <span><i class="fa fa-map-marker"></i> Sydney</span>
+                                </div>
+                                <div style="float:right">
+                                    <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                    <span><i class="fa fa-file-archive-o"></i> Recieved</span>
+                                </div>
+                            </div>
+                    </a>
+                   
+                </li>
+
+                <li>
+                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                        <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                        <div class="job-list-content">
+                            <h4>Marketing Coordinator </h4>
+                            <div class="job-icons">
+                                <span><i class="fa fa-briefcase"></i> King</span>
+                                <span><i class="fa fa-map-marker"></i> Sydney</span>
+                            </div>
+                            <div style="float:right">
+                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                        <img src="~/Content/userContent/images/job-list-logo-02.png" alt="">
+                        <div class="job-list-content">
+                            <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                            <div class="job-icons">
+                                <span><i class="fa fa-briefcase"></i> King</span>
+                                <span><i class="fa fa-map-marker"></i> Sydney</span>
+                            </div>
+                            <div style="float:right">
+                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                <span><i class="fa fa-file-archive-o"></i> Recieved</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                        <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
+                        <div class="job-list-content">
+                            <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                            <div class="job-icons">
+                                <span><i class="fa fa-briefcase"></i> King</span>
+                                <span><i class="fa fa-map-marker"></i> Sydney</span>
+                            </div>
+                            <div style="float:right">
+                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div> 
+
+        <div class="five columns">
+            <ul style="float: right; display: inline;">
+                <li >
+                   <a href="" class="button " style="background-color: silver; margin: 10px; ">
+                     <pre><br />        <i class="fa fa-file-archive-o fa-5x"></i><br />   <span> Saved Jobs</span></pre>
+                    </a>
+                     <a href="" class="button " style="background-color: silver; margin:10px;">
+                       <pre><br />       <i class="fa fa-envelope-square fa-5x"></i><br />  <span> Job Alerts</span></pre>
+                     </a>
+                   
+                </li>
+                <li>
+                    
+                        <a href="" class="button" style="background-color: silver; margin: 10px; ">
+                            <pre><br />       <i class="fa fa-file-pdf-o fa-5x"></i><br />      <span> MY CVs        </span></pre>
+                        </a>
+                   
+                        <a href="" class="button" style="background-color: silver; margin: 10px; ">
+                            <pre><br />       <i class="fa fa-star-half-full fa-5x"></i><br />        <span> Premium</span></pre>
+                        </a>
+                    
+                </li>
+                
+            </ul>
+            <div>
+                <div class="clearfix"></div><br />
+                <span style="float:right;"><a href="@Url.Content("~/JobSeeker/SavedJobs")">View All</a></span>
+                <h4>My Saved Jobs</h4>
+                <ul class="job-list full">
+                    <li>
+                       <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                            <h4>Marketing Coordinator </h4>
+                       </a>
+                        <div class="job-icons">
+                            <i class="fa fa-share-alt-square" style="margin-left:10px;" title="Share"></i>
+                            <i class="fa fa-trash-o" style="margin-left:10px;" title="Delete"></i>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                            <h4>Marketing Coordinator </h4>
+                        </a>
+                        <div class="job-icons">
+                            <i class="fa fa-share-alt-square" style="margin-left:10px;" title="Share"></i>
+                            <i class="fa fa-trash-o" style="margin-left:10px;" title="Delete"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                            <h4>Marketing Coordinator </h4>
+                        </a>
+                        <div class="job-icons">
+                            <i class="fa fa-share-alt-square" style="margin-left:10px;" title="Share"></i>
+                            <i class="fa fa-trash-o" style="margin-left:10px;" title="Delete"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
+                            <h4>Marketing Coordinator </h4>
+                        </a>
+                        <div class="job-icons">
+                            <i class="fa fa-share-alt-square" style="margin-left:10px;" title="Share"></i>
+                            <i class="fa fa-trash-o" style="margin-left:10px;" title="Delete"></i>
+                        </div>
+                    </li>
+                </ul>
             </div>
-
-            <div class="twelve columns">
-                <div id="resume-manager-candidate-dashboard">
-                    <p class="margin-bottom-25">Your resume can be viewed, edited or removed below.</p>
-                    <table class="resume-manager-resumes manage-table resumes responsive-table">
-                        <thead>
-                            <tr>
-                                <th class="resume-title"><i class="fa fa-user"></i> Name</th>
-                                <th class="candidate-title"><i class="fa fa-file-text"></i> Title</th>
-                                <th class="candidate-location"><i class="fa fa-map-marker"></i> Location</th>
-                                <th class="resume-category">Category</th>
-                                <th class="date"><i class="fa fa-calendar"></i> Date Posted</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="resume-title">
-                                    Hafiz Mohsin <small>(Pending Review)</small>
-
-                                </td>
-
-                                <td class="candidate-title">
-                                    web Developer
-                                </td>
-
-                                <td class="candidate-location">
-                                    <span class="candidate-location">Lahore, Punjab, Pakistan</span>
-                                </td>
-
-                                <td class="resume-category">
-                                    Web, Software &amp; IT
-                                </td>
-
-                                <td class="date">
-                                    February 15, 2017
-                                </td>
-
-                                <td class="action">
-
-                                    <a href="/candidate-dashboard/?action=delete&amp;resume_id=6925&amp;_wpnonce=4e385bda7f" class="candidate-dashboard-action-delete"><i class="fa fa-remove"></i> Delete</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-
-                    <a class="button" href="https://workscout.in/submit-resume/">Add Resume</a>
-
-             
-            </div>
-</div>
+        </div> 
     </div>
+    
 
-    <!-- Footer
-    ================================================== -->
-    <div class="margin-top-25"></div>
+        <!-- Footer
+        ================================================== -->
+        <div class="margin-top-25"></div>
 
-    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+        @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
 
-    <!-- Back To Top Button -->
-    <div id="backtotop"><a href="#"></a></div>
+        <!-- Back To Top Button -->
+        <div id="backtotop"><a href="#"></a></div>
 
-</div>
+    </div>
 <!-- Wrapper / End -->

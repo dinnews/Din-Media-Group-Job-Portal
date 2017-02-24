@@ -2,7 +2,18 @@
     ViewBag.Title = "AddResume";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+<style>
+    .ui-datepicker {
+        position: relative;
+        z-index: 10000 !important;
+    }
 
+    .datepicker {
+        z-index: 999999 !important;
+    }
+</style>
 <div id="wrapper">
 
 <!-- Header
@@ -32,7 +43,7 @@
         <div class="submit-page">
             <!-- Notice -->
             <div class="notification notice closeable margin-bottom-40">
-                <p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
+                <p><span>Have an account on LinkedIn?</span> If you have an account we will gata data from your account on your bahalf.</p>
             </div>
             <!-- Linked In -->
             <div class="form">
@@ -77,7 +88,7 @@
 
             <!-- Description -->
             <div class="form">
-                <h5>Resume Content</h5>
+                <h5>Summary (About you)</h5>
                 <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
             </div>
 
@@ -106,16 +117,53 @@
                     <!-- Add Education -->
                     <div class="form boxed box-to-clone education-box">
                         <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-                        <input class="search-field" type="text" placeholder="School Name" value="" />
-                        <input class="search-field" type="text" placeholder="Qualification(s)" value="" />
-                        <input class="search-field" type="text" placeholder="Start / end date" value="" />
-                        <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                        Institution Name
+                        <input class="search-field" type="text" placeholder="e.g. University of the Punjab" value="" />
+                        Degree Title
+                        <input class="search-field" type="text" placeholder="e.g. BS Hons" value="" />
+                        Field of Study
+                        <input class="search-field" type="text" placeholder="e.g. Computer Science" value="" />
+                        <span style="float:left; width:45%;">
+                            From Year
+                            <input class="search-field" type="text" placeholder="e.g. 2107" value="" />
+                         </span>
+                        <span style="float: right; width: 45%;" id="end-date">
+                            To Year (or expected)
+                            <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                        </span>
+                         <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                     </div>
 
                     <a href="#" class="button gray add-education add-box"><i class="fa fa-plus-circle"></i> Add Education</a>
                 </div>
             </div>
+            <!-- Skill  -->
+            <div class="form with-line">
+                <h5>Skills <span>(optional)</span></h5>
+                <div class="form-inside">
 
+                    <!-- Add Skills -->
+                    <div class="form boxed box-to-clone skills-box">
+                        <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+                        Add a new skill
+                        <input class="search-field" type="text" placeholder="" value="" />
+                        Experience with this skill
+                        <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                            <option value="">Select One</option>
+                            <option value="1">Less than 1 Year</option>
+                            <option value="2">1 Year</option>
+                            <option value="3">2 Years</option>
+                            <option value="4">3 Years</option>
+                            <option value="5">4 Years</option>
+                            <option value="6">5+ Years</option>
+                        </select>
+                        
+                    </div>
+
+                    <a href="#" class="button gray add-skill add-box"><i class="fa fa-plus-circle"></i> Add Skill</a>
+                </div>
+            </div>
+         
             <!-- Experience  -->
             <div class="form with-line">
                 <h5>Experience <span>(optional)</span></h5>
@@ -124,13 +172,96 @@
                     <!-- Add Experience -->
                     <div class="form boxed box-to-clone experience-box">
                         <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-                        <input class="search-field" type="text" placeholder="Employer" value="" />
-                        <input class="search-field" type="text" placeholder="Job Title" value="" />
-                        <input class="search-field" type="text" placeholder="Start / end date" value="" />
-                        <textarea name="desc1" id="desc1" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                        Title
+                        <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="" />
+                        Company
+                        <input class="search-field" type="text" placeholder="e.g. Microsoft" value="" />
+                        Location 
+                        <input class="search-field" type="text" placeholder="e.g. Lahore" value="" />
+                        <label for="current-job" id="current-job-checkbox">
+                            <input type="checkbox" class="search-field" /> I currently work here
+                        </label>
+                        <span style="float:left; width:45%;">
+                            From
+                            <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                        </span>
+                        <span style="float: right; width: 45%;" id="end-date" class="end-date-current-job">
+                            To
+                            <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                        </span>
+                        
+                        <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                     </div>
 
                     <a href="#" class="button gray add-experience add-box"><i class="fa fa-plus-circle"></i> Add Experience</a>
+                </div>
+            </div>
+            <!-- Project  -->
+            <div class="form with-line">
+                <h5>Projects <span>(optional)</span></h5>
+                <div class="form-inside">
+
+                    <!-- Add Project -->
+                    <div class="form boxed box-to-clone project-box">
+                        <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+                        Title
+                        <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" value="" />
+                        Position
+                        <input class="search-field" type="text" placeholder="e.g. Project Manager" value="" />
+                        URL
+                        <input class="search-field" type="text" placeholder="e.g. https://" value="" />
+                        <label for="current-job" id="current-job-checkbox">
+                            <input type="checkbox" class="search-field" /> Currently Working
+                        </label>
+                        <span style="float:left; width:45%;">
+                            From
+                            <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                        </span>
+                        <span style="float: right; width: 45%;" id="end-date">
+                            To
+                            <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                        </span>
+                        <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                    </div>
+
+                    <a href="#" class="button gray add-experience add-box"><i class="fa fa-plus-circle"></i> Add Project</a>
+                </div>
+            </div>
+            <!-- Languages  -->
+            <div class="form with-line">
+                <h5>Languages <span>(optional)</span></h5>
+                <div class="form-inside">
+
+                    <!-- Add Languages -->
+                    <div class="form boxed box-to-clone languges-box">
+                        <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+                        Add a new language
+                        <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                            <option value=""> Select One </option>
+                            <option value="557"> Albanian </option>
+                            <option value="553"> Arabic </option>
+                            <option value="559"> Armenian </option>
+                            <option value="1167"> Balochi </option>
+                            <option value="561"> Belarusan </option>
+                            <option value="549"> Bosnian </option>
+                            <option value="499"> Bulgarian </option>
+                            <option value="473"> Cantonese </option>
+                            <option value="475"> Catalan </option>
+                            <option value="1338"> Chinese </option>
+                            <option value="477"> Czech </option>
+                            <option value="478"> Urdu </option>
+                        </select>
+                        Proficiency with this language
+                        <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                            <option value="">Select One</option>
+                            <option value="1">Beginner</option>
+                            <option value="2">Intermediate</option>
+                            <option value="3">Expert</option>
+                        </select>
+
+                    </div>
+
+                    <a href="#" class="button gray add-skill add-box"><i class="fa fa-plus-circle"></i> Add Language</a>
                 </div>
             </div>
             <div class="divider margin-top-0 padding-reset"></div>
@@ -149,3 +280,21 @@
 
 </div>
 <!-- Wrapper / End -->
+
+<script>
+    jQuery(document).ready(function () {
+        $('#datepicker1').datepicker();
+       // $('#myform :checkbox')
+        $('#current-job-checkbox :checkbox').change(function () {
+            if ($(this).is(':checked')) {
+                //Do stuff
+                $('#end-date').hide();
+            }
+            else
+            {
+                $('.end-date-current-job').show();
+            }
+        });
+        
+    });
+</script>
