@@ -730,6 +730,9 @@
     </Content>
     <Content Include="Views\Employer\AccountSetting.cshtml" />
     <Content Include="Views\Employer\MyAccount.cshtml" />
+    <Content Include="Views\Employer\Dashboard.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
