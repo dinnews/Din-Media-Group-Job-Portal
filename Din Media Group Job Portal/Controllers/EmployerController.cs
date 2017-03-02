@@ -38,6 +38,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
         public ActionResult AccountSetting()
         {
             return View();
-        } 
+        }
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }

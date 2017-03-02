@@ -702,6 +702,7 @@
     <Content Include="Views\Employer\EmployerHome.cshtml" />
     <Content Include="Views\Header\HeaderSelectionEmployer.cshtml" />
     <Content Include="Views\Header\HeaderSelectionJobSeeker.cshtml" />
+    <Content Include="Views\Employer\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
