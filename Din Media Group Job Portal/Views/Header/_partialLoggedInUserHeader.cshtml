@@ -9,31 +9,24 @@
         <!-- Menu -->
         <nav id="navigation" class="menu">
             <ul id="responsive">
-                <li>
-                    <a href="#">For Candidates</a>
-                    <ul>
-                        <li><a href="@Url.Content("~/JobSeeker/BrowseJob")">Browse Jobs</a></li>
-                        <li><a href="@Url.Content("~/JobSeeker/AddResume")">Add Resume</a></li>
-                        <li><a href="@Url.Content("~/JobSeeker/ManageResume")">Manage Resumes</a></li>
-                    </ul>
-                </li>
+                <li><a href="@Url.Content("~/JobSeeker/BrowseJob")">Browse Jobs</a></li>
+                <li><a href="@Url.Content("~/JobSeeker/ManageResume")">CV Manager</a></li>
                 <li><a href="#">Job History</a>
                     <ul>
                         <li><a href="@Url.Content("~/JobSeeker/AppliedJobs")">Applied Jobs</a></li>
                         <li><a href="@Url.Content("~/JobSeeker/SavedJobs")">Saved Jobs</a></li>
                     </ul>
                 </li>
+               
                 <li>                    
                     <a href="@Url.Content("~/User/ContactUs")">Contact Us</a>           
                 </li>
-            <li><a href="#">FAQs</a></li>
-            </ul>
-
-            <ul class="float-right">
-                <li><a href="@Url.Content("~/User/Premium")">Premium Services</a></li>
-                <li><a href="@Url.Content("~/JobSeeker/UserProfile")"><i class="fa fa-user"></i> Profile</a>
+                <li><a href="#">FAQs</a></li>
+                
+                <li>
+                    <a href="@Url.Content("~/JobSeeker/UserProfile")"><i class="fa fa-user"></i> Profile</a>
                     <ul>
-                        <li><a href="@Url.Content("~/User/ContactUs")" >Contact Us</a></li>
+                        <li><a href="@Url.Content("~/JobSeeker/Dashboard")">Dashboard</a></li>
                         <li><a href="@Url.Content("~/JobSeeker/AccountSetting")" class="button">Settings</a></li>
                         <li><a href="@Url.Content("~/User/LogOut")" class="button">Logout</a></li>
                     </ul>

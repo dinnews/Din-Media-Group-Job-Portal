@@ -30,6 +30,14 @@ namespace Din_Media_Group_Job_Portal.Controllers
         public ActionResult BrowseResume()
         {
             return View();
-        }       
+        }
+        public ActionResult MyAccount()
+        {
+            return View();
+        }
+        public ActionResult AccountSetting()
+        {
+            return View();
+        } 
     }
 }

@@ -3,7 +3,10 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 <style>
-   
+    .profil-heading {
+        color: #0079d6;
+        font-size:x-large;
+    }
 </style>
 <div id="wrapper">
 
@@ -22,16 +25,13 @@
     <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
         
         <div class="container">
-            <span style="float:right; ">
-                <a href=".profile-upload" class="popup-with-zoom-anim"><i class="fa fa-pencil-square-o"></i></a>
-            </span>
+            
             <div class="ten columns">
                 <div class="resume-titlebar">
-                    
-                    <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
-                    <span style="position:absolute; left:50px; top:80px; background-color:black; width:30px;" class="centered" id="image-upload-edit-profile">
-                        <a href=".profile-upload" class="popup-with-zoom-anim"><i class="fa fa-pencil-square-o"></i></a>
-                    </span>
+                    <a href=".profile-upload" class="popup-with-zoom-anim">
+                        <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture">
+                    </a> 
+                 
                     <div class="resumes-list-content">
                       <h4 style="color:white;">John Doe 
                           <a href=".profile-edit" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>
@@ -53,7 +53,7 @@
 
             <div class="six columns">
                 <div class="two-buttons">
-                    <a href="#small-dialog" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-envelope"></i> Send Message</a>
+                    <a href=".profile-upload" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-upload"></i> Change Cover</a>
 
                     <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
                         <div class="small-dialog-headline">
@@ -74,11 +74,14 @@
                     <a href="#" class="button dark" style="width:150px;" ><i class="fa fa-print"></i> Print Profile</a>
                 </div>
             </div>
-
         </div>
+        <span style="float:right; bottom:10px; display:none;">
+            <a href=".profile-edit" class="button popup-with-zoom-anim">
+                <i class="fa fa-upload">Edit Cover</i>
+            </a>
+        </span>
     </div>
-
-
+    
     <!-- Content
     ================================================== -->
     <div class="container">
@@ -86,7 +89,7 @@
         <div class="eight columns">
             <div class="padding-right">
                 <span style="float:left;">
-                    <strong class="margin-bottom-15">About Me</strong>
+                    <strong class="margin-bottom-15 profil-heading">About Me</strong>
                 </span>
                 <span style="float:right;">
                     <a href=".aboutme-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
@@ -110,7 +113,7 @@
         <!-- Widgets -->
         <div class="eight columns">
             <span style="float:left;">
-                <strong class="margin-bottom-15">Education</strong>
+                <strong class="margin-bottom-15 profil-heading">Education</strong>
             </span>
             <span style="float:right;">
                 <a href=".education-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
@@ -164,7 +167,7 @@
         <div class="eight columns">
 
             <span style="float:left;">
-                <strong class="margin-bottom-15">Exprience</strong>
+                <strong class="margin-bottom-15 profil-heading">Exprience</strong>
             </span>
             <span style="float:right;">
                 <a href=".experience-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
@@ -218,7 +221,7 @@
         <div class="eight columns">
 
             <span style="float:left;">
-                <strong class="margin-bottom-15">Projects</strong>
+                <strong class="margin-bottom-15 profil-heading">Projects</strong>
             </span>
             <span style="float:right;">
                 <a href=".project-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
@@ -264,7 +267,7 @@
         <div class="nine columns">
 
             <span style="float:left;">
-                <strong class="margin-bottom-15">Skills</strong>
+                <strong class="margin-bottom-15 profil-heading">Skills</strong>
             </span>
             <span style="float:right;">
                 <a href=".skill-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
@@ -302,7 +305,7 @@
         <div class="seven columns">
 
             <span style="float:left;">
-                <strong class="margin-bottom-15">Languages</strong>
+                <strong class="margin-bottom-15 profil-heading">Languages</strong>
             </span>
             <span style="float:right;">
                 <a href=".language-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
@@ -732,8 +735,8 @@
                     <i class="fa fa-upload"></i> Browse
                 </label>
                 <span class="fake-input" id="input-name">No file selected</span>
-                <div id="dvPreview" style="height:300px; width:300px; overflow:hidden;">
-                    
+                <div id="dvPreview" style="max-height:400px; overflow:hidden; cursor:pointer">
+                    <img  src="~/Content/userContent/images/blog-post-03.jpg" />
                 </div>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
@@ -744,7 +747,12 @@
 </div>
 
 <script language="javascript" type="text/javascript">
+    function resizeImg(img, height, width) {
+        img.height = height;
+        img.width = width;
+    }
     $(function () {
+        
         $("#imageName").change(function () {
             var _URL = window.URL || window.webkitURL;
 
@@ -773,12 +781,12 @@
                                 else {*/
                                 if (typeof (FileReader) != "undefined") {
                                     $("#dvPreview").show();
-                                    $("#dvPreview").append("<img height='200' width='200' />");
+                                    $("#dvPreview").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
                                     var reader = new FileReader();
                                     reader.onload = function (e) {
                                         $("#dvPreview img").attr("src", e.target.result);
-                                        $("#dvPreview img").attr("height", "200");
-                                        $('#input-name').text(name);
+                                        
+                                        $('#input-name').text("2425905779930697125_n.jpg");
                                     }
                                     reader.readAsDataURL(file);
                                 } else {
@@ -800,4 +808,27 @@
 
         });
     });
+</script>
+<script>
+    $(function () {
+        var curDown = false,
+            curYPos = 0,
+            curXPos = 0;
+        $('#dvPreview').mousemove(function (m) {
+            if (curDown === true) {
+                $('#dvPreview').scrollTop($('#dvPreview').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview').scrollLeft($('#dvPreview').scrollLeft() + (curXPos - m.pageX));
+            }
+        });
+
+        $('#dvPreview').mousedown(function (m) {
+            curDown = true;
+            curYPos = m.pageY;
+            curXPos = m.pageX;
+        });
+
+        $('#dvPreview').mouseup(function () {
+            curDown = false;
+        });
+    })
 </script>

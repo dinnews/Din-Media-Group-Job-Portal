@@ -67,6 +67,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
             Session.Abandon();
             return RedirectToAction("Home", "User");
         }
+       public ActionResult Error()
+       {
+           return View();
+       }
 
     }
 }
