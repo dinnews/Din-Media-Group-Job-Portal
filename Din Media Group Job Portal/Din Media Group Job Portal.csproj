@@ -326,6 +326,23 @@
     <Content Include="Content\adminContent\images\themeforest.png" />
     <Content Include="Content\adminContent\images\uploadfile.png" />
     <Content Include="Content\adminContent\images\user.png" />
+    <Content Include="Content\datepicker\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\datepicker\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\datepicker\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\datepicker\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\datepicker\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\datepicker\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\datepicker\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\datepicker\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\datepicker\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\datepicker\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\datepicker\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\datepicker\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\datepicker\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\datepicker\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\datepicker\jquery-ui.css" />
+    <Content Include="Content\datepicker\jquery-ui.js" />
+    <Content Include="Content\graph-loader\loader.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -655,6 +672,7 @@
     <Content Include="Scripts\userScripts\scripts\jquery.gmaps.min.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.jpanelmenu.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\userScripts\scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.sceditor.bbcode.min.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.sceditor.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.superfish.js" />
@@ -702,9 +720,21 @@
     <Content Include="Views\Employer\EmployerHome.cshtml" />
     <Content Include="Views\Header\HeaderSelectionEmployer.cshtml" />
     <Content Include="Views\Header\HeaderSelectionJobSeeker.cshtml" />
+    <Content Include="Views\JobSeeker\Dashboard.cshtml" />
+    <Content Include="Views\JobSeeker\EditProfile.cshtml" />
+    <Content Include="Views\JobSeeker\SavedJobs.cshtml" />
+    <Content Include="Views\JobSeeker\CreateProfile.cshtml" />
+    <Content Include="Views\JobSeeker\AppliedJobs.cshtml" />
+    <Content Include="Views\JobSeeker\AccountSetting.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Employer\AccountSetting.cshtml" />
+    <Content Include="Views\Employer\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Employer_Profile_images\" />
+    <Folder Include="JobSeeker_Profile_images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
