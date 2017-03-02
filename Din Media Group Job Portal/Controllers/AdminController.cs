@@ -39,7 +39,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             return View();
         }
-
+        public ActionResult SearchJobs()
+        {
+            return View();
+        }
 
     }
 }
