@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Job Portal || A Project of Din Media Group";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<link href="@Url.Content("~/Content/userContent/css/error.css")" rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200italic,200,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+<div id="wrapper">
+
+
+    <header class="sticky-header full-width">
+        @Html.Partial("~/Views/Header/_partialUserHeader.cshtml")
+
+    </header>
+
+    <script>
+        $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
+    </script>
+    <div class="clearfix"></div>
+    <div class="main w3l">
+        <div></div>
+        <h2><br />OOPS ERROR 404 </h2>
+        <h3><br />Somenthing went worong!  </h3>
+
+        <h3>
+            "The page you are looking can not be found."<br />
+            kindly Contact developer fro more information or help<br />
+            Email: bcsf13m030@pucit.edu.pk<br />
+            Mobile# 03156935575<br />
+        </h3>
+        <a href="#" class="back button">BACK TO HOME</a>
+
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <div class="margin-top-15"></div>
+    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->

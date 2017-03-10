@@ -1,7 +1,40 @@
 ﻿@{
-    ViewBag.Title = "BrowseResume";
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/slider/css/lightslider.css" />
+<script>
+    jQuery(document).ready(function () {
+        $('#search-by-date').datepicker({
+            //comment the beforeShow handler if you want to see the ugly overlay
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            }
+        });
+    });
+</script>
+<style>
+    #myProgress {
+        background-color: #ddd;
+    }
+
+    #myBar {
+        width: 10%;
+        height: 15px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 15px;
+        color: white;
+    }
+    #search-by-date{
+        z-index:99999999;
+    }
+    
+</style>
 
 <div id="wrapper">
     <!-- Header
@@ -17,199 +50,259 @@
     </script>
     <div class="container">
         <br />
-        <div class="sixteen columns">
-            <!-- Content
-            ================================================== -->
-           
-                <div class="container">
-                    <div class="eleven columns" style=" height:300px;" id="visitor-graph">
-                    </div>
-                    <div class="five columns" style="background:#1565c0; color:white;">
+        <div class="twelve columns">
+            <div id="titlebar" class="resume photo-bg custom-dashboard-cover" style=" background: url(/Content/userContent/images/job-page-photo.jpg)">
+                <div class="container twelve columns">
+
+                    <div class="twelve columns">
+                        <a href=".profile-upload" class="popup-with-zoom-anim button" style=" float: right;  top: 5px; margin-right: 10px; "><i class="fa fa-upload"></i> Change Cover</a>
                         <div class="resume-titlebar">
-                            <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
+                            <a href=".profile-upload" class="popup-with-zoom-anim">
+                                <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture">
+                            </a>
+
                             <div class="resumes-list-content">
-                                <h4 style="color: white;">
-                                    John Doe
+                                <h4 style="color:white;">
+                                    Muhammad Iqbal
+                                    <a href="#" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>
+                                    <span style="color:white;">Microsoft (Lahore, Pakistan)</span>
                                 </h4>
-                                <span style="color: white;">Administrator</span>
+                                <p class="nine columns" style="background-color: rgba(211, 211, 211, 0.5); padding-right: 10px; padding-left: 10px; color:white;">
+                                    The control is ready to accept user interaction and for external method calls. If you want to interact with the control, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired. Alternatively, you can listen for a ready event on the dashboard holding the control and call control methods only after the event was fired.
+                                </p>
+                                <div style="background-color:lightgrey; padding-right:10px;" class="ten columns">
+
+                                </div>
+                                <span class="icons" style="color:white;"><i class="fa fa-group"></i> No of Employees: 10</span>
+                                <span class="icons" style="color:white;"><i class="fa fa-building-o"></i> No of Departments: 2</span>
+                                <span class="icons" style="color:white;"><i class="fa fa-star-half-full"></i> Profile Reviews: 10</span>
                                 <div class="clearfix"></div>
 
                             </div>
                         </div>
                     </div>
-                
+
+                </div>
+            </div>
+            <div class="twelve columns">
+                <h4>Profile Status</h4>
+                <div id="myProgress" class="five columns">
+                    <div id="myBar">10%</div>
+                </div>
+                <div class="six columns" style=" line-height: 15px;">
+                    <a href="#" style=" line-height: 15px;">Complete profile</a>
+                </div>
+                <br />
             </div>
         </div>
-        <div class="eleven columns">
-            <span style="float:right;"><a href="@Url.Content("~/JobSeeker/AppliedJobs")">View All</a></span>
-            <h4>My Job Applications</h4>
-            <div class="clearfix"></div>
-
-            <ul class="job-list full">
+        <!-- Job Spotlight -->
+        <div class="four columns ">
+            <div style="border: 0.5px solid; border-color: #e2e2e2;">
+                <h3>Our featured Employees</h3>
+            </div>
+            <ul id="spotlight-slider">
                 <li>
-                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
-                        <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Marketing Coordinator - SEO / SEM Experience</h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> King</span>
-                                <span><i class="fa fa-map-marker"></i> Sydney</span>
-                            </div>
-                            <div style="float:right">
-                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                <span><i class="fa fa-file-archive-o"></i> Recieved</span>
-                            </div>
+                    <div class="job-spotlight" style="margin-top:0px;">
+                        <div class="resume-titlebar" style="margin-left: 20%; margin-top: 0px;">
+                            <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture" style="margin-top:0px;">
                         </div>
-                    </a>
-
-                </li>
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
-                        <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Marketing Coordinator </h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> King</span>
-                                <span><i class="fa fa-map-marker"></i> Sydney</span>
-                            </div>
-                            <div style="float:right">
-                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                <span><i class="fa fa-file-archive-o"></i> Viewed</span>
-                            </div>
+                        <div class="centered" style="margin:0;">
+                            <span><h4>Hafiz Mohsin Ayoob</h4></span>
+                            <span><i class="fa fa-briefcase"></i> Din Media Group</span>
+                            <a href="#" class="button" style="margin:0;">View Profile</a>
                         </div>
-                    </a>
-
+                    </div>
                 </li>
                 <li>
-                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
-                        <img src="~/Content/userContent/images/job-list-logo-02.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Marketing Coordinator - SEO / SEM Experience</h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> King</span>
-                                <span><i class="fa fa-map-marker"></i> Sydney</span>
-                            </div>
-                            <div style="float:right">
-                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                <span><i class="fa fa-file-archive-o"></i> Recieved</span>
-                            </div>
+                    <div class="job-spotlight" style="margin-top:0px;">
+                        <div class="resume-titlebar" style="margin-left: 20%; margin-top: 0px;">
+                            <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture" style="margin-top:0px;">
                         </div>
-                    </a>
-
+                        <div class="centered" style="margin:0;">
+                            <span><h4>Hafiz Mohsin Ayoob</h4></span>
+                            <span><i class="fa fa-briefcase"></i> Din Media Group</span>
+                            <a href="#" class="button" style="margin:0;">View Profile</a>
+                        </div>
+                    </div>
                 </li>
                 <li>
-                    <a href="@Url.Content("~/JobSeeker/AppliedJobs")">
-                        <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Marketing Coordinator - SEO / SEM Experience</h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> King</span>
-                                <span><i class="fa fa-map-marker"></i> Sydney</span>
-                            </div>
-                            <div style="float:right">
-                                <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                <span><i class="fa fa-file-archive-o"></i> Viewed</span>
-                            </div>
+                    <div class="job-spotlight" style="margin-top:0px;">
+                        <div class="resume-titlebar" style="margin-left: 20%; margin-top: 0px;">
+                            <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture" style="margin-top:0px;">
                         </div>
-                    </a>
-
+                        <div class="centered" style="margin:0;">
+                            <span><h4>Hafiz Mohsin Ayoob</h4></span>
+                            <span><i class="fa fa-briefcase"></i> Din Media Group</span>
+                            <a href="#" class="button" style="margin:0;">View Profile</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
+            <div  style="height:200px;background-color:red; margin-top:10px;">
+                <iframe height="200" width:"90%" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container">
+        <div class="twelve columns">
+            <h4>Job Search Filters</h4>
+            <span class="widget" style="float:right; width:33%;">
+                <!-- Select -->
+                <label for="sele">
+                    Date
+                    <input type="text" placeholder="23/03/1940" value="" id="search-by-date" />
+                </label>
+
+            </span>
+            <span class="widget" style="float:left; width:33%;">
+                <!-- Select -->
+                <label for="sele">
+                    Job title
+                    <input type="text" placeholder="e.g. Din Media Group" value="" />
+                </label>
+
+            </span>
+            <span class="widget" style="float:left; width:33%; margin-left:0.5%;">
+                <!-- Select -->
+                <label for="catagory">
+                    Department
+                    <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                        <option selected="selected" value="">Select your Catagory</option>
+                        <option value="Software Engineer">HR</option>
+                        <option value="Qualit Manager">QA</option>
+
+                    </select>
+                </label>
+                
+
+            </span>
             <div class="clearfix"></div>
-            <div>
-                <div class="clearfix"></div><br />
-                <span style="float:right;"><a href="@Url.Content("~/JobSeeker/SavedJobs")">View All</a></span>
-                <h4>My Saved Jobs</h4>
+        </div>
+        <div class="sixteen columns">
+            <!-- Content
+        ================================================== -->
+            <div class="four columns">
+                <div style=" height:400px;" id="visitor-graph">
+                </div>
+                <div class="four columns" id="curve_chart" style=" height:350px;"></div>
+            </div>
+            <!--
+            =============== My Jobs
+        -->
+            <div class="seven columns">
+                <span style="float:right;"><a href="@Url.Content("~/Employer/ManageJobs")">Manage jobs</a></span>
+                <h4>My Job </h4>
+                <div class="clearfix"></div>
+
                 <ul class="job-list full">
                     <li>
-                        <a href="@Url.Content("~/JobSeeker/SavedJobs")">
-                            <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
-                            <div class="job-list-content">
-                                <h4>Marketing Coordinator - SEO / SEM Experience</h4>
-                                <div class="job-icons">
-                                    <span><i class="fa fa-briefcase"></i> King</span>
-                                    <span><i class="fa fa-map-marker"></i> Sydney</span>
-                                </div>
-                                <div style="float:right">
-                                    <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                    <span><i class="fa fa-file-archive-o"></i> Applied</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Content("~/JobSeeker/SavedJobs")">
+                        <a href="@Url.Content("~/Employer/ManageApplications")">
                             <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
                             <div class="job-list-content">
                                 <h4>Marketing Coordinator - SEO / SEM Experience</h4>
                                 <div class="job-icons">
-                                    <span><i class="fa fa-briefcase"></i> King</span>
-                                    <span><i class="fa fa-map-marker"></i> Sydney</span>
-                                </div>
-                                <div style="float:right">
+                                    <span><i class="fa fa-map-marker"></i> Rawalpindi</span>
                                     <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                    <span><i class="fa fa-file-archive-o"></i> Applied</span>
+                                    <span><i class="fa fa-file-archive-o"></i> Recieved</span>
                                 </div>
                             </div>
                         </a>
+
+                    </li>
+
+                    <li>
+                        <a href="@Url.Content("~/Employer/ManageApplications")">
+                            <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                            <div class="job-list-content">
+                                <h4>Marketing Coordinator </h4>
+                                <div class="job-icons">
+                                    <span><i class="fa fa-map-marker"></i> Lahore</span>
+                                    <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                    <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                                </div>
+                            </div>
+                        </a>
+
                     </li>
                     <li>
-                        <a href="@Url.Content("~/JobSeeker/SavedJobs")">
+                        <a href="@Url.Content("~/Employer/ManageApplications")">
                             <img src="~/Content/userContent/images/job-list-logo-02.png" alt="">
                             <div class="job-list-content">
                                 <h4>Marketing Coordinator - SEO / SEM Experience</h4>
                                 <div class="job-icons">
-                                    <span><i class="fa fa-briefcase"></i> King</span>
                                     <span><i class="fa fa-map-marker"></i> Sydney</span>
-                                </div>
-                                <div style="float:right">
                                     <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
-                                    <span><i class="fa fa-file-archive-o"></i> Expired</span>
+                                    <span><i class="fa fa-file-archive-o"></i> Viewed</span>
                                 </div>
                             </div>
                         </a>
+
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Employer/ManageApplications")">
+                            <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
+                            <div class="job-list-content">
+                                <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                                <div class="job-icons">
+                                    <span><i class="fa fa-map-marker"></i> Sydney</span>
+                                    <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                    <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                                </div>
+                            </div>
+                        </a>
+
                     </li>
                 </ul>
+                <div class="clearfix"></div>
+
+                <div class="pagination-container">
+                    <nav class="pagination">
+                        <ul>
+                            <li><a href="#" class="current-page">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li class="blank">...</li>
+                            <li><a href="#">22</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="pagination-next-prev">
+                        <ul>
+                            <li><a href="#" class="prev">Previous</a></li>
+                            <li><a href="#" class="next">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="four columns">
+                <div class="four columns" style=" height:350px;" id="profile-graph">
+
+                </div>
+                <div class="four columns" style=" height:350px;" id="university-graph">
+
+                </div>
             </div>
         </div>
-
-        <a href="@Url.Content("~/JobSeeker/EditProfile")" class="five columns">
-            <div style=" height:300px;" id="profile-graph">
-
-            </div>
-        </a>
+            
         
 
-        <!-- <ul style="float: right; display: inline;">
-             <li >
-                <a href="" class="button " style="background-color: silver; margin: 10px; ">
-                  <pre><br />        <i class="fa fa-file-archive-o fa-5x"></i><br />   <span> Saved Jobs</span></pre>
-                 </a>
-                  <a href="" class="button " style="background-color: silver; margin:10px;">
-                    <pre><br />       <i class="fa fa-envelope-square fa-5x"></i><br />  <span> Job Alerts</span></pre>
-                  </a>
-
-             </li>
-             <li>
-
-                     <a href="" class="button" style="background-color: silver; margin: 10px; ">
-                         <pre><br />       <i class="fa fa-file-pdf-o fa-5x"></i><br />      <span> MY CVs        </span></pre>
-                     </a>
-
-                     <a href="" class="button" style="background-color: silver; margin: 10px; ">
-                         <pre><br />       <i class="fa fa-star-half-full fa-5x"></i><br />        <span> Premium</span></pre>
-                     </a>
-
-             </li>
-
-         </ul>-->
-        <div class="clearfix five columns"></div><br />
-        <iframe class="five columns" height="315" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameborder="0" allowfullscreen></iframe>
-
-
-    </div>
+            <div class="sixteen columns" style="background:white; color:white;">
+                <ul id="employer-slider">
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-01.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-02.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-03.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-04.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-05.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-06.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-07.png")" /></li>
+                    <li><img src="@Url.Content("~/Content/userContent/images/logo-01.png")" /></li>
+                </ul>
+            </div>
+   </div>
 
 
     <!-- Footer
@@ -223,22 +316,191 @@
 
 </div>
 <!-- Wrapper / End -->
+<!--Profile edit popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-edit">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Edit Profile</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                Name
+                <input class="search-field" type="text" placeholder="e.g. John Doe" value="John Doe" />
+                Title
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
+                Location
+                <input class="search-field" type="text" placeholder="e.g. Lahore, Pakistan" value="Lahore, Pakistan" />
+                My Video Link
+                <input class="search-field" type="text" placeholder="e.g.http://" value="http://youtu.e/ghas" />
+
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Profile Pic popup-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-upload">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Change Picture</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                <label class="upload-btn">
+                    <input type="file" multiple id="imageName" />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input" id="input-name">No file selected</span>
+              
+                    
+                        
+                        <div class="ten columns" id="dvPreview" style="max-height: 400px; overflow: hidden; cursor: pointer;">
+                            <img src="~/Content/userContent/images/blog-post-03.jpg" style="width:100%;" />
+                        </div>
+               
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    function resizeImg(img, height, width) {
+        img.height = height;
+        img.width = width;
+    }
+    $(function () {
+
+        $("#imageName").change(function () {
+            var _URL = window.URL || window.webkitURL;
+
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+
+                    $("#dvPreview").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                            $("#dvPreview").show();
+                            $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                        }
+                        else {*/
+                        if (typeof (FileReader) != "undefined") {
+                            $("#dvPreview").show();
+                            $("#dvPreview").append("<img  style=' pointer-events: none; width:100%; height:'400px'' />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $("#dvPreview img").attr("src", e.target.result);
+
+                                $('#input-name').text("2425905779930697125_n.jpg");
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+
+
+
+
+
+        });
+    });
+</script>
+<script>
+    $(function () {
+        var curDown = false,
+            curYPos = 0,
+            curXPos = 0;
+        $('#dvPreview').mousemove(function (m) {
+            if (curDown === true) {
+                $('#dvPreview').scrollTop($('#dvPreview').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview').scrollLeft($('#dvPreview').scrollLeft() + (curXPos - m.pageX));
+            }
+        });
+
+        $('#dvPreview').mousedown(function (m) {
+            curDown = true;
+            curYPos = m.pageY;
+            curXPos = m.pageX;
+        });
+
+        $('#dvPreview').mouseup(function () {
+            curDown = false;
+        });
+    })
+
+</script>
 <script type="text/javascript" src="@Url.Content("~/Content/graph-loader/loader.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/slider/js/lightslider.js")"></script> 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#spotlight-slider').lightSlider({
+            controls: false,
+            pager: false,
+            pauseOnHover: true,
+            item: 1,
+            loop: true,
+            thumbItem: 9,
+            slideMargin: 0,
+           
+            auto: true
+        });
+        $('#employer-slider').lightSlider({
+            controls: true,
+            pager: false,
+            pauseOnHover: true,
+            auto: true,
+            loop: true,
+            item: 6
+        });
+    });
     google.charts.load('current', { 'packages': ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(drawPieChart);
+    google.charts.setOnLoadCallback(drawUniversityPieChart);
+    google.charts.setOnLoadCallback(drawLineChart);
 
     function drawPieChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Profile', 'Completeness'],
-          ['Complete', 11],
-          ['Incomplete', 2]
+          ['City', 'Percentage of Candidate'],
+          
+          ['Lahore', 18],
+           ['Karachi', 7],
+          ['Peshawar', 6],
+          ['Others', 11]
         ]);
 
         var options = {
-            title: 'Profile Completeness\nClick to Edit your Profile',
+            title: 'Candidates by cities',
+            isStacked: true,
+            //height: 300,
+            legend: { position: 'top', maxLines: 3 },
             //subtitle:'Click to Edit your Profile',
             'is3D': true,
             'width': 400,
@@ -249,28 +511,90 @@
 
         chart.draw(data, options);
     }
-    function drawChart() {
+    function drawUniversityPieChart() {
+
         var data = google.visualization.arrayToDataTable([
-          ['Jobs', 'Viewed CVS', 'Applicatns'],
-         ['Software.', 894, 1024],
-         ['Software.', 894, 1024],
-         ['Software.', 894, 1024]
+          ['University', 'Percentage of Candidate'],
+
+          ['University of the Punjab', 18],
+           ['University of Sargodha', 7],
+          ['University of Peshawar', 6],
+          ['University of Malakand', 11],
+          ['Others', 18]
+
         ]);
 
         var options = {
-            chart: {
-                title: 'Application Statistics',
-                subtitle: 'Who have applied to my jobs',
-                'is3D': true,
-                isStacked: true,
-                'height': 350,
-                
-            }
+            title: 'Candidates from Universities (Top 5)',
+            isStacked: true,
+            //height: 300,
+            legend: { position: 'top', maxLines: 4 },
+            //subtitle:'Click to Edit your Profile',
+            'is3D': true,
+            'width': 400,
+            'height': 370
         };
 
-        var chart = new google.charts.Bar(document.getElementById('visitor-graph'));
+        var chart = new google.visualization.PieChart(document.getElementById('university-graph'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        chart.draw(data, options);
+    }
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('number', 'Value');
+        data.addColumn({type: 'string', role: 'style'});
+  
+        data.addRows([
+            ['Viewed Applications', 10, 'color: #4285f4'],
+            ['Total Applications', 71, 'color: #db4437']
+   
+        ]);
+          
+
+        var options = {
+            title: 'Application Statistics',
+            subtitle: 'Who have applied to my jobs',
+            height: 350,
+            hAxis: {
+                title: 'Jobs & CVs',
+               
+            },
+            vAxis: {
+                title: 'Total'
+            },
+            legend: { position: 'none' }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById('visitor-graph'));
+
+        chart.draw(data, options);
+        
+    }
+   
+    function drawLineChart() {
+     
+     
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Jobs', 'CVs'],
+          ['Jan', 10, 15],
+          ['Feb', 12, 50],
+          ['Mar', 2, 35],
+          ['Apr', 4, 2]
+        ]);
+
+        var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            series: [{ pointSize: 3 }, {color:'red', pointSize:4}]
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+       
     }
     ///////////////////////////////////////////
 
