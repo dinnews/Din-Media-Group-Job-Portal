@@ -71,6 +71,17 @@ namespace Din_Media_Group_Job_Portal.Controllers
        {
            return View();
        }
-
+       public ActionResult NotFoundError()
+       {
+           return View();
+       }
+       public ActionResult DbError()
+       {
+           return View();
+       }
+       public ActionResult GeneralError()
+       {
+           return View();
+       }
     }
 }
