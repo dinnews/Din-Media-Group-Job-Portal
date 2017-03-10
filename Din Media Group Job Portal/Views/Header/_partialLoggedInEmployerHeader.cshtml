@@ -9,33 +9,30 @@
         <!-- Menu -->
         <nav id="navigation" class="menu">
             <ul id="responsive">
-                             
-                <li>
-                    <a href="#">For Employers</a>
-                    <ul>
-                        <li><a href="@Url.Content("~/Employer/PostJob")">Add Job</a></li>
+              
+                        <li><a href="@Url.Content("~/Employer/PostJob")">Post a Job</a></li>
                         <li><a href="@Url.Content("~/Employer/ManageJobs")">Manage Jobs</a></li>
-                        <li><a href="@Url.Content("~/Employer/ManageApplications")">Manage Applications</a></li>
                         <li><a href="@Url.Content("~/Employer/BrowseResume")">Browse Resumes</a></li>
-                    </ul>
-                </li>
+                    
+                
                 <li>
                     <a href="@Url.Content("~/User/ContactUs")">Contact Us</a>
                 </li>
                 <li><a href="#">FAQs</a></li>
-               
-            </ul>
-            <ul class="float-right">
-                <li><a href="@Url.Content("~/User/Premium")">Premium Services</a></li>
+                <li>
+                    <a href="@Url.Content("~/Employer/ViewDepartment")"> Departments</a>
+                </li>
                 <li>
                     <a href="#"><i class="fa fa-user"></i> Profile</a>
                     <ul>
-                        <li><a href="@Url.Content("~/User/ContactUs")">Contact Us</a></li>
+                        <li><a href="@Url.Content("~/Employer/Dashboard")">Dashboard</a></li>
+                        <li><a href="@Url.Content("~/Employer/CompleteProfile")">Complete Profile</a></li>
                         <li><a href="@Url.Content("~/Employer/AccountSetting")" class="button">Settings</a></li>
                         <li><a href="@Url.Content("~/User/LogOut")" class="button">Logout</a></li>
                     </ul>
                 </li>
             </ul>
+            
         </nav>
 
         <!-- Navigation -->

@@ -734,6 +734,7 @@
     <Content Include="Scripts\userScripts\scripts\jquery.themepunch.tools.min.js" />
     <Content Include="Scripts\userScripts\scripts\stacktable.js" />
     <Content Include="Scripts\userScripts\scripts\switcher.js" />
+    <Content Include="Scripts\userScripts\scripts\tinymce.min.js" />
     <Content Include="Scripts\userScripts\scripts\waypoints.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

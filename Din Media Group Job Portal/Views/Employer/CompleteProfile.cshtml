@@ -2,10 +2,30 @@
     ViewBag.Title = "Complete Profile";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-
-
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
 <script>
-    $(function () {
+    jQuery(document).ready(function () {
+        $('#company-establishment').datepicker({
+            //comment the beforeShow handler if you want to see the ugly overlay
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            }
+        });
+    });
+</script>
+<script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=tpp2hu82f0f6trwgjx40rllvlhq14lrg9j7jqb8reqbnh26b"></script>
+<script>
+    /*
+tinymce.init({
+    selector: '#summary',
+    menubar: ''
+});*/
+</script>
+<script>
+   $(function () {
         // Replace all textarea tags with SCEditor
         $('#summary').sceditor({
             plugins: 'bbcode',
@@ -53,7 +73,7 @@
                 <!-- Title -->
                 <div class="form">
                     <h5>Date of Establishment of your company</h5>
-                    <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" />
+                    <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" id="company-establishment" />
                 </div>
                 
                 <!-- Logo -->
