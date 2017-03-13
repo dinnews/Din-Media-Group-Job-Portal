@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "Department Details";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<script>
+    $(function () {
+        // Replace all textarea tags with SCEditor
+        $('#summary').sceditor({
+            plugins: 'bbcode',
+            style: '/Content/userContent/css/jquery.sceditor.default.min.css',
+            emoticonsRoot: "/emoticons/",
+            emoticonsEnabled: false
+        });
+    });
+</script>
+<div id="wrapper">
+
+
+    <!-- Header
+    ================================================== -->
+    <header class="sticky-header full-width">
+        @Html.Partial("~/Views/Header/HeaderSelectionEmployer.cshtml")
+    </header>
+    <div class="clearfix"></div>
+    <script>
+        $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
+    </script>
+
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="single submit-page">
+        <div class="container">
+            <div class="sixteen columns">
+                <h2><i class="fa fa-building"></i> HR</h2>
+                <h4>
+
+                    <span>Microsoft (Lahore, Pakistan)</span>
+                </h4>
+                <p style="background-color: rgba(211, 211, 211, 0.5); padding-right: 10px; padding-left: 10px;">
+                    The control is ready to accept user interaction and for external method calls. If you want to interact with the control, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired. Alternatively, you can listen for a ready event on the dashboard holding the control and call control methods only after the event was fired.
+                </p>
+                <div style="background-color:lightgrey; padding-right:10px;" class="ten columns">
+
+                </div>
+                <span class="icons"><i class="fa fa-group"></i> No of Employees: 10</span>
+                <span class="icons"><i class="fa fa-history"></i> No of posted jobs: 2</span>
+                <div class="clearfix"></div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Content
+    ================================================== -->
+    <div class="container">
+
+        <!-- Table -->
+        <div class="sixteen columns">
+
+            <p class="margin-bottom-25">Department is a functional organization within your company, e.g. Finance, IT, HR. You can add and manage departments for your company in this area. As you create accounts for employees within your company, you can specify what department they belong to and assign rights accordingly.</p>
+
+            <table class="manage-table resumes responsive-table">
+
+                <tr>
+                    <th><i class="fa fa-user"></i> Department Name</th>
+                    <th><i class="fa fa-file-text"></i> Details</th>
+                    <th><i class="fa fa-pencil"></i> Edit</th>
+                    <th><i class="fa fa-eye-slash"></i> Hide</th>
+                    <th><i class="fa fa-remove"></i> Remove</th>
+                </tr>
+
+                <!-- Item #1 -->
+                <tr>
+                    <td class="title">Hr</td>
+                    <td><a href="">View Detail</a></td>
+                    <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
+                    <td><a href=""> Hide</a></td>
+                    <td><a href=""> Remove</a></td>
+
+                </tr>
+
+                <tr>
+                    <td class="title">Hr</td>
+                    <td><a href="">View Detail</a></td>
+                    <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
+                    <td><a href=""> Hide</a></td>
+                    <td><a href=""> Remove</a></td>
+
+                </tr>
+
+            </table>
+
+            <br>
+
+            <a href=".department-add" class="popup-with-zoom-anim button">Add Department</a>
+            <!--
+            Add New Department Modal
+                -->
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup department-add">
+                <div class="small-dialog-headline">
+                    <h2 id="change-title-popup">Add Department</h2>
+                </div>
+                <div class="small-dialog-content">
+                    <form action="#" method="get">
+                        Department Name
+                        <input class="search-field" type="text" placeholder="e.g. HR" value="" />
+                        Number of Employees in that Department
+                        <input class="search-field" type="number" placeholder="e.g. 4" value="" />
+                        Deprtment Introduction
+                        <textarea name="desc" cols="30" rows="10" placeholder="Write about Department"></textarea>
+                        <button class="send">Save Department</button>
+                    </form>
+                </div>
+            </div>
+            <!--
+                update department
+            -->
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup department-edit">
+                <div class="small-dialog-headline">
+                    <h2 id="change-title-popup">Edit Department</h2>
+                </div>
+                <div class="small-dialog-content">
+                    <form action="#" method="get">
+                        Department Name
+                        <input class="search-field" type="text" placeholder="e.g. HR" value="HR" id="department-name" />
+                        Number of Employees in that Department
+                        <input class="search-field" type="number" placeholder="e.g. 4" value=10 id="department-employees" />
+                        Deprtment Introduction
+                        <textarea name="desc" cols="30" rows="10" placeholder="Write about Department" id="department-descripttion">human resource deaprtment</textarea>
+                        <button class="send">Save Department</button>
+                    </form>
+                </div>
+            </div>
+            <!--
+            Update CV Modal
+                 -->
+
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cv-update">
+                <div id="">
+                    <div class="small-dialog-headline">
+                        <h2>Update Your CV</h2>
+                    </div>
+                    <div class="small-dialog-content">
+                        <form action="#" method="get">
+                            <label for="CV-Name">
+                                CV Name:
+                                <input type="text" placeholder="QA CV" value="QA CV" />
+                            </label>
+                            <label for="cv-catagory">
+                                Select Catagory:
+                                <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
+                                    <option value="Default">Default</option>
+                                    <option value="Public">Public</option>
+                                    <option value="Private">Private</option>
+                                </select>
+                            </label>
+                            <!-- Upload CV -->
+                            <div class="upload-info"><i class="fa fa-file-text"></i><strong> abc.docx</strong> </div>
+                            <div class="clearfix"></div>
+                            <div class="divider"></div>
+                            <button class="send">Update CV</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <div class="margin-top-60"></div>
+
+    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->
