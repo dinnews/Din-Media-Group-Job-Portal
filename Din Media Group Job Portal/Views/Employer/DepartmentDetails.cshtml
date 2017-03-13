@@ -2,15 +2,18 @@
     ViewBag.Title = "Department Details";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
 
 <script>
-    $(function () {
-        // Replace all textarea tags with SCEditor
-        $('#summary').sceditor({
-            plugins: 'bbcode',
-            style: '/Content/userContent/css/jquery.sceditor.default.min.css',
-            emoticonsRoot: "/emoticons/",
-            emoticonsEnabled: false
+    jQuery(document).ready(function () {
+        $('#search-by-date').datepicker({
+            //comment the beforeShow handler if you want to see the ugly overlay
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            }
         });
     });
 </script>
@@ -32,20 +35,28 @@
     <div id="titlebar" class="single submit-page">
         <div class="container">
             <div class="sixteen columns">
-                <h2><i class="fa fa-building"></i> HR</h2>
-                <h4>
+                
+                <div class="twelve columns">
+                    <h3><i class="fa fa-building"></i> HR</h3>
+                    <a href=".department-edit" class="popup-with-zoom-anim" style="float:right;"><i class="fa fa-pencil"></i></a>
+                    <h4>
+                        
+                        <span>
+                            
+                            Microsoft (Lahore, Pakistan)
+                        </span>
+                    </h4>
+                    <p style="background-color: rgba(211, 211, 211, 0.5); padding-right: 10px; padding-left: 10px;">
+                        The control is ready to accept user interaction and for external method calls. If you want to interact with the control, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired. Alternatively, you can listen for a ready event on the dashboard holding the control and call control methods only after the event was fired.
+                    </p>
+                    <div style="background-color:lightgrey; padding-right:10px;" class="ten columns">
 
-                    <span>Microsoft (Lahore, Pakistan)</span>
-                </h4>
-                <p style="background-color: rgba(211, 211, 211, 0.5); padding-right: 10px; padding-left: 10px;">
-                    The control is ready to accept user interaction and for external method calls. If you want to interact with the control, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired. Alternatively, you can listen for a ready event on the dashboard holding the control and call control methods only after the event was fired.
-                </p>
-                <div style="background-color:lightgrey; padding-right:10px;" class="ten columns">
-
+                    </div>
+                    <span class="icons"><i class="fa fa-group"></i> No of Employees: 10</span>
+                    <span class="icons" style="margin-left:10px;"><i class="fa fa-history"></i> No of posted jobs: 12</span>
+                    <div class="clearfix"></div>
                 </div>
-                <span class="icons"><i class="fa fa-group"></i> No of Employees: 10</span>
-                <span class="icons"><i class="fa fa-history"></i> No of posted jobs: 2</span>
-                <div class="clearfix"></div>
+                
             </div>
             
         </div>
@@ -53,119 +64,128 @@
     <!-- Content
     ================================================== -->
     <div class="container">
+        <div class="twelve columns">
+           
+                <!-- Form -->
+                <form method="post" action="">
+                    <h4>Job Search Filters</h4>
+                    <span class="widget">
+                        <!-- Select -->
+                        <label for="sele" style="float:left; width:44%; margin-right:2%;">
+                            Job title
+                            <input type="text" placeholder="e.g. Din Media Group" value="" />
+                        </label>
+                        <label for="sele" style="float:left; width:44%;">
+                            Date
+                            <input type="text" placeholder="23/03/1940" value="" id="search-by-date" />
 
-        <!-- Table -->
-        <div class="sixteen columns">
-
-            <p class="margin-bottom-25">Department is a functional organization within your company, e.g. Finance, IT, HR. You can add and manage departments for your company in this area. As you create accounts for employees within your company, you can specify what department they belong to and assign rights accordingly.</p>
-
-            <table class="manage-table resumes responsive-table">
-
-                <tr>
-                    <th><i class="fa fa-user"></i> Department Name</th>
-                    <th><i class="fa fa-file-text"></i> Details</th>
-                    <th><i class="fa fa-pencil"></i> Edit</th>
-                    <th><i class="fa fa-eye-slash"></i> Hide</th>
-                    <th><i class="fa fa-remove"></i> Remove</th>
-                </tr>
-
-                <!-- Item #1 -->
-                <tr>
-                    <td class="title">Hr</td>
-                    <td><a href="">View Detail</a></td>
-                    <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
-                    <td><a href=""> Hide</a></td>
-                    <td><a href=""> Remove</a></td>
-
-                </tr>
-
-                <tr>
-                    <td class="title">Hr</td>
-                    <td><a href="">View Detail</a></td>
-                    <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
-                    <td><a href=""> Hide</a></td>
-                    <td><a href=""> Remove</a></td>
-
-                </tr>
-
-            </table>
-
-            <br>
-
-            <a href=".department-add" class="popup-with-zoom-anim button">Add Department</a>
-            <!--
-            Add New Department Modal
-                -->
-            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup department-add">
-                <div class="small-dialog-headline">
-                    <h2 id="change-title-popup">Add Department</h2>
-                </div>
-                <div class="small-dialog-content">
-                    <form action="#" method="get">
-                        Department Name
-                        <input class="search-field" type="text" placeholder="e.g. HR" value="" />
-                        Number of Employees in that Department
-                        <input class="search-field" type="number" placeholder="e.g. 4" value="" />
-                        Deprtment Introduction
-                        <textarea name="desc" cols="30" rows="10" placeholder="Write about Department"></textarea>
-                        <button class="send">Save Department</button>
+                        </label>
+                        <label for="button" style="float:left; width:10%; margin:0;">
+                            Search
+                            <a href="" class="button" style="height:auto;"><i class="fa fa-search"></i></a>
+                        </label>
+                        </span>
                     </form>
-                </div>
-            </div>
-            <!--
-                update department
-            -->
-            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup department-edit">
-                <div class="small-dialog-headline">
-                    <h2 id="change-title-popup">Edit Department</h2>
-                </div>
-                <div class="small-dialog-content">
-                    <form action="#" method="get">
-                        Department Name
-                        <input class="search-field" type="text" placeholder="e.g. HR" value="HR" id="department-name" />
-                        Number of Employees in that Department
-                        <input class="search-field" type="number" placeholder="e.g. 4" value=10 id="department-employees" />
-                        Deprtment Introduction
-                        <textarea name="desc" cols="30" rows="10" placeholder="Write about Department" id="department-descripttion">human resource deaprtment</textarea>
-                        <button class="send">Save Department</button>
-                    </form>
-                </div>
-            </div>
-            <!--
-            Update CV Modal
-                 -->
 
-            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cv-update">
-                <div id="">
-                    <div class="small-dialog-headline">
-                        <h2>Update Your CV</h2>
-                    </div>
-                    <div class="small-dialog-content">
-                        <form action="#" method="get">
-                            <label for="CV-Name">
-                                CV Name:
-                                <input type="text" placeholder="QA CV" value="QA CV" />
-                            </label>
-                            <label for="cv-catagory">
-                                Select Catagory:
-                                <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
-                                    <option value="Default">Default</option>
-                                    <option value="Public">Public</option>
-                                    <option value="Private">Private</option>
-                                </select>
-                            </label>
-                            <!-- Upload CV -->
-                            <div class="upload-info"><i class="fa fa-file-text"></i><strong> abc.docx</strong> </div>
-                            <div class="clearfix"></div>
-                            <div class="divider"></div>
-                            <button class="send">Update CV</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+            <span class="widget" style="float:left; width:50%;">
+            </span>
+            <div class="clearfix"></div>
         </div>
-    </div>
+            <div class="sixteen columns">
+                <!-- Content
+            ================================================== -->
+                <!--
+                =============== My Jobs
+            -->
+                <div class="twelve columns">
+                    
+                    <h4>Department Jobs </h4>
+                    <div class="clearfix"></div>
+
+                    <ul class="job-list full">
+                        <li>
+                            <a href="@Url.Content("~/Employer/ManageApplications")">
+                                <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                                <div class="job-list-content">
+                                    <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                                    <div class="job-icons">
+                                        <span><i class="fa fa-map-marker"></i> Rawalpindi</span>
+                                        <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                        <span><i class="fa fa-file-archive-o"></i> Recieved</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </li>
+
+                        <li>
+                            <a href="@Url.Content("~/Employer/ManageApplications")">
+                                <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                                <div class="job-list-content">
+                                    <h4>Marketing Coordinator </h4>
+                                    <div class="job-icons">
+                                        <span><i class="fa fa-map-marker"></i> Lahore</span>
+                                        <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                        <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="@Url.Content("~/Employer/ManageApplications")">
+                                <img src="~/Content/userContent/images/job-list-logo-02.png" alt="">
+                                <div class="job-list-content">
+                                    <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                                    <div class="job-icons">
+                                        <span><i class="fa fa-map-marker"></i> Sydney</span>
+                                        <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                        <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="@Url.Content("~/Employer/ManageApplications")">
+                                <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
+                                <div class="job-list-content">
+                                    <h4>Marketing Coordinator - SEO / SEM Experience</h4>
+                                    <div class="job-icons">
+                                        <span><i class="fa fa-map-marker"></i> Sydney</span>
+                                        <span><i class="fa fa-calendar"></i> Sep 23, 2016</span>
+                                        <span><i class="fa fa-file-archive-o"></i> Viewed</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+
+                    <div class="pagination-container">
+                        <nav class="pagination">
+                            <ul>
+                                <li><a href="#" class="current-page">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li class="blank">...</li>
+                                <li><a href="#">22</a></li>
+                            </ul>
+                        </nav>
+
+                        <nav class="pagination-next-prev">
+                            <ul>
+                                <li><a href="#" class="prev">Previous</a></li>
+                                <li><a href="#" class="next">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
 
     <!-- Footer
     ================================================== -->
@@ -178,3 +198,22 @@
 
 </div>
 <!-- Wrapper / End -->
+<!--
+    Deparetment edit Modal
+-->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup department-edit">
+    <div class="small-dialog-headline">
+        <h2 id="change-title-popup">Edit Department</h2>
+    </div>
+    <div class="small-dialog-content">
+        <form action="#" method="get">
+            Department Name
+            <input class="search-field" type="text" placeholder="e.g. HR" value="HR" id="department-name" />
+            Number of Employees in that Department
+            <input class="search-field" type="number" placeholder="e.g. 4" value=10 id="department-employees" />
+            Deprtment Introduction
+            <textarea name="desc" cols="30" rows="10" placeholder="Write about Department" id="department-descripttion">human resource deaprtment</textarea>
+            <button class="send">Save Department</button>
+        </form>
+    </div>
+</div>

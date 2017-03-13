@@ -58,7 +58,7 @@
                 <!-- Item #1 -->
                 <tr>
                     <td class="title">Hr</td>
-                    <td><a href="">View Detail</a></td>
+                    <td><a href="@Url.Content("~/Employer/DepartmentDetails")">View Detail</a></td>
                     <td><a href=".department-edit" class="popup-with-zoom-anim" > Edit</a></td>
                     <td><a href=""> Hide</a></td>
                     <td><a href=""> Remove</a></td>
@@ -67,7 +67,7 @@
 
                 <tr>
                     <td class="title">Hr</td>
-                    <td><a href="">View Detail</a></td>
+                    <td><a href="@Url.Content("~/Employer/DepartmentDetails")">View Detail</a></td>
                     <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
                     <td><a href=""> Hide</a></td>
                     <td><a href=""> Remove</a></td>
@@ -117,39 +117,6 @@
                     </form>
                 </div>
             </div>
-            <!--
-            Update CV Modal
-                 -->
-
-            <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cv-update">
-                <div id="">
-                    <div class="small-dialog-headline">
-                        <h2>Update Your CV</h2>
-                    </div>
-                    <div class="small-dialog-content">
-                        <form action="#" method="get">
-                            <label for="CV-Name">
-                                CV Name:
-                                <input type="text" placeholder="QA CV" value="QA CV" />
-                            </label>
-                            <label for="cv-catagory">
-                                Select Catagory:
-                                <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
-                                    <option value="Default">Default</option>
-                                    <option value="Public">Public</option>
-                                    <option value="Private">Private</option>
-                                </select>
-                            </label>
-                            <!-- Upload CV -->
-                            <div class="upload-info"><i class="fa fa-file-text"></i><strong> abc.docx</strong> </div>
-                            <div class="clearfix"></div>
-                            <div class="divider"></div>
-                            <button class="send">Update CV</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
