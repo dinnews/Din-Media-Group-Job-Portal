@@ -3,6 +3,25 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=tpp2hu82f0f6trwgjx40rllvlhq14lrg9j7jqb8reqbnh26b"></script>
+<script>
+    
+tinymce.init({
+    selector: '#summary',
+    menubar: ''
+});
+</script>
+<script>
+   /* $(function () {
+        // Replace all textarea tags with SCEditor
+        $('#summary').sceditor({
+            plugins: 'bbcode',
+            style: '/Content/userContent/css/jquery.sceditor.default.min.css',
+            emoticonsRoot: "/emoticons/",
+            emoticonsEnabled: false
+        });
+    });*/
+</script>
 <div id="wrapper">
 
 
@@ -23,7 +42,7 @@
         <div class="container">
 
             <div class="sixteen columns">
-                <h2><i class="fa fa-plus-circle"></i> Add Job</h2>
+                <h2><i class="fa fa-plus-circle"></i> Post a Job</h2>
             </div>
 
         </div>
@@ -38,43 +57,22 @@
         <div class="sixteen columns">
             <div class="submit-page">
 
-                <!-- Notice -->
+                <!-- Notice
                 <div class="notification notice closeable margin-bottom-40">
                     <p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
                 </div>
-
-
-                <!-- Email -->
-                <div class="form">
-                    <h5>Your Email</h5>
-                    <input class="search-field" type="text" placeholder="mail@example.com" value="" />
-                </div>
+                     -->
 
                 <!-- Title -->
                 <div class="form">
                     <h5>Job Title</h5>
                     <input class="search-field" type="text" placeholder="" value="" />
                 </div>
-
-                <!-- Location -->
+                <!-- Description -->
                 <div class="form">
-                    <h5>Location <span>(optional)</span></h5>
-                    <input class="search-field" type="text" placeholder="e.g. London" value="" />
-                    <p class="note">Leave this blank if the location is not important</p>
+                    <h5>Description</h5>
+                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true" style="border:1px solid;"></textarea>
                 </div>
-
-                <!-- Job Type -->
-                <div class="form">
-                    <h5>Job Type</h5>
-                    <select data-placeholder="Full-Time" class="chosen-select-no-single">
-                        <option value="1">Full-Time</option>
-                        <option value="2">Part-Time</option>
-                        <option value="2">Internship</option>
-                        <option value="2">Freelance</option>
-                    </select>
-                </div>
-
-
                 <!-- Choose Category -->
                 <div class="form">
                     <div class="select">
@@ -91,80 +89,282 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- Tags -->
                 <div class="form">
-                    <h5>Job Tags <span>(optional)</span></h5>
-                    <input class="search-field" type="text" placeholder="e.g. PHP, Social Media, Management" value="" />
-                    <p class="note">Comma separate tags, such as required skills or technologies, for this job.</p>
+                    <div class="select">
+                        <h5>Required Career Level</h5>
+                        <select data-placeholder="Choose Career Level" class="chosen-select">
+                            <option value="685">Intern/Student</option>
+                            <option value="868">Entry Level</option>
+                            <option value="693">Experienced Professional</option>
+                            <option value="698">Department Head</option>
+                            <option value="697">GM / CEO / Country Head / President</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form">
+                    <h5>Required SKill</h5>
+                    <select data-placeholder="Select Skills" class="chosen-select" multiple>
+                        <option value="">Adobe Photoshop</option>
+                        <option value="">PHP</option>
+                        <option value="">HTML</option>
+                        <option value="">CSS</option>
+                        <option value="">JavaScript</option>
+                        <option value="">jQuery</option>
+                        <option value="">MySQL</option>
+                        <option value="">WordPress</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <h5>Salary Range (Monthly) </h5>
+
+                    <span style="float:right; width:48%;">
+
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option selected="selected" value="">To (PKR)</option>
+                            <option value="5000">5000</option>
+                            <option value="7000">7000</option>
+                            <option value="8000">8000</option>
+                        </select>
+                    </span>
+                    <span style="float:left; width:48%;">
+
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option selected="selected" value="">From (PKR)</option>
+                            <option value="5000">5000</option>
+                            <option value="7000">7000</option>
+                            <option value="8000">8000</option>
+                        </select>
+                    </span>
+                   <br />
+                </div>
+                <div class="checkbox noerrchckbx">
+                    <label>
+                        <input type="checkbox" name="flagSalaryRange" value="yes">
+                        <span class="glyphicon glyphicon-ok"></span> Hide the salary range from appearing on your job post
+                    </label>
+                </div>
+                <div class="margin-top-20"></div>
+                <div class="form">
+                    <div class="select">
+                        <h5>Select Department</h5>
+                        <select data-placeholder="Choose Department" class="chosen-select">
+                            <option value="685">HR</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <!-- Location -->
+                <div class="form">
+                    <h5>Location <span>(optional)</span></h5>
+                    <select data-placeholder="Select Locations" class="chosen-select" multiple>
+                        <option value="">Lahore</option>
+                        <option value="">Karachi</option>
+                        <option value="">Peshawar</option>
+                        <option value="">Multan</option>
+                        <option value="">Sukkur</option>
+                        <option value="">Islamabad</option>
+                        <option value="">Kasur</option>
+                        <option value="">Faislaabad</option>
+                    </select>
                 </div>
 
-
-                <!-- Description -->
+                <!-- Job Type -->
                 <div class="form">
-                    <h5>Description</h5>
-                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+                    <h5>Job Type</h5>
+                    <select data-placeholder="Full-Time" class="chosen-select-no-single">
+                        <option value="1">Full-Time</option>
+                        <option value="2">Part-Time</option>
+                        <option value="2">Internship</option>
+                        <option value="2">Govt Job</option>
+                    </select>
                 </div>
 
-                <!-- Application email/url -->
+                <!-- available positions -->
                 <div class="form">
-                    <h5>Application email / URL</h5>
-                    <input type="text" placeholder="Enter an email address or website URL">
+                    <h5>Position Available</h5>
+                    <input class="search-field" type="number" placeholder="1" value="" min="1" />
+                   
+                </div>
+               
+                <!-- Gender requirementl -->
+                <div class="form">
+                    <h5>Gender Requirement</h5>
+                    <select data-placeholder="No preference" class="chosen-select">
+                        <option value="685">No preference</option>
+                        <option value="868">Female</option>
+                        <option value="693">Male</option>
+                       
+                    </select>
                 </div>
 
                 <!-- TClosing Date -->
                 <div class="form">
                     <h5>Closing Date <span>(optional)</span></h5>
-                    <input data-role="date" type="text" placeholder="yyyy-mm-dd">
+                    <input data-role="date" type="text" id="datepicker1" readonly>
                     <p class="note">Deadline for new applicants.</p>
                 </div>
 
 
                 <!-- Company Details -->
-                <div class="divider"><h3>Company Details</h3></div>
+                <div class="divider"><h3>Applicant Requirements</h3></div>
 
                 <!-- Company Name -->
                 <div class="form">
-                    <h5>Company Name</h5>
-                    <input type="text" placeholder="Enter the name of the company">
+                    <h5>Required Qualification</h5>
+                    <select data-placeholder="Select degree level" class="chosen-select">
+
+                        <option value="">Select degree level*</option>
+                        <option value="836">Non-Matriculation</option>
+                        <option value="838">Matriculation/O-Level</option>
+                        <option value="840">Intermediate/A-Level</option>
+                        <option value="369">Bachelors</option>
+                        <option value="373">Masters</option>
+                        <option value="842">MPhil/MS</option>
+                        <option value="375">PHD/Doctorate</option>
+                        <option value="846">Certification</option>
+                        <option value="371">Diploma</option>
+                        <option value="1243">Short Course</option>
+
+                    </select>
                 </div>
 
-                <!-- Website -->
+                <!-- Specific Degree Title -->
                 <div class="form">
-                    <h5>Website <span>(optional)</span></h5>
-                    <input type="text" placeholder="http://">
+                    <h5>Specific Degree Title</h5>
+                    <input type="text" placeholder="e.g. Software Engineer">
                 </div>
 
-                <!-- Teagline -->
+                <!--years of experince-->
                 <div class="form">
-                    <h5>Tagline <span>(optional)</span></h5>
-                    <input type="text" placeholder="Briefly describe your company">
+                    <h5>Years of Experience </h5>
+
+                    <span style="float:right; width:48%;">
+
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option value="" id="minExpLabel">Max</option>
+                            <option value="713">Fresh</option>
+                            <option value="715">Less than 1 Year</option>
+                            <option value="717">1 Year</option>
+                            <option value="719">2 Years</option>
+                            <option value="721">3 Years</option>
+                            <option value="723">4 Years</option>
+                            <option value="725">5 Years</option>
+                            <option value="727">6 Years</option>
+                            <option value="729">7 Years</option>
+                            <option value="731">8 Years</option>
+                            <option value="733">9 Years</option>
+                            <option value="735">10+ Years</option>
+                        </select>
+                    </span>
+                    <span style="float:left; width:48%;">
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option value="" id="minExpLabel">Min</option>
+                            <option value="713">Fresh</option>
+                            <option value="715">Less than 1 Year</option>
+                            <option value="717">1 Year</option>
+                            <option value="719">2 Years</option>
+                            <option value="721">3 Years</option>
+                            <option value="723">4 Years</option>
+                            <option value="725">5 Years</option>
+                            <option value="727">6 Years</option>
+                            <option value="729">7 Years</option>
+                            <option value="731">8 Years</option>
+                            <option value="733">9 Years</option>
+                            <option value="735">10+ Years</option>
+                        </select>
+                    </span>
+                    <br /><br />
+                </div>
+                <!-- more info on experience  -->
+                <div class="form">
+                    <h5>More Info on Experience <span>(optional)</span></h5>
+                    <input type="text" placeholder="Briefly describe your experience">
                 </div>
 
                 <!-- Video -->
                 <div class="form">
-                    <h5>Video <span>(optional)</span></h5>
-                    <input type="text" placeholder="A link to a video about your company">
-                </div>
+                    <h5>Age Requirement <span>(optional)</span></h5>
+                    <span style="float:right; width:48%;">
 
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option value="" id="minAgeLabel">Max</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </span>
+                    <span style="float:left; width:48%;">
+                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <option value="" id="minAgeLabel">Min</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </span>
+                    <br /><br />
+                </div>
+                <div class="divider"><h3>Refine Your Applicant Pool</h3></div>
                 <!-- Twitter -->
                 <div class="form">
-                    <h5>Twitter Username <span>(optional)</span></h5>
-                    <input type="text" placeholder="yourcompany">
+                    <h5>Pre-filter Applicants<span>(optional)</span></h5>
+                    <div class="row">
+                        <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />Gender
+                        <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Experience
+                        <input class="checkboxes" type="checkbox" name="internship" id="interests" />Degree Level
+                        <input class="checkboxes" type="checkbox" name="Govt" id="interests" />Age
+                        <input class="checkboxes" type="checkbox" name="Govt" id="interests" />City
+                    </div>
+                    <p>Limit applications based on the following filters -select all that apply.</p>
                 </div>
-
-                <!-- Logo -->
-                <div class="form">
-                    <h5>Logo <span>(optional)</span></h5>
-                    <label class="upload-btn">
-                        <input type="file" multiple />
-                        <i class="fa fa-upload"></i> Browse
-                    </label>
-                    <span class="fake-input">No file selected</span>
-                </div>
-
+                <!-- Question
+                <div class="divider"></div>
+                
+                <div class="container">
+                    <div class="eleven columns">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="scrnquz" name="testQuestions" id="testQuestions">
+                                <span class="glyphicon glyphicon-ok"></span> Screen your applicants further with custom questions
+                            </label>
+                            
+                        </div>
+                    </div>
+                    <div class="five columns">
+                        <div class="text-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Attaching questions to your job post can help ensure that only the most serious candidates apply for the role, and reduce your time to hire.">
+                            
+                            <div class="lrnmrtxt s-14"><a href="javascript:void(0)">Learn more</a></div>
+                        </div>
+                    </div>
+                </div> -->
 
                 <div class="divider margin-top-0"></div>
+                <a href="#" class="button big margin-top-5" style="margin-right:20px;">Post Job</a>
                 <a href="#" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>
 
 
@@ -185,3 +385,29 @@
 
 </div>
 <!-- Wrapper / End -->
+<script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
+<link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+<style>
+    .ui-datepicker {
+        position: relative;
+        z-index: 10000 !important;
+    }
+
+    .datepicker {
+        z-index: 999999 !important;
+    }
+</style>
+<script>
+    jQuery(document).ready(function () {
+        $('#datepicker1').datepicker();
+       
+        var d = new Date();
+        d.setMonth(d.getMonth() + 1);
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var date = d.getDate();
+        document.getElementById("datepicker1").value = month+'/'+date+'/'+year;
+       
+
+    });
+</script>
