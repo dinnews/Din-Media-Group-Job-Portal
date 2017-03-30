@@ -766,6 +766,7 @@
     <Content Include="Views\Employer\CompleteProfile.cshtml" />
     <Content Include="Views\Employer\ViewDepartment.cshtml" />
     <Content Include="Views\Employer\DepartmentDetails.cshtml" />
+    <Content Include="Views\Employer\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
