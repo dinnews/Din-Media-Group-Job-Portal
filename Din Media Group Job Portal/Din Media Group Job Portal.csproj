@@ -479,6 +479,13 @@
     <Content Include="Content\userContent\images\resumes-list-avatar-03.png" />
     <Content Include="Content\userContent\images\switcher.png" />
     <Content Include="Content\userContent\images\testimonials-bg.jpg" />
+    <Content Include="Employer_images\cover_images\account_settings.jpg" />
+    <Content Include="Employer_images\cover_images\department-cover.jpg" />
+    <Content Include="Employer_images\cover_images\edit_cover.jpg" />
+    <Content Include="Employer_images\cover_images\manage_jobs.jpg" />
+    <Content Include="Employer_images\cover_images\manage_jobs_cover.jpg" />
+    <Content Include="Employer_images\cover_images\my_account.jpg" />
+    <Content Include="Employer_images\cover_images\postjob_cover.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\userContent\fonts\fontawesome-webfont93e3.eot" />
@@ -770,7 +777,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Employer_Profile_images\" />
     <Folder Include="JobSeeker_Profile_images\" />
     <Folder Include="Models\" />
   </ItemGroup>
