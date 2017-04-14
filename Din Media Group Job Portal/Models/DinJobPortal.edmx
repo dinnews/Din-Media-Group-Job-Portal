@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DinJobPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_employee_registration_data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="job_catagory_field" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="job_title" Type="varchar(max)" Nullable="false" />
+          <Property Name="last_login" Type="datetime" />
+          <Property Name="job_interest" Type="varchar(max)" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_employer_registration_data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="company_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mobile" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cnic" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="last_login" Type="datetime" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_exception">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exception_message" Type="varchar(max)" />
+          <Property Name="exception_stack_trace" Type="varchar(max)" />
+          <Property Name="exception_number" Type="varchar(max)" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="user_type" Type="varchar" MaxLength="50" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="is_verified" Type="bit" Nullable="false" />
+          <Property Name="last_change_password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tb_verification_code">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="verification_code" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_employee_registration_data_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_employee_registration_data" Type="Self.tb_employee_registration_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_employee_registration_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_employer_registration_data_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_employer_registration_data" Type="Self.tb_employer_registration_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_employer_registration_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DinJobPortalModelStoreContainer">
+          <EntitySet Name="tb_employee_registration_data" EntityType="Self.tb_employee_registration_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_employer_registration_data" EntityType="Self.tb_employer_registration_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_exception" EntityType="Self.tb_exception" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_verification_code" EntityType="Self.tb_verification_code" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_employee_registration_data_tb_user" Association="Self.FK_tb_employee_registration_data_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_employee_registration_data" EntitySet="tb_employee_registration_data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_employer_registration_data_tb_user" Association="Self.FK_tb_employer_registration_data_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_employer_registration_data" EntitySet="tb_employer_registration_data" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DinJobPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_employee_registration_data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="job_catagory_field" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="job_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_login" Type="DateTime" Precision="3" />
+          <Property Name="job_interest" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_user" Relationship="Self.FK_tb_employee_registration_data_tb_user" FromRole="tb_employee_registration_data" ToRole="tb_user" />
+        </EntityType>
+        <EntityType Name="tb_employer_registration_data">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="company_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mobile" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cnic" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="last_login" Type="DateTime" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_user" Relationship="Self.FK_tb_employer_registration_data_tb_user" FromRole="tb_employer_registration_data" ToRole="tb_user" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="is_verified" Type="Boolean" Nullable="false" />
+          <Property Name="last_change_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_employee_registration_data" Relationship="Self.FK_tb_employee_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employee_registration_data" />
+          <NavigationProperty Name="tb_employer_registration_data" Relationship="Self.FK_tb_employer_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employer_registration_data" />
+        </EntityType>
+        <Association Name="FK_tb_employee_registration_data_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_employee_registration_data" Type="Self.tb_employee_registration_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_employee_registration_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_employer_registration_data_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_employer_registration_data" Type="Self.tb_employer_registration_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_employer_registration_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DinJobPortalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_employee_registration_data" EntityType="Self.tb_employee_registration_data" />
+          <EntitySet Name="tb_employer_registration_data" EntityType="Self.tb_employer_registration_data" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" />
+          <AssociationSet Name="FK_tb_employee_registration_data_tb_user" Association="Self.FK_tb_employee_registration_data_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_employee_registration_data" EntitySet="tb_employee_registration_data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_employer_registration_data_tb_user" Association="Self.FK_tb_employer_registration_data_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_employer_registration_data" EntitySet="tb_employer_registration_data" />
+          </AssociationSet>
+          <EntitySet Name="tb_exception" EntityType="DinJobPortalModel.tb_exception" />
+          <EntitySet Name="tb_verification_code" EntityType="DinJobPortalModel.tb_verification_code" />
+        </EntityContainer>
+        <EntityType Name="tb_exception">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exception_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="exception_stack_trace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="exception_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_verification_code">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="verification_code" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DinJobPortalModelStoreContainer" CdmEntityContainer="DinJobPortalEntities">
+          <EntitySetMapping Name="tb_employee_registration_data">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_employee_registration_data">
+              <MappingFragment StoreEntitySet="tb_employee_registration_data">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="job_catagory_field" ColumnName="job_catagory_field" />
+                <ScalarProperty Name="job_title" ColumnName="job_title" />
+                <ScalarProperty Name="last_login" ColumnName="last_login" />
+                <ScalarProperty Name="job_interest" ColumnName="job_interest" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_employer_registration_data">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_employer_registration_data">
+              <MappingFragment StoreEntitySet="tb_employer_registration_data">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="cnic" ColumnName="cnic" />
+                <ScalarProperty Name="last_login" ColumnName="last_login" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_user">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_user">
+              <MappingFragment StoreEntitySet="tb_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_verified" ColumnName="is_verified" />
+                <ScalarProperty Name="last_change_password" ColumnName="last_change_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_exception">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_exception">
+              <MappingFragment StoreEntitySet="tb_exception">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="exception_number" ColumnName="exception_number" />
+                <ScalarProperty Name="exception_stack_trace" ColumnName="exception_stack_trace" />
+                <ScalarProperty Name="exception_message" ColumnName="exception_message" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_verification_code">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_verification_code">
+              <MappingFragment StoreEntitySet="tb_verification_code">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

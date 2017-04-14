@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     if (Session["type"] == null)
     {
         ViewBag.Title = "MyAccount";
@@ -108,53 +109,85 @@
                 <div class="tab-content" id="tab2" style="display: none;">
                   <a href="@Url.Content("~/Employer/MyAccount#tab2")" style="float:right;">Signup as Employer </a>
                    <div class="clearfix margin-bottom-0"></div>
-                    <form method="post" class="register">
+                    <form method="post" class="register" action="@Url.Content("~/User/ValidateEmployeeSignUp")">
                         <div class="single">
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count>0)
+                            {
+                                <span style="color:red">
+                                   
+                                         @ViewData.ModelState["first_name"].Errors[0].ErrorMessage
+                                   
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="firtName" id="first-name" value="" />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="" required />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["last_name"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
-                                <label for="first-name">
+                                <label for="last-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="lastName" id="last-name" value="" />
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="" required />
                                 </label>
                             </p>
-
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["email"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="text" class="input-text" name="email" id="email2" value="" />
+                                    <input type="email" class="input-text" name="email" id="email2" value="" required/>
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["gender"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["gender"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="gender">
-                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender">
-                                        <option selected="selected" value="">Select your gender</option>
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender" required>
+                                        <option selected="selected" value=null>Select your gender</option>
                                         <option value="female"> Female</option>
                                         <option value="male">Male</option>
                                         <option value="other">Other</option>
                                     </select>
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["password"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="password1">
                                     Password:  (Enter between 6 and 32 characters)
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password" id="password1" />
+                                    <input class="input-text" type="password" name="password" id="password1" required />
                                 </label>
                             </p>
+                               
 
                             <p class="form-row form-row-wide">
                                 <label for="password2">
                                     Repeat Password:
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password2" id="password2" />
+                                    <input class="input-text" type="password" name="password_reenter" id="password2" required />
                                 </label>
                             </p>
                         </div>
@@ -164,22 +197,38 @@
                                     What are You looking for
                                 </h3>
                             </p>
-
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["location"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["location"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="work-location">
                                     Preferred Work Location:
                                     <i class="ln ln-icon-Location-2"></i>
-                                    <input type="text" class="input-text" name="location" id="work-location" value="" placeholder="e.g. Lahore" />
+                                    <input type="text" class="input-text" name="location" id="work-location" value="" placeholder="e.g. Lahore" required/>
                                 </label>
                             </p>
-
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_title"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["job_title"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
                                     Desired Job Title:
                                     <i class="ln ln-icon-Suitcase"></i>
-                                    <input class="input-text" type="text" name="jobb_itle" id="job-title" placeholder="e.g. Software Engineer"/>
+                                    <input class="input-text" type="text" name="job_title" id="job-title" placeholder="e.g. Software Engineer" required/>
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid )
+                            {
+                                <span style="color:red">
+                                    <!--ViewData.ModelState["interest"].Errors[0].ErrorMessage-->
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
                                     I'm interested in (Please select at least one option)
@@ -191,11 +240,17 @@
                                    <input class="checkboxes" type="checkbox" name="Govt" id="interests" />Govt Jobs
                                </div>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_catagory_field"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+                                    @ViewData.ModelState["job_catagory_field"].Errors[0].ErrorMessage
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
                                     Select Your Catagory
-                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="catagory">
-                                        <option selected="selected" value="">Select your Catagory</option>
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="job_catagory_field" required>
+                                        <option selected="selected" value=null>Select your Catagory</option>
                                         <option value="Software Engineer">Software Engineer</option>
                                         <option value="Qualit Manager">Qualit Manager</option>
                                         <option value="Content Writer">Content Writer</option>
@@ -211,8 +266,7 @@
                                 By clicking Register, you accept our <a href="#">Terms and Conditions</a>.
                             </div>
                         </p>
-
-
+                       
                     </form>
                  </div>
             </div>
