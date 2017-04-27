@@ -1,0 +1,104 @@
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
+    if (Session["type"] == null)
+    {
+        ViewBag.Title = "Verify Email";
+        Layout = "~/Views/Shared/UserLayout.cshtml";
+    }
+    else if (Session["type"] == "jobseeker")
+    {
+        Response.Redirect("~/User/Home");
+    }
+    else if (Session["type"] == "employer")
+    {
+        Response.Redirect("~/Employer/EmployerHome");
+    }
+    else
+    {
+        Session.Abandon();
+        Response.Redirect("~/User/MyAccount");
+
+    }
+}
+
+<div id="wrapper">
+
+
+    <!-- Header
+    ================================================== -->
+    <header class="sticky-header full-width">
+        @Html.Partial("~/Views/Header/_partialUserHeader.cshtml")
+
+    </header>
+    <div class="clearfix"></div>
+    <script>
+        $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
+    </script>
+
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="single">
+        <div class="container">
+
+            <div class="sixteen columns">
+                <h2>Email Verification</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li>You are here:</li>
+                        <li><a href="#">Home</a></li>
+                        <li>Verify Email</li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Content
+    ================================================== -->
+    <!-- Container -->
+    <div class="container">
+
+        <div class="my-account">
+
+            <div class="tabs-container">
+                <!-- Login -->
+                <div class="tab-content" id="tab1" style="display: none;">
+                    <form method="post" class="login" action="@Url.Content("~/User/ValidateVerificationCode")" >
+
+                        <p class="form-row form-row-wide">
+                            <label for="username">
+                                Enter Verification Code here..
+                                Check your email to get Code
+                                <i class="ln ln-icon-Security-Check"></i>
+                                <input type="text" class="input-text" name="verification_code" id="verification_code" value="" required />
+                            </label>
+                        </p>
+
+                        <p class="form-row">
+                            <input type="submit" class="button border fw margin-top-10" name="login" value="Verify" />
+                       
+                        <span style="color:red">
+                            @ViewBag.ErrorMessage
+                        </span>
+                        
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <div class="margin-top-30"></div>
+
+    @Html.Partial("~/Views/Footer/_partialUserFooter.cshtml")
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->
+

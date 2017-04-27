@@ -16,24 +16,24 @@ namespace Din_Media_Group_Job_Portal.Controllers
         #region All_Class_Level_Variables
         private UtilityMethods.Utility objUtility ;
         #endregion
-        //
-        // GET: /User/
-
+        
         public ActionResult Home()
         {
             return View();
         }
+
         #region Signup, Validation and verification
         [HttpPost]
-        public ActionResult ValidateEmployeeSignUp(tb_user user, tb_employee_registration_data employee, string password_reenter)
+        public ActionResult ValidateEmployeeSignUp(tb_user user, tb_employee_registration_data employee, string password_reenter, string fulltime, string parttime, string internship, string govt)
         {
-            #region Employer Registration Validation
+            #region Employee Registration Validation
             try
             {
-                user.user_type = "employee";
+                string interests = fulltime + "," + parttime + "," + internship + "," + govt;
+
                 //harcoded job_interest///////
                 /// didn't get any idea to vlaidate
-                employee.job_interest = "abc";
+                employee.job_interest = interests;
                 List<tb_employee_registration_data> emp = new List<tb_employee_registration_data>();
                 emp.Add(employee);
                 user.tb_employee_registration_data = emp;
@@ -54,7 +54,8 @@ namespace Din_Media_Group_Job_Portal.Controllers
                     //}
 
                 }
-                    /*
+                #region commented
+                /*
                 else
                 {
                     ModelState.AddModelError("password", "Password is required");
@@ -99,7 +100,8 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     ModelState.AddModelError("email", "Email is required");
                 }*/
-            #endregion
+                #endregion
+          
                 if (ModelState.IsValid)
                 {
                     try
@@ -110,7 +112,17 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         db.tb_user.Add(user);
                         db.SaveChanges();
                         int id = user.id;
-                        return SendVerificationEmail(user.email);
+                        Random rnd = new Random();
+                        decimal randomNo = rnd.Next(10000000, 99999999);
+                        objUtility = new UtilityMethods.Utility();
+                        bool isEmailSent = objUtility.SendVerificationEmail(user.email, randomNo);
+                        if(isEmailSent)
+                        {
+                            Session["user_email"] = user.email;
+                            Session["verification_code"] = randomNo;
+                            return RedirectToAction("VerifyEmail");
+                        }
+                
                     }
                     catch (Exception e)
                     {
@@ -135,36 +147,11 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 ViewBag.Exception = e.Message;
                 return View("DbError");
             }
+            #endregion
         }
-        public ActionResult SendVerificationEmail(string email)
-        {
-            tb_verification_code verification_obj = new tb_verification_code();
-            try
-            {
-                Random rnd = new Random();
-                verification_obj.verification_code = rnd.Next(10000000, 99999999);
-                verification_obj.email = email;
-                verification_obj.date = System.DateTime.Now;
-                verification_obj.status = "created";
-
-                /*
-             * Verify Email and then send a verifiction this verifcation code to that email..
-             * if everything done successfully then return true otherwise return false
-             
-             */
-
-                db.tb_verification_code.Add(verification_obj);
-                db.SaveChanges();
-                int id = verification_obj.id;
-               
-            }
-            catch (Exception e)
-            {
-                return Error(e);
-            }
-            return View("MyAccount");
-        }
+        
         #endregion
+
         [HttpPost]
          public ActionResult MyAccount(string userName, string password)
         {
@@ -193,7 +180,52 @@ namespace Din_Media_Group_Job_Portal.Controllers
             
            
         }
+        public ActionResult ValidateVerificationCode(string verification_code)
+        {
+            tb_user get_user_to_update ;
+            try
+            {
+                decimal verification_code_in_session=decimal.Parse(Session["verification_code"].ToString());
+                decimal verification_code_by_user = decimal.Parse(verification_code);
+                if (verification_code_by_user == verification_code_in_session)
+                {
+                    string email = Session["user_email"].ToString();
+                    get_user_to_update= db.tb_user.Where(user => user.email == email).FirstOrDefault<tb_user>();
+                    if(get_user_to_update!=null)
+                    {
+                        try
+                        {
+                            get_user_to_update.is_active = true;
+                            get_user_to_update.is_verified = true;
+                            db.Entry(get_user_to_update).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                            ViewBag.SuccesMessage = "Verified Successfully Login to your Account.";
+                            return View("MyAccount");
+                        }
+                        catch(Exception e)
+                        {
+                            objUtility = new UtilityMethods.Utility();
+                            objUtility.SaveException_for_ExceptionLog(e);
+                            ViewBag.Exception = e.Message;
+                            return View("DbError");
+                        }
+                        
+                    }
+                }
+                ViewBag.ErrorMessage = "You entered invalid code";
+
+            }
+            catch(Exception e)
+            {
+                ViewBag.ErrorMessage = "You entered invalid code";
+            }
+            return View("VerifyEmail");
+        }
         
+        public ActionResult VerifyEmail()
+        {
+            return View();
+        }
         public ActionResult ContactUs()
         {
             return View();

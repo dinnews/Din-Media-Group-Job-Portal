@@ -70,6 +70,9 @@
             <div class="tabs-container">
                 <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
+                    <span style="color:red;">
+                        @ViewBag.SuccesMessage
+                    </span>
                     <form method="post" class="login" action="@Url.Content("~/User/MyAccount")">
 
                         <p class="form-row form-row-wide">
@@ -123,7 +126,8 @@
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="first_name" id="first-name" value="" required />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employee_registration_data.FirstOrDefault().first_name}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
@@ -136,7 +140,8 @@
                                 <label for="last-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="last_name" id="last-name" value="" required />
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employee_registration_data.FirstOrDefault().last_name}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
@@ -149,7 +154,7 @@
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="email" class="input-text" name="email" id="email2" value="@if(!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count < 1)
+                                    <input type="email" class="input-text" name="email" id="email2" value="@if(!ViewData.ModelState.IsValid)
                             {@Model.email}" required />
                                 </label>
                             </p>
@@ -208,7 +213,8 @@
                                 <label for="work-location">
                                     Preferred Work Location:
                                     <i class="ln ln-icon-Location-2"></i>
-                                    <input type="text" class="input-text" name="location" id="work-location" value="" placeholder="e.g. Lahore" required/>
+                                    <input type="text" class="input-text" name="location" id="work-location"  value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().location }" placeholder="e.g. Lahore" required />
+
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_title"].Errors.Count > 0)
@@ -221,7 +227,8 @@
                                 <label for="job-title">
                                     Desired Job Title:
                                     <i class="ln ln-icon-Suitcase"></i>
-                                    <input class="input-text" type="text" name="job_title" id="job-title" placeholder="e.g. Software Engineer" required/>
+                                    <input class="input-text" type="text" name="job_title" id="job-title" placeholder="e.g. Software Engineer" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().job_title }" required />
+
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid )
@@ -235,10 +242,10 @@
                                     I'm interested in (Please select at least one option)
                                 </label>
                                 <div class="row">
-                                   <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />Full Time
-                                   <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Part Time
-                                   <input class="checkboxes" type="checkbox" name="internship" id="interests" />Internship
-                                   <input class="checkboxes" type="checkbox" name="Govt" id="interests" />Govt Jobs
+                                    <input class="checkboxes" type="checkbox" name="fulltime" id="interests" value="fulltime" />Full Time
+                                   <input class="checkboxes" type="checkbox" name="parttime" id="interests" value="parttime" />Part Time
+                                   <input class="checkboxes" type="checkbox" name="internship" id="interests" value="internship" />Internship
+                                   <input class="checkboxes" type="checkbox" name="govt" id="interests" value="govt" />Govt Jobs
                                </div>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_catagory_field"].Errors.Count > 0)
@@ -259,6 +266,7 @@
                                 </label>
                             </p>
                         </div>
+                        <input type="hidden" name="user_type" value="employee" />
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
                         </p>

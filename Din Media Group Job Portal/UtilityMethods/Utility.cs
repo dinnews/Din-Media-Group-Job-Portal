@@ -26,5 +26,25 @@ namespace Din_Media_Group_Job_Portal.UtilityMethods
                 //throw;
             }
         }
+        public bool SendVerificationEmail(string email, decimal radomNo)
+        {
+            try
+            {
+              
+                /*
+             * Verify Email and then send a verifiction this verifcation code to that email..
+             * if everything done successfully then return true otherwise return false
+             
+             */
+
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }

@@ -28,12 +28,13 @@ namespace Din_Media_Group_Job_Portal.Models
         [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Last Name must contain atleast 1 Alphabets")]
         public string last_name { get; set; }
         [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Name must contain atleast 1 Alphabets")]
         public string company_name { get; set; }
         [Required]
-        [RegularExpression(@"^[\d-]+$", ErrorMessage = "Mobile Number format is 9999-1234567")]
+        [RegularExpression(@"^[\d-]+$", ErrorMessage = "Mobile Number format is 9999-1234567 (Only Digits Allowed)")]
 
         public string mobile { get; set; }
-        [RegularExpression(@"^[\d-]+$", ErrorMessage = "CNIC format is 23202-1234567-6")]
+        [RegularExpression(@"^[\d-]+$", ErrorMessage = "CNIC format is 23202-1234567-6 (Only Digits Allowed)")]
         public string cnic { get; set; }
         public Nullable<System.DateTime> last_login { get; set; }
         public int user_id { get; set; }

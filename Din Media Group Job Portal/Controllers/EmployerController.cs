@@ -12,6 +12,10 @@ namespace Din_Media_Group_Job_Portal.Controllers
     public class EmployerController : Controller
     {
         DinJobPortalEntities db = new DinJobPortalEntities();
+        #region All_Class_Level_Variables
+        private UtilityMethods.Utility objUtility ;
+        #endregion
+        
         // GET: /Employer/
        
         public ActionResult EmployerHome()
@@ -41,7 +45,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
         public ActionResult ValidateEmployerSignUp(tb_user user, tb_employer_registration_data employer, string password_reenter) //*, string password_reenter, string mobileNo, string cnicNo*?/
         {
             #region Employer Registration Validation
-            
+           try{
            user.user_type = "employer";
            /*  var tempMobile = mobileNo.Split('-');
             employer.mobile = decimal.Parse(tempMobile[0] + tempMobile[1]);
@@ -113,23 +117,51 @@ namespace Din_Media_Group_Job_Portal.Controllers
             #endregion
             if (ModelState.IsValid)
             {
-                try
-                {
-                    PasswordEncryption enc = new PasswordEncryption();
-                    string encPassword = enc.encryptPassword(user.password);
-                    user.password = encPassword;
-                    db.tb_user.Add(user);
-                    db.SaveChanges();
-                    int id = user.id;
-                    return View("MyAccount");
+                 try
+                    {
+                        PasswordEncryption enc = new PasswordEncryption();
+                        string encPassword = enc.encryptPassword(user.password);
+                        user.password = encPassword;
+                        db.tb_user.Add(user);
+                        db.SaveChanges();
+                        int id = user.id;
+                        Random rnd = new Random();
+                        decimal randomNo = rnd.Next(10000000, 99999999);
+                        objUtility = new UtilityMethods.Utility();
+                        bool isEmailSent = objUtility.SendVerificationEmail(user.email, randomNo);
+                        if(isEmailSent)
+                        {
+                            Session["user_email"] = user.email;
+                            Session["verification_code"] = randomNo;
+                            return RedirectToAction("VerifyEmail","User");
+                        }
+                
+                    }
+                    catch (Exception e)
+                    {
+                        objUtility = new UtilityMethods.Utility();
+                        objUtility.SaveException_for_ExceptionLog(e);
+                        ViewBag.Exception = e.Message;
+                        return View("DbError");
+                    }
                 }
-                catch (Exception e)
-                {
-                    ViewBag.Exception = e.Message;
-                    return View("DbError");
-                }
+                return View("MyAccount", user);
             }
-            return View("MyAccount", user);
+            catch (Exception e)
+            {
+                
+                //tb_exception ex = new tb_exception();
+                //ex.date = System.DateTime.Now;
+                //ex.exception_message = e.Message;
+                //ex.exception_stack_trace = e.StackTrace;
+                //db.tb_exception.Add(ex);
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return View("DbError");
+            }
+            
+
             #endregion
             //return View("MyAccount");
         }

@@ -121,7 +121,8 @@
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="first_name" id="first-name" value="" required />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employer_registration_data.FirstOrDefault().first_name}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
@@ -136,7 +137,8 @@
                                 <label for="first-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="last_name" id="last-name" value="" required/>
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employer_registration_data.FirstOrDefault().last_name}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
@@ -151,7 +153,8 @@
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="text" class="input-text" name="email" id="email2" value="" required/>
+                                    <input type="text" class="input-text" name="email" id="email2" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.email}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["company_name"].Errors.Count > 0)
@@ -166,7 +169,8 @@
                                 <label for="Company-Name">
                                     Company Name:
                                     <i class="ln ln-icon-Building"></i>
-                                    <input type="text" class="input-text" name="company_name" id="companyName" value="" required />
+                                    <input type="text" class="input-text" name="company_name" id="companyName" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employer_registration_data.FirstOrDefault().company_name}" required />
                                 </label>
                             </p>
                             
@@ -205,7 +209,8 @@
                                 <label for="mobile-number">
                                     Mobile:
                                     <i class="ln ln-icon-Phone-3G"></i>
-                                    <input class="input-text" type="text" name="mobile" id="mobile" placeholder="____-_______" onkeypress="return isNumberKey(event)" />
+                                    <input class="input-text" type="text" name="mobile" id="mobile" placeholder="____-_______" onkeypress="return isNumberKey(event)" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employer_registration_data.FirstOrDefault().mobile}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["cnic"].Errors.Count > 0)
@@ -220,7 +225,8 @@
                                 <label for="mobile-number">
                                     CNIC (Optional):
                                     <i class="ln ln-icon-ID-Card"></i>
-                                    <input class="input-text" type="text" name="cnic" id="cnic" placeholder="_____-_______-_" />
+                                    <input class="input-text" type="text" name="cnic" id="cnic" placeholder="_____-_______-_" value="@if(!ViewData.ModelState.IsValid)
+                            {@Model.tb_employer_registration_data.FirstOrDefault().cnic}" />
                                 </label>
                             </p>
                         </div>

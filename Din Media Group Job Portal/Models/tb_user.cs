@@ -28,7 +28,7 @@ namespace Din_Media_Group_Job_Portal.Models
                                                 @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Email is not valid")]
         public string email { get; set; }
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
+        [StringLength(32, ErrorMessage = "Must be between 6 and 32 characters", MinimumLength = 6)]
         [DataType(DataType.Password)]
         
         public string password { get; set; }
