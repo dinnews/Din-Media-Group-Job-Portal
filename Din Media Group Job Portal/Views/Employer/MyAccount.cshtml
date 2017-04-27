@@ -109,7 +109,7 @@
                 <div class="tab-content" id="tab2" style="display: none;">
                     <form method="post" class="register" action="/Employer/ValidateEmployerSignUp">
                         <div class="single">
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -121,10 +121,10 @@
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="first_name" id="first-name" value="" />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="" required />
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -136,10 +136,10 @@
                                 <label for="first-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="last_name" id="last-name" value="" />
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="" required/>
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -151,10 +151,10 @@
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="text" class="input-text" name="email" id="email2" value="" />
+                                    <input type="text" class="input-text" name="email" id="email2" value="" required/>
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["company_name"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["company_name"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -166,11 +166,11 @@
                                 <label for="Company-Name">
                                     Company Name:
                                     <i class="ln ln-icon-Building"></i>
-                                    <input type="text" class="input-text" name="company_name" id="companyName" value="" />
+                                    <input type="text" class="input-text" name="company_name" id="companyName" value="" required />
                                 </label>
                             </p>
                             
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["password"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -182,7 +182,7 @@
                                 <label for="password1">
                                     Password:  (Enter between 6 and 32 characters)
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password" id="password1" />
+                                    <input class="input-text" type="password" name="password" id="password1" required/>
                                 </label>
                             </p>
                             
@@ -190,10 +190,10 @@
                                 <label for="password2">
                                     Repeat Password:
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password_reenter" id="password2" />
+                                    <input class="input-text" type="password" name="password_reenter" id="password2" required/>
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["mobile"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["mobile"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -205,10 +205,10 @@
                                 <label for="mobile-number">
                                     Mobile:
                                     <i class="ln ln-icon-Phone-3G"></i>
-                                    <input class="input-text" type="text" name="mobileNo" id="mobile" placeholder="____-_______" onkeypress="return isNumberKey(event)" />
+                                    <input class="input-text" type="text" name="mobile" id="mobile" placeholder="____-_______" onkeypress="return isNumberKey(event)" />
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["cnic"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["cnic"].Errors.Count > 0)
                             {
                                 <span style="color:red">
 
@@ -220,11 +220,11 @@
                                 <label for="mobile-number">
                                     CNIC (Optional):
                                     <i class="ln ln-icon-ID-Card"></i>
-                                    <input class="input-text" type="text" name="cnicNo" id="cnic" placeholder="_____-_______-_" />
+                                    <input class="input-text" type="text" name="cnic" id="cnic" placeholder="_____-_______-_" />
                                 </label>
                             </p>
                         </div>
-                       
+                        <input type="hidden" name="user_type" value="employer" />
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
                         </p>

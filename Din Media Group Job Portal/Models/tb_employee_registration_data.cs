@@ -11,16 +11,28 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tb_employee_registration_data
     {
+        
         public int id { get; set; }
+        [Required]
         public string email { get; set; }
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "First Name must contain atleast 1 Alphabets")]
         public string first_name { get; set; }
+      
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Last Name must contain atleast 1 Alphabets")]
         public string last_name { get; set; }
+        [Required]
         public string gender { get; set; }
+        [Required]
         public string location { get; set; }
+        [Required]
         public string job_catagory_field { get; set; }
+        [Required]
         public string job_title { get; set; }
         public Nullable<System.DateTime> last_login { get; set; }
         public string job_interest { get; set; }

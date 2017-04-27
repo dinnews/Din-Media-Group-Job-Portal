@@ -46,14 +46,15 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     if (user.password != password_reenter)
                     {
-                        ModelState.AddModelError("password", "Kindly Enter Same Password in both fields");
+                       ModelState.AddModelError("password", "Kindly Enter Same Password in both fields");
                     }
-                    if (user.password.Length < 6 || user.password.Length > 32)
-                    {
-                        ModelState.AddModelError("password", "Kindly Enter Password between 6 and 32 sharacters");
-                    }
+                    //if (user.password.Length < 6 || user.password.Length > 32)
+                    //{
+                    //    ModelState.AddModelError("password", "Kindly Enter Password between 6 and 32 sharacters");
+                    //}
 
                 }
+                    /*
                 else
                 {
                     ModelState.AddModelError("password", "Password is required");
@@ -85,19 +86,19 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 }
                 if (!string.IsNullOrEmpty(user.email))
                 {
-                    string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
-                                             @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-                                                @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-                    Regex re = new Regex(emailRegex);
-                    if (!re.IsMatch(user.email))
-                    {
-                        ModelState.AddModelError("email", "Email is not valid");
-                    }
+                    //string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                    //                         @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                    //                            @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+                    //Regex re = new Regex(emailRegex);
+                    //if (!re.IsMatch(user.email))
+                    //{
+                    //    ModelState.AddModelError("email", "Email is not valid");
+                    //}
                 }
                 else
                 {
                     ModelState.AddModelError("email", "Email is required");
-                }
+                }*/
             #endregion
                 if (ModelState.IsValid)
                 {

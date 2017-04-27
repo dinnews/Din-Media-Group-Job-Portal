@@ -111,7 +111,7 @@
                    <div class="clearfix margin-bottom-0"></div>
                     <form method="post" class="register" action="@Url.Content("~/User/ValidateEmployeeSignUp")">
                         <div class="single">
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count>0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count>0)
                             {
                                 <span style="color:red">
                                    
@@ -126,7 +126,7 @@
                                     <input type="text" class="input-text" name="first_name" id="first-name" value="" required />
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
                             {
                                 <span style="color:red">
                                     @ViewData.ModelState["last_name"].Errors[0].ErrorMessage
@@ -149,7 +149,8 @@
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="email" class="input-text" name="email" id="email2" value="" required/>
+                                    <input type="email" class="input-text" name="email" id="email2" value="@if(!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count < 1)
+                            {@Model.email}" required />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["gender"].Errors.Count > 0)
@@ -161,7 +162,7 @@
                             <p class="form-row form-row-wide">
                                 <label for="gender">
                                     <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender" required>
-                                        <option selected="selected" value=null>Select your gender</option>
+                                        <option selected="selected" value="">Select your gender</option>
                                         <option value="female"> Female</option>
                                         <option value="male">Male</option>
                                         <option value="other">Other</option>
@@ -250,7 +251,7 @@
                                 <label for="job-title">
                                     Select Your Catagory
                                     <select data-placeholder="Choose Category" class="chosen-select-no-single" name="job_catagory_field" required>
-                                        <option selected="selected" value=null>Select your Catagory</option>
+                                        <option selected="selected" value="">Select your Catagory</option>
                                         <option value="Software Engineer">Software Engineer</option>
                                         <option value="Qualit Manager">Qualit Manager</option>
                                         <option value="Content Writer">Content Writer</option>

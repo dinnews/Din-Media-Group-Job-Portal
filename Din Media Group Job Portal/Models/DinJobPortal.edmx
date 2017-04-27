@@ -32,8 +32,8 @@
           <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="company_name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="mobile" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="cnic" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cnic" Type="varchar" MaxLength="20" />
           <Property Name="last_login" Type="datetime" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
@@ -140,8 +140,8 @@
           <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="company_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="mobile" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="cnic" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="mobile" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="cnic" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="last_login" Type="DateTime" Precision="3" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tb_user" Relationship="Self.FK_tb_employer_registration_data_tb_user" FromRole="tb_employer_registration_data" ToRole="tb_user" />

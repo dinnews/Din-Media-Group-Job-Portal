@@ -38,15 +38,15 @@ namespace Din_Media_Group_Job_Portal.Controllers
         {
             return View();
         }
-        public ActionResult ValidateEmployerSignUp(tb_user user, tb_employer_registration_data employer, string password_reenter, string mobileNo, string cnicNo)
+        public ActionResult ValidateEmployerSignUp(tb_user user, tb_employer_registration_data employer, string password_reenter) //*, string password_reenter, string mobileNo, string cnicNo*?/
         {
             #region Employer Registration Validation
             
-            user.user_type = "employer";
-            var tempMobile = mobileNo.Split('-');
+           user.user_type = "employer";
+           /*  var tempMobile = mobileNo.Split('-');
             employer.mobile = decimal.Parse(tempMobile[0] + tempMobile[1]);
             var tempCnic = cnicNo.Split('-');
-            employer.cnic = decimal.Parse(tempCnic[0] + tempCnic[1] + tempCnic[2]);
+            employer.cnic = decimal.Parse(tempCnic[0] + tempCnic[1] + tempCnic[2]);*/
             List<tb_employer_registration_data> emp = new List<tb_employer_registration_data>();
             emp.Add(employer);
             user.tb_employer_registration_data = emp;
@@ -61,12 +61,14 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     ModelState.AddModelError("password", "Kindly Enter Same Password in both fields");
                 }
-                if (user.password.Length < 6 || user.password.Length > 32)
-                {
-                    ModelState.AddModelError("password", "Kindly Enter Password between 6 and 32 sharacters");
-                }
+               // if (user.password.Length < 6 || user.password.Length > 32)
+                //{
+                  //  ModelState.AddModelError("password", "Kindly Enter Password between 6 and 32 sharacters");
+                //}
 
             }
+            #region Commented
+            /*
             else
             {
                 ModelState.AddModelError("password", "Password is required");
@@ -107,7 +109,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
             else
             {
                 ModelState.AddModelError("email", "Email is required");
-            }
+            }*/
             #endregion
             if (ModelState.IsValid)
             {
@@ -128,6 +130,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 }
             }
             return View("MyAccount", user);
+            #endregion
             //return View("MyAccount");
         }
         public ActionResult AccountSetting()
