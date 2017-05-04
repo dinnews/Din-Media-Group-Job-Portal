@@ -14,7 +14,9 @@ namespace Din_Media_Group_Job_Portal.Controllers
     {
         DinJobPortalEntities db = new DinJobPortalEntities();
         #region All_Class_Level_Variables
-        private UtilityMethods.Utility objUtility ;
+       private PasswordEncryption encryption = new PasswordEncryption();
+        private UtilityMethods.Utility objUtility = new UtilityMethods.Utility();
+        List<tb_master_masters> master_masters_data;
         #endregion
         
         public ActionResult Home()
@@ -106,8 +108,8 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     try
                     {
-                        PasswordEncryption enc = new PasswordEncryption();
-                        string encPassword = enc.encryptPassword(user.password);
+                        
+                        string encPassword = encryption.encryptPassword(user.password);
                         user.password = encPassword;
                         db.tb_user.Add(user);
                         db.SaveChanges();
@@ -153,21 +155,41 @@ namespace Din_Media_Group_Job_Portal.Controllers
         #endregion
 
         [HttpPost]
-         public ActionResult MyAccount(string userName, string password)
+         public ActionResult MyAccount(string email, string password, string rememberme)
         {
+            
+            string encPassword = encryption.encryptPassword(password);
+            tb_user user_from_db_to_verify;
             try
             {
-                if (userName == "mohsin")
+                user_from_db_to_verify = db.tb_user.Where(user => (user.email == email && user.password == encPassword)).FirstOrDefault<tb_user>();
+               
+                if (user_from_db_to_verify!=null)
                 {
-                    Session["user"] = userName;
-                    Session["type"] = "jobseeker";
-                    return RedirectToAction("Home", "User");
-                }
-                else if (userName == "dinnews")
-                {
-                    Session["user"] = userName;
-                    Session["type"] = "employer";
-                    return RedirectToAction("EmployerHome", "Employer");
+                    if (user_from_db_to_verify.is_active == true && user_from_db_to_verify.is_verified == true)
+                    {
+                        user_from_db_to_verify.last_login = System.DateTime.Now;
+                        db.Entry(user_from_db_to_verify).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        if (user_from_db_to_verify.user_type == "employee")
+                        {
+                            user_from_db_to_verify.tb_employee_registration_data.Add(db.tb_employee_registration_data.Where(employee => employee.user_id == user_from_db_to_verify.id).FirstOrDefault<tb_employee_registration_data>());
+                        }
+                        else if (user_from_db_to_verify.user_type == "employer")
+                        {
+                            user_from_db_to_verify.tb_employer_registration_data.Add(db.tb_employer_registration_data.Where(employer => employer.user_id == user_from_db_to_verify.id).FirstOrDefault<tb_employer_registration_data>());
+                        }
+                        if (rememberme != null)
+                        {
+                            ///cookies
+                        }
+                        Session["user"] = user_from_db_to_verify;
+                        Session["type"] = user_from_db_to_verify.user_type;
+                        return RedirectToAction("Home", "User");
+                    }
+                    ViewBag.SuccessMessage = "You have not verified your account. Check your email and verify";
+                    return View("VerifyEmail");
+                    
                 }
                 ViewBag.ErrorLogin = "Kindly Check Username or Password";
                 return View("MyAccount");
@@ -175,9 +197,13 @@ namespace Din_Media_Group_Job_Portal.Controllers
             }
             catch(Exception e)
             {
-                return View("MyAccount");
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return View("DbError");
+                
             }
-            
+            //return View("MyAccount");
            
         }
         public ActionResult ValidateVerificationCode(string verification_code)
@@ -207,7 +233,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                             objUtility = new UtilityMethods.Utility();
                             objUtility.SaveException_for_ExceptionLog(e);
                             ViewBag.Exception = e.Message;
-                            return View("DbError");
+                            return View("DbError",e);
                         }
                         
                     }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "Account Setting";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -50,49 +51,96 @@
             <div class="tabs-container">
                 <!-- udate Accout Setting -->
                 <div class="tab-content" id="tab2" style="display: none;">
-                    <form method="post" class="register">
+                    <form method="post" class="register" action="/Employer/UpdateAccountSettings">
                         <div class="single">
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["first_name"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="firtName" id="first-name" value="Nawaz" />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="@Model.tb_employer_registration_data.FirstOrDefault().first_name" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["last_name"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="lastName" id="last-name" value="Shareef" />
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="@Model.tb_employer_registration_data.FirstOrDefault().last_name" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
 
+                                    @ViewData.ModelState["email"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="text" class="input-text" name="email" id="email2" value="pmo@gov.pk" />
+                                    <input type="text" class="input-text" name="email" id="email2" value="@Model.email" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["company_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["company_name"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="Company-Name">
                                     Company Name:
                                     <i class="ln ln-icon-Building"></i>
-                                    <input type="text" class="input-text" name="companyName" id="companyName" value="Govt of Pakistan" />
+                                    <input type="text" class="input-text" name="company_name" id="companyName" value="@Model.tb_employer_registration_data.FirstOrDefault().company_name" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["mobile"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["mobile"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="mobile-number">
                                     Mobile:
                                     <i class="ln ln-icon-Phone-3G"></i>
-                                    <input class="input-text" type="text" name="mobile" id="mobile" placeholder="____-_______" value="03151234567" />
+                                    <input class="input-text" type="text" name="mobile" id="mobile" placeholder="____-_______" value="@Model.tb_employer_registration_data.FirstOrDefault().mobile" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["cnic"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["cnic"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="mobile-number">
                                     CNIC (Optional):
                                     <i class="ln ln-icon-ID-Card"></i>
-                                    <input class="input-text" type="text" name="cnic" id="cnic" placeholder="_____-_______-_" value="3630208775902" />
+                                    <input class="input-text" type="text" name="cnic" id="cnic" placeholder="_____-_______-_" value="@Model.tb_employer_registration_data.FirstOrDefault().cnic" />
                                 </label>
                             </p>
                         </div>
@@ -100,18 +148,21 @@
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="update" value="Update" />
                         </p>
-                        
+
                     </form>
                 </div>
                 <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
-                    <form method="post" class="login" action="#">
-
+                    <form method="post" class="login" action="/Employer/UpdatePassword">
+                        <span style="color:red;">
+                            @ViewBag.ErrorMessage
+                        </span>
+                       
                         <p class="form-row form-row-wide">
                             <label for="old-password">
                                 Old Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" required />
+                                <input class="input-text" type="password" name="old_password" id="password" required />
                             </label>
                         </p>
 
@@ -119,14 +170,14 @@
                             <label for="password">
                                 New Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" required />
+                                <input class="input-text" type="password" name="new_password" id="password" required />
                             </label>
                         </p>
                         <p class="form-row form-row-wide">
                             <label for="repeat-password">
                                 Repeat Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="repeat-password" id="repeat-password" required />
+                                <input class="input-text" type="password" name="new_password_reenter" id="repeat-password" required />
                             </label>
                         </p>
 

@@ -1,16 +1,29 @@
 ﻿@{
-    if (Session["type"] == "jobseeker")
+    try
     {
-        @Html.Partial("~/Views/Header/_partialLoggedInUserHeader.cshtml")
+        Din_Media_Group_Job_Portal.Models.tb_user user;
+        user = (Din_Media_Group_Job_Portal.Models.tb_user)Session["user"];
+        if (user != null)
+        {
+            if (user.user_type == "employee")
+            { 
+               @Html.Partial("~/Views/Header/_partialLoggedInUserHeader.cshtml")
         
+            }
+            else if (user.user_type == "employer")
+            {           
+                 Response.Redirect("~/User/MyAccount");
+            }
+        }
+        
+        else
+        {
+            @Html.Partial("~/Views/Header/_partialUserHeader.cshtml")
+        }    
     }
-    else if (Session["type"] == "employer")
+    catch(Exception e)
     {
-        //@Html.Partial("~/Views/Header/_partialLoggedInEmployerHeader.cshtml")
         Response.Redirect("~/User/MyAccount");
     }
-    else
-    {
-        Response.Redirect("~/User/MyAccount");
-    }
+   
 }

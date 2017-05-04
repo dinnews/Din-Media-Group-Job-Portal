@@ -36,6 +36,7 @@ namespace Din_Media_Group_Job_Portal.Models
         public string mobile { get; set; }
         [RegularExpression(@"^[\d-]+$", ErrorMessage = "CNIC format is 23202-1234567-6 (Only Digits Allowed)")]
         public string cnic { get; set; }
+        
         public Nullable<System.DateTime> last_login { get; set; }
         public int user_id { get; set; }
     

@@ -5,7 +5,7 @@
         ViewBag.Title = "Register as Employer";
         Layout = "~/Views/Shared/UserLayout.cshtml";
     }
-    else if (Session["type"] == "jobseeker")
+    else if (Session["type"] == "employee")
     {
         Response.Redirect("~/User/Home");
     }
@@ -296,7 +296,7 @@
     }
     $(document).ready(function ($) {
 
-        $('#mobile').mask("****-*******");
+        $('#mobile').mask("9999-9999999");
         $('#cnic').mask("*****-*******-*");
         //$("#mobile").numeric();
     });

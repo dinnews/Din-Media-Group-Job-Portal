@@ -166,6 +166,9 @@
     <Compile Include="Models\tb_exception.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tb_master_masters.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_user.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -663,6 +666,7 @@
     <Content Include="Models\DinJobPortal.edmx.diagram">
       <DependentUpon>DinJobPortal.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\DinJobPortal.edmx.sql" />
     <Content Include="Models\DinJobPortal.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DinJobPortal.edmx</DependentUpon>

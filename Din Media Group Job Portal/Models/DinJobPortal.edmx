@@ -47,6 +47,15 @@
           <Property Name="exception_number" Type="varchar(max)" />
           <Property Name="date" Type="datetime" />
         </EntityType>
+        <EntityType Name="tb_master_masters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="page_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="visibility" Type="bit" Nullable="false" />
+          <Property Name="reason" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="tb_user">
           <Key>
             <PropertyRef Name="id" />
@@ -58,6 +67,7 @@
           <Property Name="is_active" Type="bit" Nullable="false" />
           <Property Name="is_verified" Type="bit" Nullable="false" />
           <Property Name="last_change_password" Type="varchar" MaxLength="100" />
+          <Property Name="last_login" Type="datetime" />
         </EntityType>
         <EntityType Name="tb_verification_code">
           <Key>
@@ -65,12 +75,14 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="verification_code" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="verification_code" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_tb_employee_registration_data_tb_user">
-          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tb_employee_registration_data" Type="Self.tb_employee_registration_data" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_user">
@@ -82,7 +94,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tb_employer_registration_data_tb_user">
-          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tb_employer_registration_data" Type="Self.tb_employer_registration_data" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_user">
@@ -97,6 +111,7 @@
           <EntitySet Name="tb_employee_registration_data" EntityType="Self.tb_employee_registration_data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_employer_registration_data" EntityType="Self.tb_employer_registration_data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_exception" EntityType="Self.tb_exception" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_master_masters" EntityType="Self.tb_master_masters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_verification_code" EntityType="Self.tb_verification_code" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tb_employee_registration_data_tb_user" Association="Self.FK_tb_employee_registration_data_tb_user">
@@ -159,6 +174,7 @@
           <Property Name="last_change_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_employee_registration_data" Relationship="Self.FK_tb_employee_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employee_registration_data" />
           <NavigationProperty Name="tb_employer_registration_data" Relationship="Self.FK_tb_employer_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employer_registration_data" />
+          <Property Name="last_login" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_tb_employee_registration_data_tb_user">
           <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
@@ -198,6 +214,7 @@
           </AssociationSet>
           <EntitySet Name="tb_exception" EntityType="DinJobPortalModel.tb_exception" />
           <EntitySet Name="tb_verification_code" EntityType="DinJobPortalModel.tb_verification_code" />
+          <EntitySet Name="tb_master_masters" EntityType="DinJobPortalModel.tb_master_masters" />
         </EntityContainer>
         <EntityType Name="tb_exception">
           <Key>
@@ -218,6 +235,15 @@
           <Property Name="verification_code" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_master_masters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="page_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="visibility" Type="Boolean" Nullable="false" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -260,6 +286,7 @@
           <EntitySetMapping Name="tb_user">
             <EntityTypeMapping TypeName="DinJobPortalModel.tb_user">
               <MappingFragment StoreEntitySet="tb_user">
+                <ScalarProperty Name="last_login" ColumnName="last_login" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -288,6 +315,16 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="verification_code" ColumnName="verification_code" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_master_masters">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_master_masters">
+              <MappingFragment StoreEntitySet="tb_master_masters">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="visibility" ColumnName="visibility" />
+                <ScalarProperty Name="page_name" ColumnName="page_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

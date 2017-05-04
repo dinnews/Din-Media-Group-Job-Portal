@@ -5,7 +5,7 @@
         ViewBag.Title = "Verify Email";
         Layout = "~/Views/Shared/UserLayout.cshtml";
     }
-    else if (Session["type"] == "jobseeker")
+    else if (Session["type"] == "employee")
     {
         Response.Redirect("~/User/Home");
     }
@@ -66,7 +66,9 @@
                 <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
                     <form method="post" class="login" action="@Url.Content("~/User/ValidateVerificationCode")" >
-
+                        <span style="color:red;">
+                            @ViewBag.SuccessMessage
+                        </span>
                         <p class="form-row form-row-wide">
                             <label for="username">
                                 Enter Verification Code here..

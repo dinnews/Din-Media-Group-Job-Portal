@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1406e6d18e65454da28872c55e50b9c9" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="1406e6d18e65454da28872c55e50b9c9" Name="Diagram1" ZoomLevel="109">
         <EntityTypeShape EntityType="DinJobPortalModel.tb_employee_registration_data" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_employer_registration_data" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_user" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_employee_registration_data_tb_user" ManuallyRouted="false" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_employer_registration_data_tb_user" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_verification_code" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_master_masters" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

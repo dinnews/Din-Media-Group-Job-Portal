@@ -1,24 +1,36 @@
 ﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+
 @{
-    if (Session["type"] == null)
+    try
     {
-        ViewBag.Title = "MyAccount";
-        Layout = "~/Views/Shared/UserLayout.cshtml";
+        Din_Media_Group_Job_Portal.Models.tb_user user;
+        user = (Din_Media_Group_Job_Portal.Models.tb_user)Session["user"];
+        if (user != null)
+        {
+            if (user.user_type == "employee")
+            {
+               Response.Redirect("~/Jobseeker/Dashboard");
+
+            }
+            else if (user.user_type == "employer")
+            {
+                Response.Redirect("~/Employer/Dashboard");
+            }
+        }
+
+        else
+        {
+            Session.Abandon();
+            ViewBag.Title = "MyAccount";
+            Layout = "~/Views/Shared/UserLayout.cshtml";
+        }
     }
-    else if (Session["type"] == "jobseeker")
-    {
-        Response.Redirect("~/User/Home");
-    }
-    else if (Session["type"] == "employer")
-    {
-        Response.Redirect("~/Employer/EmployerHome");
-    }
-    else
+    catch (Exception e)
     {
         Session.Abandon();
         Response.Redirect("~/User/MyAccount");
-       
     }
+
 }
 
 <div id="wrapper">
@@ -65,13 +77,17 @@
             <ul class="tabs-nav">
                 <li class=""><a href="#tab1">Login</a></li>
                 <li><a href="#tab2">Register</a></li>
+                
+                
             </ul>
-
+           
             <div class="tabs-container">
-                <!-- Login -->
+                
                 <div class="tab-content" id="tab1" style="display: none;">
                     <span style="color:red;">
                         @ViewBag.SuccesMessage
+                        @ViewBag.ErrorLogin
+                        
                     </span>
                     <form method="post" class="login" action="@Url.Content("~/User/MyAccount")">
 
@@ -79,7 +95,7 @@
                             <label for="username">
                                 Username:
                                 <i class="ln ln-icon-Male"></i>
-                                <input type="text" class="input-text" name="userName" id="username" value="" required />
+                                <input type="text" class="input-text" name="email" id="username" value="" required />
                             </label>
                         </p>
 
@@ -93,9 +109,7 @@
 
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="login" value="Login" />
-                            <p class="lost_password">
-                               @ViewBag.ErrorLogin
-                            </p>
+                            
                             <label for="rememberme" class="rememberme">
                                 <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember Me
                             </label>
@@ -107,7 +121,7 @@
 
                     </form>
                 </div>
-
+        
                 <!-- Register -->
                 <div class="tab-content" id="tab2" style="display: none;">
                   <a href="@Url.Content("~/Employer/MyAccount#tab2")" style="float:right;">Signup as Employer </a>

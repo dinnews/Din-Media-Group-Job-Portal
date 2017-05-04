@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "Account Setting";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -48,28 +49,69 @@
             <div class="tabs-container">
                 <!-- udate Accout Setting -->
                 <div class="tab-content" id="tab2" style="display: none;">
-                    <form method="post" class="register">
+                    <form method="post" class="register" action="/Jobseeker/UpdateAccountSettings">
                         <div class="single">
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["first_name"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
                                     First Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="firtName" id="first-name" value="Dr Allama" />
+                                    <input type="text" class="input-text" name="first_name" id="first-name" value="@Model.tb_employee_registration_data.FirstOrDefault().first_name" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["last_name"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
                                     Last Name
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="lastName" id="last-name" value="iqbal" />
+                                    <input type="text" class="input-text" name="last_name" id="last-name" value="@Model.tb_employee_registration_data.FirstOrDefault().last_name" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
 
+                                    @ViewData.ModelState["email"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="email2">
                                     Email:
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="text" class="input-text" name="email" id="email2" value="someone@gmail.com" />
+                                    <input type="text" class="input-text" name="email" id="email2" value="@Model.email" />
+                                </label>
+                            </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["gender"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["gender"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
+                            <p class="form-row form-row-wide">
+                                <label for="gender">
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender" id="gender" required>
+                                        
+                                        <option value="female"> Female</option>
+                                        <option value="male" >Male</option>
+                                        <option value="other">Other</option>
+                                    </select>
                                 </label>
                             </p>
                         </div>
@@ -79,20 +121,34 @@
                                     What are you looking for.
                                 </h3>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["location"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
 
+                                    @ViewData.ModelState["location"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="work-location">
                                     Preferred Work Location:
                                     <i class="ln ln-icon-Location-2"></i>
-                                    <input type="text" class="input-text" name="work-location" id="work-location" value="Lahore" placeholder="e.g. Lahore"/>
+                                    <input type="text" class="input-text" name="location" id="work-location" value="@Model.tb_employee_registration_data.FirstOrDefault().location" placeholder="e.g. Lahore" />
                                 </label>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_title"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
 
+                                    @ViewData.ModelState["job_title"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
                                     Desired Job Title:
                                     <i class="ln ln-icon-Suitcase"></i>
-                                    <input class="input-text" type="text" name="job-title" id="job-title" value="Software Engineer" placeholder="e.g. Software Engineer"/>
+                                    <input class="input-text" type="text" name="job_title" id="job-title" value="@Model.tb_employee_registration_data.FirstOrDefault().job_title" placeholder="e.g. Software Engineer" />
                                 </label>
                             </p>
                             <p class="form-row form-row-wide">
@@ -100,16 +156,56 @@
                                     I'm interested in (Please select at least one option)
                                 </label>
                                 <div class="row">
-                                    <input class="checkboxes" type="checkbox" name="fulltime" id="interests" checked />Full Time
-                                    <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Part Time
-                                    <input class="checkboxes" type="checkbox" name="internship" id="interests" />Internship
-                                    <input class="checkboxes" type="checkbox" name="Govt" id="interests" checked />Govt Jobs
+                                    @{
+                                        var checkboxArray = Model.tb_employee_registration_data.FirstOrDefault().job_interest.Split(',');
+                                        if(checkboxArray[0]=="fulltime")
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="fulltime" id="interests" value="fulltime" checked />Full Time
+                                        }
+                                        else
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="fulltime" id="interests" value="fulltime" />Full Time
+                                        }
+                                        if(checkboxArray[1]=="parttime")
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="parttime" id="interests" value="parttime" checked />Part Time
+                                        }
+                                        else
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="parttime" id="interests" value="parttime" />Part Time
+                                        }
+                                        if(checkboxArray[2]=="internship")
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="internship" id="interests" value="internship" checked/>Internship
+                                        }
+                                        else
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="internship" id="interests" value="internship" />Internship
+                                        }
+                                        if (checkboxArray[3] == "govt")
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="govt" id="interests" value="govt" checked/>Govt Jobs
+                                        }
+                                        else
+                                        {
+                                            @:<input class="checkboxes" type="checkbox" name="govt" id="interests" value="govt" />Govt Jobs
+                                        }
+                                    }
+                                                                        
                                 </div>
                             </p>
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_catagory_field"].Errors.Count > 0)
+                            {
+                                <span style="color:red">
+
+                                    @ViewData.ModelState["job_catagory_field"].Errors[0].ErrorMessage
+
+                                </span>
+                            }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
                                     Select Your Catagory
-                                    <select data-placeholder="Choose Category" class="chosen-select-no-single">
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="job_catagory_field">
                                         <option value="">Select your Catagory</option>
                                         <option value="Software Engineer">Software Engineer</option>
                                         <option value="Qualit Manager" selected="selected">Qualit Manager</option>
@@ -127,13 +223,16 @@
                 </div>
                 <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
-                    <form method="post" class="login" action="#">
+                    <form method="post" class="login" action="/Jobseeker/UpdatePassword">
+                        <span style="color:red;">
+                            @ViewBag.ErrorMessage
+                        </span>
 
                         <p class="form-row form-row-wide">
                             <label for="old-password">
                                 Old Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" required />
+                                <input class="input-text" type="password" name="old_password" id="password" required />
                             </label>
                         </p>
 
@@ -141,14 +240,14 @@
                             <label for="password">
                                 New Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" required />
+                                <input class="input-text" type="password" name="new_password" id="password" required />
                             </label>
                         </p>
                         <p class="form-row form-row-wide">
                             <label for="repeat-password">
                                 Repeat Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="repeat-password" id="repeat-password" required />
+                                <input class="input-text" type="password" name="new_password_reenter" id="repeat-password" required />
                             </label>
                         </p>
 
@@ -175,3 +274,14 @@
 
 </div>
 <!-- Wrapper / End -->
+<script>
+    @if(ViewData.ModelState.IsValid)
+    {
+        <text>
+    $("#gender").val("@Model.tb_employee_registration_data.FirstOrDefault().gender");
+    $("#job_catagory_field").val("@Model.tb_employee_registration_data.FirstOrDefault().job_catagory_field");
+    
+    </text>
+       
+    }   
+</script>
