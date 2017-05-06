@@ -157,6 +157,9 @@
       <DependentUpon>DinJobPortal.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjectConstants.cs" />
+    <Compile Include="Models\tb_education_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_employee_registration_data.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -166,7 +169,25 @@
     <Compile Include="Models\tb_exception.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tb_experience_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_external_url_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_languages_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_master_masters.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_profile_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_projects_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_skills_employee.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_user.cs">

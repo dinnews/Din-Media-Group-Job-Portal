@@ -132,6 +132,12 @@ namespace Din_Media_Group_Job_Portal.Controllers
             }
             return View("AccountSetting");
         }
+        [HttpPost]
+        public ActionResult CreateProfileFirstTime(tb_profile_employee emp, IEnumerable<tb_education_employee> ed)
+        {
+
+            return View();
+        }
        public ActionResult Catagories()
         {
             return View("Catagories");
