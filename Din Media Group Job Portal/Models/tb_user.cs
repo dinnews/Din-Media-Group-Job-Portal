@@ -20,7 +20,7 @@ namespace Din_Media_Group_Job_Portal.Models
             this.tb_employee_registration_data = new HashSet<tb_employee_registration_data>();
             this.tb_employer_registration_data = new HashSet<tb_employer_registration_data>();
         }
-    
+
         public int id { get; set; }
         [Required]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
