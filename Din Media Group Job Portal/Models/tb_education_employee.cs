@@ -19,9 +19,9 @@ namespace Din_Media_Group_Job_Portal.Models
         public string institution_name { get; set; }
         public string degree_title { get; set; }
         public string field_of_study { get; set; }
-        public Nullable<System.DateTime> start_date { get; set; }
-        public Nullable<System.DateTime> end_date { get; set; }
-        public string notes { get; set; }
+        public Nullable<System.DateTime> education_start_date { get; set; }
+        public Nullable<System.DateTime> education_end_date { get; set; }
+        public string education_notes { get; set; }
     
         public virtual tb_profile_employee tb_profile_employee { get; set; }
     }

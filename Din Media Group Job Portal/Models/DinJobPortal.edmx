@@ -14,9 +14,9 @@
           <Property Name="institution_name" Type="varchar(max)" Nullable="false" />
           <Property Name="degree_title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="field_of_study" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="start_date" Type="date" />
-          <Property Name="end_date" Type="date" />
-          <Property Name="notes" Type="varchar(max)" />
+          <Property Name="education_start_date" Type="date" />
+          <Property Name="education_end_date" Type="date" />
+          <Property Name="education_notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tb_employee_registration_data">
           <Key>
@@ -67,12 +67,12 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="profile_id" Type="int" Nullable="false" />
           <Property Name="job_title" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="company_mame" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="company_location" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="currently_working" Type="bit" Nullable="false" />
-          <Property Name="start_date" Type="date" />
-          <Property Name="end_date" Type="date" />
-          <Property Name="notes" Type="varchar(max)" />
+          <Property Name="experience_currently_working" Type="bit" Nullable="false" />
+          <Property Name="experience_start_date" Type="date" />
+          <Property Name="experience_end_date" Type="date" />
+          <Property Name="experience_notes" Type="varchar(max)" />
+          <Property Name="company_name" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_external_url_employee">
           <Key>
@@ -110,6 +110,8 @@
           <Property Name="profile_picture" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cover_picture" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="summary" Type="varchar(max)" Nullable="false" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="video_id" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tb_projects_employee">
           <Key>
@@ -120,10 +122,10 @@
           <Property Name="project_title" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="position" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="project_url" Type="varchar(max)" Nullable="false" />
-          <Property Name="currently_working" Type="bit" Nullable="false" />
-          <Property Name="start_date" Type="date" />
-          <Property Name="end_date" Type="date" />
-          <Property Name="notes" Type="varchar(max)" />
+          <Property Name="project_currently_working" Type="bit" Nullable="false" />
+          <Property Name="project_start_date" Type="date" />
+          <Property Name="project_end_date" Type="date" />
+          <Property Name="project_notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tb_skills_employee">
           <Key>
@@ -468,10 +470,10 @@
           <Property Name="institution_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="degree_title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="field_of_study" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Precision="0" />
-          <Property Name="end_date" Type="DateTime" Precision="0" />
-          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_profile_employee" Relationship="DinJobPortalModel.FK_tb_education_employee_tb_profile_employee" FromRole="tb_education_employee" ToRole="tb_profile_employee" />
+          <Property Name="education_start_date" Type="DateTime" Precision="0" />
+          <Property Name="education_end_date" Type="DateTime" Precision="0" />
+          <Property Name="education_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_experience_employee">
           <Key>
@@ -480,13 +482,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="profile_id" Type="Int32" Nullable="false" />
           <Property Name="job_title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="company_mame" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="company_location" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="currently_working" Type="Boolean" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Precision="0" />
-          <Property Name="end_date" Type="DateTime" Precision="0" />
-          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_profile_employee" Relationship="DinJobPortalModel.FK_tb_experience_employee_tb_profile_employee" FromRole="tb_experience_employee" ToRole="tb_profile_employee" />
+          <Property Name="experience_currently_working" Type="Boolean" Nullable="false" />
+          <Property Name="experience_start_date" Type="DateTime" Precision="0" />
+          <Property Name="experience_end_date" Type="DateTime" Precision="0" />
+          <Property Name="experience_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="company_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_external_url_employee">
           <Key>
@@ -523,6 +525,8 @@
           <NavigationProperty Name="tb_languages_employee" Relationship="DinJobPortalModel.FK_tb_languages_employee_tb_profile_employee" FromRole="tb_profile_employee" ToRole="tb_languages_employee" />
           <NavigationProperty Name="tb_projects_employee" Relationship="DinJobPortalModel.FK_tb_projects_employee_tb_profile_employee" FromRole="tb_profile_employee" ToRole="tb_projects_employee" />
           <NavigationProperty Name="tb_skills_employee" Relationship="DinJobPortalModel.FK_tb_skills_employee_tb_profile_employee" FromRole="tb_profile_employee" ToRole="tb_skills_employee" />
+          <Property Name="mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="video_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="true" />
         </EntityType>
         <EntityType Name="tb_projects_employee">
           <Key>
@@ -533,11 +537,11 @@
           <Property Name="project_title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="position" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="project_url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="currently_working" Type="Boolean" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Precision="0" />
-          <Property Name="end_date" Type="DateTime" Precision="0" />
-          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_profile_employee" Relationship="DinJobPortalModel.FK_tb_projects_employee_tb_profile_employee" FromRole="tb_projects_employee" ToRole="tb_profile_employee" />
+          <Property Name="project_currently_working" Type="Boolean" Nullable="false" />
+          <Property Name="project_start_date" Type="DateTime" Precision="0" />
+          <Property Name="project_end_date" Type="DateTime" Precision="0" />
+          <Property Name="project_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_skills_employee">
           <Key>
@@ -710,9 +714,9 @@
           <EntitySetMapping Name="tb_education_employee">
             <EntityTypeMapping TypeName="DinJobPortalModel.tb_education_employee">
               <MappingFragment StoreEntitySet="tb_education_employee">
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="education_notes" ColumnName="education_notes" />
+                <ScalarProperty Name="education_end_date" ColumnName="education_end_date" />
+                <ScalarProperty Name="education_start_date" ColumnName="education_start_date" />
                 <ScalarProperty Name="field_of_study" ColumnName="field_of_study" />
                 <ScalarProperty Name="degree_title" ColumnName="degree_title" />
                 <ScalarProperty Name="institution_name" ColumnName="institution_name" />
@@ -724,12 +728,12 @@
           <EntitySetMapping Name="tb_experience_employee">
             <EntityTypeMapping TypeName="DinJobPortalModel.tb_experience_employee">
               <MappingFragment StoreEntitySet="tb_experience_employee">
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="currently_working" ColumnName="currently_working" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="experience_notes" ColumnName="experience_notes" />
+                <ScalarProperty Name="experience_end_date" ColumnName="experience_end_date" />
+                <ScalarProperty Name="experience_start_date" ColumnName="experience_start_date" />
+                <ScalarProperty Name="experience_currently_working" ColumnName="experience_currently_working" />
                 <ScalarProperty Name="company_location" ColumnName="company_location" />
-                <ScalarProperty Name="company_mame" ColumnName="company_mame" />
                 <ScalarProperty Name="job_title" ColumnName="job_title" />
                 <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -759,6 +763,8 @@
           <EntitySetMapping Name="tb_profile_employee">
             <EntityTypeMapping TypeName="DinJobPortalModel.tb_profile_employee">
               <MappingFragment StoreEntitySet="tb_profile_employee">
+                <ScalarProperty Name="video_id" ColumnName="video_id" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="cover_picture" ColumnName="cover_picture" />
                 <ScalarProperty Name="profile_picture" ColumnName="profile_picture" />
@@ -770,10 +776,10 @@
           <EntitySetMapping Name="tb_projects_employee">
             <EntityTypeMapping TypeName="DinJobPortalModel.tb_projects_employee">
               <MappingFragment StoreEntitySet="tb_projects_employee">
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="currently_working" ColumnName="currently_working" />
+                <ScalarProperty Name="project_notes" ColumnName="project_notes" />
+                <ScalarProperty Name="project_end_date" ColumnName="project_end_date" />
+                <ScalarProperty Name="project_start_date" ColumnName="project_start_date" />
+                <ScalarProperty Name="project_currently_working" ColumnName="project_currently_working" />
                 <ScalarProperty Name="project_url" ColumnName="project_url" />
                 <ScalarProperty Name="position" ColumnName="position" />
                 <ScalarProperty Name="project_title" ColumnName="project_title" />

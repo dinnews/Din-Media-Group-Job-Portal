@@ -11,15 +11,12 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
     
     public partial class tb_external_url_employee
     {
         public int id { get; set; }
         public int profile_id { get; set; }
         public string url_name { get; set; }
-        [Required]
-        [RegularExpression(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$")]
         public string url { get; set; }
     
         public virtual tb_profile_employee tb_profile_employee { get; set; }
