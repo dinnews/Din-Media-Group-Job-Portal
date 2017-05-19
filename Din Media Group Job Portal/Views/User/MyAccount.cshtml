@@ -32,7 +32,8 @@
     }
 
 }
-
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/FormValidations/EmployeeSignUpValidations.js"></script>
 <div id="wrapper">
 
 
@@ -71,23 +72,16 @@
     ================================================== -->
     <!-- Container -->
     <div class="container">
-
         <div class="my-account">
-
             <ul class="tabs-nav">
                 <li class=""><a href="#tab1">Login</a></li>
                 <li><a href="#tab2">Register</a></li>
-                
-                
             </ul>
-           
             <div class="tabs-container">
-                
+                <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
                     <span style="color:red;">
                         @ViewBag.SuccesMessage
-                        @ViewBag.ErrorLogin
-                        
                     </span>
                     <form method="post" class="login" action="@Url.Content("~/User/MyAccount")">
 
@@ -95,7 +89,7 @@
                             <label for="username">
                                 Username:
                                 <i class="ln ln-icon-Male"></i>
-                                <input type="text" class="input-text" name="email" id="username" value="" required />
+                                <input type="text" class="input-text" name="userName" id="username" value="" required />
                             </label>
                         </p>
 
@@ -103,17 +97,19 @@
                             <label for="password">
                                 Password:
                                 <i class="ln ln-icon-Lock-2"></i>
-                                <input class="input-text" type="password" name="password" id="password" required/>
+                                <input class="input-text" type="password" name="password" id="password" required />
                             </label>
                         </p>
 
                         <p class="form-row">
                             <input type="submit" class="button border fw margin-top-10" name="login" value="Login" />
-                            
-                            <label for="rememberme" class="rememberme">
-                                <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember Me
-                            </label>
-                        
+                        <p class="lost_password">
+                            @ViewBag.ErrorLogin
+                        </p>
+                        <label for="rememberme" class="rememberme">
+                            <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember Me
+                        </label>
+
 
                         <p class="lost_password">
                             <a href="#small-dialog" class="popup-with-zoom-anim">Lost Your Password?</a>
@@ -121,27 +117,26 @@
 
                     </form>
                 </div>
-        
+
                 <!-- Register -->
                 <div class="tab-content" id="tab2" style="display: none;">
-                  <a href="@Url.Content("~/Employer/MyAccount#tab2")" style="float:right;">Signup as Employer </a>
-                   <div class="clearfix margin-bottom-0"></div>
-                    <form method="post" class="register" action="@Url.Content("~/User/ValidateEmployeeSignUp")">
+                    <a href="@Url.Content("~/Employer/MyAccount#tab2")" style="float:right">Signup as Employer </a>
+                    <div class="clearfix margin-bottom-0"></div>
+                    <form method="post" class="register" action="@Url.Content("~/User/ValidateEmployeeSignUp")" onsubmit="return CallAllOtherFunctions_forJobSeeker()">
                         <div class="single">
-                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count>0)
+                            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["first_name"].Errors.Count > 0)
                             {
                                 <span style="color:red">
-                                   
-                                         @ViewData.ModelState["first_name"].Errors[0].ErrorMessage
-                                   
+                                    @ViewData.ModelState["first_name"].Errors[0].ErrorMessage
                                 </span>
                             }
                             <p class="form-row form-row-wide">
                                 <label for="first-name">
-                                    First Name
+                                    First Name <span id="errror_firstname" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="first_name" id="first-name" value="@if(!ViewData.ModelState.IsValid)
+                                    <input type="text" class="input-text" name="first_name" id="first_name" onblur="FirstNameValidation()" value="@if(!ViewData.ModelState.IsValid)
                             {@Model.tb_employee_registration_data.FirstOrDefault().first_name}" required />
+
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["last_name"].Errors.Count > 0)
@@ -152,10 +147,11 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="last-name">
-                                    Last Name
+                                    Last Name <span id="error_lastname" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Male"></i>
-                                    <input type="text" class="input-text" name="last_name" id="last-name" value="@if(!ViewData.ModelState.IsValid)
+                                    <input type="text" class="input-text" name="last_name" id="last_name" onblur="LastNameValidation()" value="@if(!ViewData.ModelState.IsValid)
                             {@Model.tb_employee_registration_data.FirstOrDefault().last_name}" required />
+
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
@@ -166,9 +162,9 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="email2">
-                                    Email:
+                                    Email: <span id="error_email" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Mail"></i>
-                                    <input type="email" class="input-text" name="email" id="email2" value="@if(!ViewData.ModelState.IsValid)
+                                    <input type="email" class="input-text" name="email" id="email2" onblur="EmailValidation()" value="@if(!ViewData.ModelState.IsValid)
                             {@Model.email}" required />
                                 </label>
                             </p>
@@ -180,7 +176,8 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="gender">
-                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender" required>
+                                    Select Your Gender <span id="error_gender" style="color:red;float:right"></span>
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="gender" id="Gender_field">
                                         <option selected="selected" value="">Select your gender</option>
                                         <option value="female"> Female</option>
                                         <option value="male">Male</option>
@@ -196,18 +193,16 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="password1">
-                                    Password:  (Enter between 6 and 32 characters)
+                                    Password:  (Enter between 6 and 32 characters)<span id="error_password" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password" id="password1" required />
+                                    <input class="input-text" type="password" name="password" min="8" max="12" id="password1" onblur="PasswordValidation()" required />
                                 </label>
                             </p>
-                               
-
                             <p class="form-row form-row-wide">
                                 <label for="password2">
-                                    Repeat Password:
+                                    Repeat Password: <span id="error_password2" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password_reenter" id="password2" required />
+                                    <input class="input-text" type="password" name="password_reenter" id="password2" onblur="ReEnter_PasswordValidation()" required />
                                 </label>
                             </p>
                         </div>
@@ -225,27 +220,25 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="work-location">
-                                    Preferred Work Location:
+                                    Preferred Work Location:<span id="error_location" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Location-2"></i>
-                                    <input type="text" class="input-text" name="location" id="work-location"  value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().location }" placeholder="e.g. Lahore" required />
-
+                                    <input type="text" class="input-text" name="location" id="work_location" onblur="LocationValidation()" required value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().location }" placeholder="e.g. Lahore" />
                                 </label>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_title"].Errors.Count > 0)
                             {
-                                <span style="color:red">
+                                <span style="color:red" id="error_jobtitle">
                                     @ViewData.ModelState["job_title"].Errors[0].ErrorMessage
                                 </span>
                             }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
-                                    Desired Job Title:
+                                    Desired Job Title: <span id="error_jobtitle" style="color:red;float:right"></span>
                                     <i class="ln ln-icon-Suitcase"></i>
-                                    <input class="input-text" type="text" name="job_title" id="job-title" placeholder="e.g. Software Engineer" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().job_title }" required />
-
+                                    <input class="input-text" type="text" name="job_title" id="job_title" onblur="Job_TitleValidation()" required placeholder="e.g. Software Engineer" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_employee_registration_data.FirstOrDefault().job_title }" />
                                 </label>
                             </p>
-                            @if (!ViewData.ModelState.IsValid )
+                            @if (!ViewData.ModelState.IsValid)
                             {
                                 <span style="color:red">
                                     <!--ViewData.ModelState["interest"].Errors[0].ErrorMessage-->
@@ -253,14 +246,14 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
-                                    I'm interested in (Please select at least one option)
+                                    I'm interested in (optional)
                                 </label>
                                 <div class="row">
                                     <input class="checkboxes" type="checkbox" name="fulltime" id="interests" value="fulltime" />Full Time
-                                   <input class="checkboxes" type="checkbox" name="parttime" id="interests" value="parttime" />Part Time
-                                   <input class="checkboxes" type="checkbox" name="internship" id="interests" value="internship" />Internship
-                                   <input class="checkboxes" type="checkbox" name="govt" id="interests" value="govt" />Govt Jobs
-                               </div>
+                                    <input class="checkboxes" type="checkbox" name="parttime" id="interests" value="parttime" />Part Time
+                                    <input class="checkboxes" type="checkbox" name="internship" id="interests" value="internship" />Internship
+                                    <input class="checkboxes" type="checkbox" name="govt" id="interests" value="govt" />Govt Jobs
+                                </div>
                             </p>
                             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["job_catagory_field"].Errors.Count > 0)
                             {
@@ -270,8 +263,8 @@
                             }
                             <p class="form-row form-row-wide">
                                 <label for="job-title">
-                                    Select Your Catagory
-                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="job_catagory_field" required>
+                                    Select Your Catagory <span id="error_catagory" style="color:red;float:right"></span>
+                                    <select data-placeholder="Choose Category" class="chosen-select-no-single" name="job_catagory_field" id="job_catagory_field" onblur="CatagoryValidation()">
                                         <option selected="selected" value="">Select your Catagory</option>
                                         <option value="Software Engineer">Software Engineer</option>
                                         <option value="Qualit Manager">Qualit Manager</option>
@@ -289,9 +282,9 @@
                                 By clicking Register, you accept our <a href="#">Terms and Conditions</a>.
                             </div>
                         </p>
-                       
+
                     </form>
-                 </div>
+                </div>
             </div>
         </div>
     </div>
@@ -335,3 +328,49 @@
         </div>
 
     </div>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    function EmailValidation() {
+        var valemail = $("#email2").val();
+        var emailExp = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (valemail == null || valemail == "" || valemail.length <= 0) {
+            $("#error_email").text("*Email is required");
+            return false;
+        }
+        else {
+            $("#error_email").text("");
+        }
+        if (!(valemail.match(emailExp))) {
+            $("#error_email").text("please enter valid email");
+            return false;
+        } else {
+            $("#error_email").text("");
+        }
+        return true;
+    }
+
+    function GenderValidation() {
+        var valgender = $("#Gender_field option:selected").text();
+        if (valgender.match("Select your gender")) {
+            $("#error_gender").text("*Gender is required");
+            return false;
+        }
+        else {
+            $("#error_gender").text("");
+        }
+        return true;
+    }
+
+    function CatagoryValidation() {
+        var catagory = $("#job_catagory_field option:selected").text();
+        if (catagory.match("Select your Catagory")) {
+            $("#error_catagory").text("*job catagory is required");
+            return false;
+        }
+        else {
+            $("#error_catagory").text("");
+        }
+        return true;
+    }
+
+</script>
