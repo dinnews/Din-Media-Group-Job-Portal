@@ -18,14 +18,18 @@
 </script>
 <script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=tpp2hu82f0f6trwgjx40rllvlhq14lrg9j7jqb8reqbnh26b"></script>
 <script>
-    /*
+    
 tinymce.init({
     selector: '#summary',
-    menubar: ''
-});*/
+    plugins: "lists advlist",
+    toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image|bullist numlist outdent indent',
+    menubar: false,
+    statusbar: true,
+    resize: true
+});
 </script>
 <script>
-   $(function () {
+   /*$(function () {
         // Replace all textarea tags with SCEditor
         $('#summary').sceditor({
             plugins: 'bbcode',
@@ -33,7 +37,7 @@ tinymce.init({
             emoticonsRoot: "/emoticons/",
             emoticonsEnabled: false
         });
-    });
+    });*/
 </script>
 <div id="wrapper">
 

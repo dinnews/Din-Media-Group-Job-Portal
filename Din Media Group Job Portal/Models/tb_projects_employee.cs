@@ -11,16 +11,12 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class tb_projects_employee
     {
         public int id { get; set; }
         public int profile_id { get; set; }
-        [Required]
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Project title must contain atleast 1 Alphabets")]
         public string project_title { get; set; }
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Position must contain atleast 1 Alphabets")]
         public string position { get; set; }
         public string project_url { get; set; }
         public bool project_currently_working { get; set; }

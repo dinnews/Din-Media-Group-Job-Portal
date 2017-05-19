@@ -182,6 +182,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     if (existing_user_data.user_type == "employer")
                     {
+                        var previous_email = existing_user_data.email;
                         existing_user_data = db.tb_user.Where(tempuser => tempuser.id == existing_user_data.id).Include(tempuser => tempuser.tb_employer_registration_data).FirstOrDefault<tb_user>();
                         existing_user_data.email = changed_employer_data.email;
                         existing_user_data.tb_employer_registration_data.FirstOrDefault().email = changed_employer_data.email;
@@ -195,6 +196,19 @@ namespace Din_Media_Group_Job_Portal.Controllers
                             db.Entry(existing_user_data).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
                             Session["user"] = existing_user_data;
+                            if (previous_email != existing_user_data.email)
+                            {
+                                Random rnd = new Random();
+                                decimal randomNo = rnd.Next(10000000, 99999999);
+                                objUtility = new UtilityMethods.Utility();
+                                bool isEmailSent = objUtility.SendVerificationEmail(existing_user_data.email, randomNo);
+                                if (isEmailSent)
+                                {
+                                    Session["user_email"] = existing_user_data.email;
+                                    Session["verification_code"] = randomNo;
+                                    return RedirectToAction("VerifyEmail", "User");
+                                }
+                            }
                             return RedirectToAction("AccountSetting");
                         }
                         else

@@ -11,7 +11,6 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class tb_profile_employee
     {
@@ -26,26 +25,19 @@ namespace Din_Media_Group_Job_Portal.Models
         }
     
         public int id { get; set; }
-        [Required]
-        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
-                                             @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-                                                @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Email is not valid")]
         public string email { get; set; }
-
         public string profile_picture { get; set; }
         public string cover_picture { get; set; }
-        [Required]
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Summary must contain atleast 1 Alphabets")]
         public string summary { get; set; }
-        [Required]
-        [RegularExpression(@"^[\d-]+$", ErrorMessage = "Mobile Number format is 9999-1234567 (Only Digits Allowed)")]
         public string mobile { get; set; }
         public string video_id { get; set; }
+        public int user_id { get; set; }
     
         public virtual ICollection<tb_education_employee> tb_education_employee { get; set; }
         public virtual ICollection<tb_experience_employee> tb_experience_employee { get; set; }
         public virtual ICollection<tb_external_url_employee> tb_external_url_employee { get; set; }
         public virtual ICollection<tb_languages_employee> tb_languages_employee { get; set; }
+        public virtual tb_user tb_user { get; set; }
         public virtual ICollection<tb_projects_employee> tb_projects_employee { get; set; }
         public virtual ICollection<tb_skills_employee> tb_skills_employee { get; set; }
     }

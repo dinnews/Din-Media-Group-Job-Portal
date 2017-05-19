@@ -9,6 +9,7 @@ using Din_Media_Group_Job_Portal.DBService;
 using System.IO;
 using Din_Media_Group_Job_Portal.SODailymotionUpload;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 namespace Din_Media_Group_Job_Portal.Controllers
 {
     public class JobSeekerController : Controller
@@ -37,6 +38,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 {
                     if (existing_user_data.user_type == "employee")
                     {
+                        var previous_email = existing_user_data.email;
                         existing_user_data = db.tb_user.Where(tempuser => tempuser.id == existing_user_data.id).Include(tempuser => tempuser.tb_employee_registration_data).FirstOrDefault<tb_user>();
                         existing_user_data.email = changed_employee_data.email;
                         existing_user_data.tb_employee_registration_data.FirstOrDefault().email = changed_employee_data.email;
@@ -47,11 +49,26 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         existing_user_data.tb_employee_registration_data.FirstOrDefault().job_interest = changed_employee_data.job_interest;
                         existing_user_data.tb_employee_registration_data.FirstOrDefault().job_title = changed_employee_data.job_title;
                         existing_user_data.tb_employee_registration_data.FirstOrDefault().job_catagory_field = changed_employee_data.job_catagory_field;
+                        existing_user_data.is_verified = false;
                         if(ModelState.IsValid)
                         {
                             db.Entry(existing_user_data).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
                             Session["user"] = existing_user_data;
+                            if(previous_email != existing_user_data.email)
+                            {
+                                Random rnd = new Random();
+                                decimal randomNo = rnd.Next(10000000, 99999999);
+                                objUtility = new UtilityMethods.Utility();
+                                bool isEmailSent = objUtility.SendVerificationEmail(existing_user_data.email, randomNo);
+                                if (isEmailSent)
+                                {
+                                    Session["user_email"] = existing_user_data.email;
+                                    Session["verification_code"] = randomNo;
+                                    return RedirectToAction("VerifyEmail", "User");
+                                }
+                            }
+                            
                             return RedirectToAction("AccountSetting");
                         }
                         else
@@ -148,6 +165,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
            tb_user existing_user_data;
            try
             {
+
                 ModelState.Clear();
                existing_user_data = (tb_user)Session["user"];
                if (existing_user_data != null )
@@ -211,8 +229,8 @@ namespace Din_Media_Group_Job_Portal.Controllers
                        ViewBag.Message = "Please select file";
                    }
                }
-                
-               
+
+               employee_profile.user_id = existing_user_data.id;
                 List<tb_education_employee> employee_education_list = new  List<tb_education_employee>();
                 List<tb_experience_employee> employee_experience_list = new  List<tb_experience_employee>();
                 List<tb_external_url_employee> employee_url_list = new  List<tb_external_url_employee>();
@@ -220,11 +238,17 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 List<tb_projects_employee> employee_project_list = new  List<tb_projects_employee>();
                 List<tb_languages_employee> employee_languages_list = new  List<tb_languages_employee>();
                 employee_experience_list.Add(experience);
+                employee_profile.tb_experience_employee = employee_experience_list;
                employee_education_list.Add(education);
+               employee_profile.tb_education_employee = employee_education_list;
                employee_url_list.Add(employee_urls);
+               employee_profile.tb_external_url_employee= employee_url_list;
                employee_skill_list.Add(skills);
+               employee_profile.tb_skills_employee = employee_skill_list;
                employee_project_list.Add(projects);
+               employee_profile.tb_projects_employee = employee_project_list;
                employee_languages_list.Add(languages);
+               employee_profile.tb_languages_employee = employee_languages_list;
                TryValidateModel(employee_profile);
                 if (ModelState.IsValid)
                 {
@@ -279,14 +303,23 @@ namespace Din_Media_Group_Job_Portal.Controllers
                     }
                     else
                     {
-                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email).FirstOrDefault();
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro=>pro.tb_education_employee)
+                            .Include(pro=>pro.tb_experience_employee)
+                            .Include(pro=>pro.tb_external_url_employee)
+                            .Include(pro=>pro.tb_languages_employee)
+                            .Include(pro=>pro.tb_projects_employee)
+                            .Include(pro=>pro.tb_skills_employee)
+                            .FirstOrDefault();
                         if (profile == null)
                         {
                             return RedirectToAction("CreateProfile");
                         }
                         else
                         {
-                            return View();
+                            session_user.tb_profile_employee.Add(profile);
+                            
+                            return View(session_user);
                         }
                     }
                 }
@@ -302,7 +335,38 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 ViewBag.Exception = e.Message;
                 return RedirectToAction("DbError", "User", e);
             }
-            return View();
+            return RedirectToAction("MyAccount", "User");
+        }
+        [HttpPost]
+        public ActionResult UpdateSummary(string summary) 
+        {
+            if(string.IsNullOrEmpty(summary))
+            {
+                return RedirectToAction("EditProfile");
+            }
+            summary = Regex.Replace(summary, @"\r\n?|\n", "<br />");
+            db = new DinJobPortalEntities();
+            tb_user session_user;
+            tb_profile_employee profile;
+            session_user = (tb_user)Session["user"];
+                if (session_user != null)
+                {
+                    profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email).FirstOrDefault();
+                    //profile = session_user.tb_profile_employee;
+                    profile.summary = summary;
+                    db.Entry(profile).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    session_user.tb_profile_employee.FirstOrDefault().summary= summary;
+                    Session["user"] = session_user;
+
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+
+
+            return RedirectToAction("EditProfile");
         }
         public ActionResult BrowseJob()
         {
@@ -328,7 +392,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                      }
                      else
                      {
-                         profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email).FirstOrDefault();
+                         profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email && pro.user_id==session_user.id).FirstOrDefault();
                          if(profile!=null)
                          {
                              return RedirectToAction("EditProfile");
@@ -391,7 +455,51 @@ namespace Din_Media_Group_Job_Portal.Controllers
         }
         public ActionResult EditProfile()
         {
-            return View();
+            tb_user session_user;
+            tb_profile_employee profile;
+            try
+            {
+                session_user = (tb_user)Session["user"];
+                if (session_user != null)
+                {
+                    if (session_user.is_active == false || session_user.is_verified == false)
+                    {
+                        ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                    }
+                    else
+                    {
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro => pro.tb_education_employee)
+                            .Include(pro => pro.tb_experience_employee)
+                            .Include(pro => pro.tb_external_url_employee)
+                            .Include(pro => pro.tb_languages_employee)
+                            .Include(pro => pro.tb_projects_employee)
+                            .Include(pro => pro.tb_skills_employee)
+                            .FirstOrDefault();
+                        if (profile == null)
+                        {
+                            return RedirectToAction("CreateProfile");
+                        }
+                        else
+                        {
+                            session_user.tb_profile_employee.Add(profile);
+                            return View(session_user);
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
+            return RedirectToAction("MyAccount", "User");
         }
     }
 }

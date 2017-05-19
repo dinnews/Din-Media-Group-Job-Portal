@@ -193,9 +193,6 @@
     <Compile Include="Models\tb_user.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_verification_code.cs">
-      <DependentUpon>DinJobPortal.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SODailymotionUpload\MainUploader.cs" />
     <Compile Include="SODailymotionUpload\OAuthResponse.cs" />
@@ -681,6 +678,7 @@
     <Content Include="Content\adminContent\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\adminContent\fonts\weathericons-regular-webfontd41d.eot" />
     <Content Include="Content\slider\js\.jshintrc" />
+    <Content Include="Models\DinJobPortal.edmx.sql" />
     <EntityDeploy Include="Models\DinJobPortal.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DinJobPortal.Designer.cs</LastGenOutput>
@@ -693,7 +691,6 @@
     <Content Include="Models\DinJobPortal.edmx.diagram">
       <DependentUpon>DinJobPortal.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\DinJobPortal.edmx.sql" />
     <Content Include="Models\DinJobPortal.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DinJobPortal.edmx</DependentUpon>

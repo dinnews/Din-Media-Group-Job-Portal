@@ -1,7 +1,10 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user 
+
+@{
     ViewBag.Title = "Job Portal || A Project of Din Media Group";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+
 <style>
     .profil-heading {
         color: #0079d6;
@@ -19,26 +22,27 @@
     <script>
         $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
     </script>
+    
     <!-- Titlebar
     ================================================== -->
     
-    <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
+    <div id="titlebar" class="resume photo-bg" style="background: url(/Jobseeker_cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture)">
         
         <div class="container">
             
             <div class="ten columns">
                 <div class="resume-titlebar">
                     <a href=".profile-upload" class="popup-with-zoom-anim">
-                        <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture">
+                        <img src="/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" alt="" title="Click to change Profile Picture">
                     </a> 
                  
                     <div class="resumes-list-content">
-                      <h4 style="color:white;">Danish Taimoor
+                      <h4 style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().first_name  @Model.tb_employee_registration_data.FirstOrDefault().last_name
                           <a href=".profile-edit" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>
-                        <span style="color:white;">UX/UI Graphic Designer</span>
+                        <span style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().job_title</span>
                          
                       </h4>
-                        <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i> Gulberg, Lahore</span>
+                        <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i>@Model.tb_employee_registration_data.FirstOrDefault().location</span>
                         <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
                         <div class="skills">
                             <span>JavaScript</span>
@@ -60,7 +64,7 @@
             </div>
         </div>
         <span style="float:right; bottom:10px; display:none;">
-            <a href=".profile-edit" class="button popup-with-zoom-anim">
+            <a href=".cover-upload" class="button popup-with-zoom-anim">
                 <i class="fa fa-upload">Edit Cover</i>
             </a>
         </span>
@@ -70,7 +74,7 @@
     ================================================== -->
     <div class="container">
         <!-- Recent Jobs -->
-        <div class="eight columns">
+        <div class="eight columns" id="summary_div">
             <div class="padding-right">
                 <span style="float:left;">
                     <strong class="margin-bottom-15 profil-heading">About Me</strong>
@@ -78,24 +82,18 @@
                 <span style="float:right;">
                     <a href=".aboutme-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
                 </span><br />
-                <p class="margin-reset">
-                    The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!
-                </p>
-                <br>
-                <p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
-                <ul class="list-1">
-                    <li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
-                    <li>Must be available to work required shifts including weekends, evenings and holidays.</li>
-                    <li>Must be able to perform repeated bending, standing and reaching.</li>
-                    <li>Must be able to occasionally lift up to 50 pounds</li>
-                </ul>
+                <div id="summary_text">
 
+                </div>
+                @Html.Raw(Server.HtmlDecode(Model.tb_profile_employee.FirstOrDefault().summary))
+                    
+                
             </div>
         </div>
 
 
         <!-- Widgets -->
-        <div class="eight columns">
+        <div class="eight columns" id="education_div">
             <span style="float:left;">
                 <strong class="margin-bottom-15 profil-heading">Education</strong>
             </span>
@@ -106,45 +104,29 @@
 
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_education_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_education_employee edu = Model.tb_profile_employee.FirstOrDefault().tb_education_employee.ElementAt(i);
+                    <dt>
                     <span style="float:right;">
                         <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span >
-                        <small class="date">2012 - 2015</small>
-                        <strong>Bsc Computing at College of Science Lahore</strong>
+                        <small class="date">@edu.education_start_date - @edu.education_end_date</small>
+                        <strong>@edu.degree_title @edu.field_of_study at @edu.institution_name</strong>
                     </span>
                     
                 </dt>
                 <dd>
-                    <p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
+                    @if(edu.education_notes!=null){
+
+                          <p> @edu.education_notes </p>
+                       }
+                   
                 </dd>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <small class="date">2006 - 2010</small>
-                        <strong>GCSE something at King Edward Lahore</strong>
-                    </span>
-                    
-                </dt>
-                <dd>
-                    <p>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</p>
-                </dd>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <small class="date">2004 - 2006</small>
-                        <strong>Test 2 at Test</strong>
-                    </span>
-                    
-                </dt>
-                <dd>
-                    <p>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</p>
-                </dd>
+                }
+                
+                
             </dl>
         </div>
 
@@ -159,47 +141,32 @@
 
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_experience_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_experience_employee exp = Model.tb_profile_employee.FirstOrDefault().tb_experience_employee.ElementAt(i);
+                    <dt>
                     <span style="float:right;">
                         <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span>
-                        <small class="date">Feb 2012 - Jan 2013</small><br />
-                        <small>.NET Developer</small>
-                        <strong>Microsoft pvt. Ltd.</strong>
+                        <small class="date">@if(exp.experience_start_date!=null){@exp.experience_start_date} - @if (@exp.experience_currently_working) { Write("Present"); }else if (exp.experience_end_date != null){@exp.experience_end_date}
+      
+                        </small><br />
+                        <small>@exp.job_title</small>
+                        <strong>@exp.company_name, @exp.company_location</strong>
                     </span>
                 </dt>
                 <dd>
-                    Experience at Microsoft was mind blowing and had great opportunity to learn and move forward.
+                    @if (exp.experience_notes != null)
+                    {
+
+                        <p> @exp.experience_notes </p>
+                    }
                 </dd>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <small class="date">Feb 2014 - Jan 2015</small><br />
-                        <small>.NET Developer</small>
-                        <strong>Texel Pvt. Ltd.</strong>
-                    </span>
                     
-                </dt>
-                <dd>
-                    Experience at Texel was mind blowing and had great opportunity to learn and move forward.
-                </dd>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <small class="date">Feb 2015 - Jan 2016</small><br />
-                        <small>Project Manager</small>
-                        <strong>PlanX pvt. Ltd.</strong>
-                    </span>
-                   
-                </dt>
-                <dd>
-                    Experience at Planx was mind blowing and had great opportunity to learn and move forward.
-                </dd>
+                }
+                
+                
             </dl>
         </div>
         <div class="eight columns">
@@ -213,36 +180,32 @@
 
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_projects_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_projects_employee proj = Model.tb_profile_employee.FirstOrDefault().tb_projects_employee.ElementAt(i);
+                    <dt>
                     <span style="float:right;">
                         <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span>
-                        <small class="date">Jun 2016 - Aug 2016</small> <br />
-                        <small>Magnetic character recognition From Cheques</small>
-                        <strong>Project Manager at College of Sceince Lahore</strong>
+                        <small class="date">@if (proj.project_start_date != null){@proj.project_start_date} - @if (@proj.project_currently_working) { Write("Present"); }else if (proj.project_end_date != null){@proj.project_end_date}</small> <br />
+                        <small>@proj.project_title</small>
+                        <strong>@proj.position</strong>
                     </span>
                     
                 </dt>
                 <dd>
-                    <p>Completeing this project was considered a high achievement for us</p>
-                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
+                   @if (proj.project_notes != null)
+                    {
+
+                     <p> @proj.project_notes </p>
+                     }
+                    <p> <a href="@if (proj.project_url.IsEmpty()) { Write("#"); }else{@proj.project_url}" target="_blank">Link of Project</a></p>
                 </dd>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <small class="date">Jun 2016 - Aug 2016</small> <br />
-                        <small>barcode recognition From Exam</small>
-                        <strong>Project Manager at Microsoft</strong>
-                    </span>
                     
-                </dt>
-                <dd>
-                    <p>Completeing this project was considered a high achievement for us</p>
-                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
-                </dd>
+
+                }
+                
 
             </dl>
         </div>
@@ -259,31 +222,19 @@
 
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_skills_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_skills_employee skill = Model.tb_profile_employee.FirstOrDefault().tb_skills_employee.ElementAt(i);
+                    <dt>
                     <span style="float:right;">
                         <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span>
-                        <strong class="date">Data Structure<small> - 3 years Experience</small></strong>
+                        <strong class="date">@skill.skill_name<small> - @skill.skill_experience</small></strong>
                     </span>
                 </dt>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <strong class="date">Image Processing<small> - Less than one year Experience</small></strong>
-                    </span>
-                </dt>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <strong class="date">Asp.NET MVC<small> - 5+ years Experience</small></strong>
-                    </span>
-                </dt>
-
+                }
+               
             </dl>
         </div>
         <div class="seven columns">
@@ -297,31 +248,21 @@
 
             <!-- Resume Table -->
             <dl class="resume-table">
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_languages_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_languages_employee language = Model.tb_profile_employee.FirstOrDefault().tb_languages_employee.ElementAt(i);
+                    <dt>
+                    <span style="float:right;">
+                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                    </span>
+                    <span>
+                        <strong class="date">@language.language_name<small> - @language.language_proficiency</small></strong>
+                    </span>
+                </dt>
+                    
+                }
 
-                <dt>
-                    <span style="float:right;">
-                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <strong class="date">Urdu<small> - Beginner</small></strong>
-                    </span>
-                </dt>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <strong class="date">Balochi<small> - Expert</small></strong>
-                    </span>
-                </dt>
-                <dt>
-                    <span style="float:right;">
-                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
-                    </span>
-                    <span>
-                        <strong class="date">Balochi<small> - Expert</small></strong>
-                    </span>
-                </dt>
+                
             </dl>
         </div>
 
@@ -344,14 +285,14 @@
             <h2>About Me</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateSummary" method="post">
                 <label for="about-me">
                     Summary:
-                    <textarea placeholder="Summary about you..">The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!</textarea>
+                    <textarea id="summary" name="summary" ></textarea>
                 </label>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
-                <button class="send">Save</button>
+                <button class="send" type="submit">Save</button>
             </form>
         </div>
     </div>
@@ -690,7 +631,7 @@
         </div>
         <div class="small-dialog-content">
             <form action="#" method="get">
-                Name
+                First Name
                 <input class="search-field" type="text" placeholder="e.g. John Doe" value="John Doe" />
                 Title
                 <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
@@ -720,7 +661,7 @@
                 </label>
                 <span class="fake-input" id="input-name">No file selected</span>
                 <div id="dvPreview" style="max-height:400px; overflow:hidden; cursor:pointer">
-                    <img  src="~/Content/userContent/images/blog-post-03.jpg" />
+                    <img src="~/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" />
                 </div>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
@@ -730,7 +671,31 @@
     </div>
 </div>
 
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cover-upload">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Change Picture</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="#" method="get">
+                <label class="upload-btn">
+                    <input type="file" multiple id="imageName" />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input" id="input-name">No file selected</span>
+                <div id="dvPreview" style="max-height:400px; overflow:hidden; cursor:pointer">
+                    <img src="~/Jobseeker_Cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
 <script language="javascript" type="text/javascript">
+    
+    
     function resizeImg(img, height, width) {
         img.height = height;
         img.width = width;
@@ -770,7 +735,7 @@
                                     reader.onload = function (e) {
                                         $("#dvPreview img").attr("src", e.target.result);
                                         
-                                        $('#input-name').text("2425905779930697125_n.jpg");
+                                        $('#input-name').text(name);
                                     }
                                     reader.readAsDataURL(file);
                                 } else {
@@ -794,6 +759,18 @@
     });
 </script>
 <script>
+    
+    var summary_height = $('#summary_div').height();
+    var education_height = $('#education_div').height();
+    if (education_height < summary_height) {
+        $('#education_div').height(summary_height);
+    }
+    else if (summary_height < education_height) {
+        $('#summary_div').height(education_height);
+    }
+       // alert(ab);
+       
+ 
     $(function () {
         var curDown = false,
             curYPos = 0,

@@ -187,6 +187,23 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         Session["type"] = user_from_db_to_verify.user_type;
                         return RedirectToAction("Home", "User");
                     }
+                    else if (user_from_db_to_verify.is_verified == false) 
+                    {
+                        if (Session["verification_code"]==null)
+                        {
+                            Random rnd = new Random();
+                            decimal randomNo = rnd.Next(10000000, 99999999);
+                            objUtility = new UtilityMethods.Utility();
+                            bool isEmailSent = objUtility.SendVerificationEmail(email, randomNo);
+                            if (isEmailSent)
+                            {
+                                Session["user_email"] = email;
+                                Session["verification_code"] = randomNo;
+                                //return RedirectToAction("VerifyEmail");
+                            }
+                        }
+                        
+                    }
                     ViewBag.SuccessMessage = "You have not verified your account. Check your email and verify";
                     return View("VerifyEmail");
                     
@@ -304,6 +321,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
        }
        public ActionResult DbError(Exception e)
        {
+           ViewBag.Exception = e.Message;
            return View();
        }
        public ActionResult GeneralError()

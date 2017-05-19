@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 
 namespace Din_Media_Group_Job_Portal.UtilityMethods
@@ -29,24 +30,38 @@ namespace Din_Media_Group_Job_Portal.UtilityMethods
         }
         public bool SendVerificationEmail(string email, decimal radomNo)
         {
-            try
-            {
-              
-                /*
-             * Verify Email and then send a verifiction this verifcation code to that email..
-             * if everything done successfully then return true otherwise return false
-             
-             */
+           
+
+                try
+                {
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                    mail.From = new MailAddress("dinnewsgroup@gmail.com");
+                    mail.To.Add(email);
+                    mail.Subject = "Verification Code";
+                    mail.Body = "Your verification code is <b>" + radomNo + "</b>";
+
+                    SmtpServer.Port = 587;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("dinnewsgroup@gmail.com", "dinnews123");
+
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.Send(mail);
+
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                    return false;
+                }
 
                 return true;
 
             }
-            catch (Exception e)
-            {
-                return false;
-            }
+           
             //return false;
         }
         
     }
-}
