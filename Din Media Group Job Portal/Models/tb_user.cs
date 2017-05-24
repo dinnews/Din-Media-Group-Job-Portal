@@ -19,6 +19,8 @@ namespace Din_Media_Group_Job_Portal.Models
             this.tb_employee_registration_data = new HashSet<tb_employee_registration_data>();
             this.tb_employer_registration_data = new HashSet<tb_employer_registration_data>();
             this.tb_profile_employee = new HashSet<tb_profile_employee>();
+            this.tb_department_employer = new HashSet<tb_department_employer>();
+            this.tb_profile_employer = new HashSet<tb_profile_employer>();
         }
     
         public int id { get; set; }
@@ -33,5 +35,7 @@ namespace Din_Media_Group_Job_Portal.Models
         public virtual ICollection<tb_employee_registration_data> tb_employee_registration_data { get; set; }
         public virtual ICollection<tb_employer_registration_data> tb_employer_registration_data { get; set; }
         public virtual ICollection<tb_profile_employee> tb_profile_employee { get; set; }
+        public virtual ICollection<tb_department_employer> tb_department_employer { get; set; }
+        public virtual ICollection<tb_profile_employer> tb_profile_employer { get; set; }
     }
 }

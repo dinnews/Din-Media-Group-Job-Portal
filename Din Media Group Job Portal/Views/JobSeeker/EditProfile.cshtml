@@ -4,7 +4,7 @@
     ViewBag.Title = "Job Portal || A Project of Din Media Group";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-
+<script type="text/javascript" src="/Scripts/userScripts/scripts/EditProfile.js"></script>
 <style>
     .profil-heading {
         color: #0079d6;
@@ -57,7 +57,7 @@
 
             <div class="six columns">
                 <div class="two-buttons">
-                    <a href=".profile-upload" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-upload"></i> Change Cover</a>
+                    <a href=".cover-upload" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-upload"></i> Change Cover</a>
 
                     <a href="#" class="button dark" style="width:150px;" ><i class="fa fa-print"></i> Print Profile</a>
                 </div>
@@ -90,7 +90,28 @@
                 
             </div>
         </div>
-
+        <!-- Widgets -->
+        @if (Model.tb_profile_employee.FirstOrDefault().video_id != null)
+        {
+             <div class="eight columns">
+                 <script src="https://api.dmcdn.net/all.js"></script>
+                 <div id="player" style="height:300px;"></div>
+                 <script>
+                     var player = DM.player(document.getElementById("player"), {
+                         video: "@Model.tb_profile_employee.FirstOrDefault().video_id",
+                         width: "100%",
+                         height: "100%",
+                         params: {
+                             autoplay: true,
+                             mute: true,
+                             "sharing-enable": false,
+                             "ui-logo": false
+                         }
+                     });
+                 </script>
+                </div>
+        }
+       
 
         <!-- Widgets -->
         <div class="eight columns" id="education_div">
@@ -98,7 +119,7 @@
                 <strong class="margin-bottom-15 profil-heading">Education</strong>
             </span>
             <span style="float:right;">
-                <a href=".education-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+                <a href=".education-add" class="popup-with-zoom-anim" onclick="AddEducation();"><i class="fa fa-plus-square"></i></a>
             </span><br />
             
 
@@ -107,9 +128,11 @@
                 @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_education_employee.Count; i++)
                 {
                     Din_Media_Group_Job_Portal.Models.tb_education_employee edu = Model.tb_profile_employee.FirstOrDefault().tb_education_employee.ElementAt(i);
+                   
                     <dt>
                     <span style="float:right;">
-                        <a href=".education-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                        
+                        <a href=".education-edit" class="popup-with-zoom-anim" onclick="UpdateEducation(@edu.id, @edu.profile_id, '@edu.institution_name' , '@edu.degree_title.ToString()', '@edu.field_of_study', '@edu.education_start_date.ToString()', '@edu.education_end_date.ToString()')"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span >
                         <small class="date">@edu.education_start_date - @edu.education_end_date</small>
@@ -136,7 +159,7 @@
                 <strong class="margin-bottom-15 profil-heading">Exprience</strong>
             </span>
             <span style="float:right;">
-                <a href=".experience-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+                <a href=".experience-add" class="popup-with-zoom-anim" onclick="AddExperience();"><i class="fa fa-plus-square"></i></a>
             </span><br />
 
             <!-- Resume Table -->
@@ -146,7 +169,7 @@
                     Din_Media_Group_Job_Portal.Models.tb_experience_employee exp = Model.tb_profile_employee.FirstOrDefault().tb_experience_employee.ElementAt(i);
                     <dt>
                     <span style="float:right;">
-                        <a href=".experience-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                        <a href=".experience-edit" class="popup-with-zoom-anim" onclick="UpdateExperience(@exp.id, @exp.profile_id, '@exp.company_name', '@exp.job_title', '@exp.experience_currently_working', '@exp.experience_start_date', '@exp.experience_end_date', '@exp.company_location', '@exp.experience_notes')"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span>
                         <small class="date">@if(exp.experience_start_date!=null){@exp.experience_start_date} - @if (@exp.experience_currently_working) { Write("Present"); }else if (exp.experience_end_date != null){@exp.experience_end_date}
@@ -175,7 +198,7 @@
                 <strong class="margin-bottom-15 profil-heading">Projects</strong>
             </span>
             <span style="float:right;">
-                <a href=".project-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+                <a href=".project-add" class="popup-with-zoom-anim" onclick="AddProject();"><i class="fa fa-plus-square"></i></a>
             </span><br />
 
             <!-- Resume Table -->
@@ -185,7 +208,7 @@
                     Din_Media_Group_Job_Portal.Models.tb_projects_employee proj = Model.tb_profile_employee.FirstOrDefault().tb_projects_employee.ElementAt(i);
                     <dt>
                     <span style="float:right;">
-                        <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                        <a href=".project-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil" onclick="UpdateProject(@proj.id, @proj.profile_id, '@proj.project_title', '@proj.position', '@proj.project_currently_working', '@proj.project_start_date', '@proj.project_end_date', '@proj.project_url', '@proj.project_notes')"></i></a>
                     </span>
                     <span>
                         <small class="date">@if (proj.project_start_date != null){@proj.project_start_date} - @if (@proj.project_currently_working) { Write("Present"); }else if (proj.project_end_date != null){@proj.project_end_date}</small> <br />
@@ -211,13 +234,13 @@
         </div>
 
         <!-- Languages and Skilss-->
-        <div class="nine columns">
+        <div class="eight columns">
 
             <span style="float:left;">
                 <strong class="margin-bottom-15 profil-heading">Skills</strong>
             </span>
             <span style="float:right;">
-                <a href=".skill-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+                <a href=".skill-add" class="popup-with-zoom-anim" onclick="AddSkill();"><i class="fa fa-plus-square"></i></a>
             </span><br />
 
             <!-- Resume Table -->
@@ -227,7 +250,7 @@
                     Din_Media_Group_Job_Portal.Models.tb_skills_employee skill = Model.tb_profile_employee.FirstOrDefault().tb_skills_employee.ElementAt(i);
                     <dt>
                     <span style="float:right;">
-                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                        <a href=".skill-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil" onclick="UpdateSkill(@skill.id, @skill.profile_id, '@skill.skill_name', '@skill.skill_experience')"></i></a>
                     </span>
                     <span>
                         <strong class="date">@skill.skill_name<small> - @skill.skill_experience</small></strong>
@@ -243,7 +266,7 @@
                 <strong class="margin-bottom-15 profil-heading">Languages</strong>
             </span>
             <span style="float:right;">
-                <a href=".language-add" class="popup-with-zoom-anim"><i class="fa fa-plus-square"></i></a>
+                <a href=".language-add" class="popup-with-zoom-anim" onclick="AddLanguage();"><i class="fa fa-plus-square"></i></a>
             </span><br />
 
             <!-- Resume Table -->
@@ -253,7 +276,7 @@
                     Din_Media_Group_Job_Portal.Models.tb_languages_employee language = Model.tb_profile_employee.FirstOrDefault().tb_languages_employee.ElementAt(i);
                     <dt>
                     <span style="float:right;">
-                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i></a>
+                        <a href=".language-edit" class="popup-with-zoom-anim"><i class="fa fa-pencil" onclick="UpdateLanguage(@language.id, @language.profile_id, '@language.language_name', '@language.language_proficiency')"></i></a>
                     </span>
                     <span>
                         <strong class="date">@language.language_name<small> - @language.language_proficiency</small></strong>
@@ -305,25 +328,26 @@
             <h2>Add Education</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateEducation" method="post">
+                <input class="search-field" type="hidden" id="education_request_add" name="education_request" />
                 Institution Name
-                <input class="search-field" type="text" placeholder="e.g. University of the Punjab" value="" />
+                <input class="search-field" type="text" placeholder="e.g. University of the Punjab"  name="institution_name" required />
                 Degree Title
-                <input class="search-field" type="text" placeholder="e.g. BS Hons" value="" />
+                <input class="search-field" type="text" placeholder="e.g. BS Hons"   name="degree_title" />
                 Field of Study
-                <input class="search-field" type="text" placeholder="e.g. Computer Science" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Computer Science"  name="field_of_study" required />
                 <span style="float:left; width:45%;">
                     From Year
-                    <input class="search-field" type="text" placeholder="e.g. 2107" value="" />
+                    <input class="search-field" type="text" placeholder="e.g. 2107" name="education_start_date" required />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date">
                     To Year (or expected)
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017"  name="education_end_date" required />
                 </span>
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="education_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
-                <button class="send">Save</button>
+                <button type="submit" class="send">Save</button>
             </form>
         </div>
     </div>
@@ -335,25 +359,28 @@
             <h2>Edit Education</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateEducation" method="post">
+                <input class="search-field" type="hidden" id="education_id" name="id" />
+                <input class="search-field" type="hidden" id="education_profile_id" name="profile_id" />
+                <input class="search-field" type="hidden" id="education_request" name="education_request" />
                 Institution Name
-                <input class="search-field" type="text" placeholder="e.g. University of the Punjab" value="University of the Punjab" />
+                <input class="search-field" type="text" placeholder="e.g. University of the Punjab" id="institution_name" name="institution_name" required />
                 Degree Title
-                <input class="search-field" type="text" placeholder="e.g. BS Hons" value="BS Hons" />
+                <input class="search-field" type="text" placeholder="e.g. BS Hons" value="BS Hons" id="degree_title" name="degree_title" />
                 Field of Study
-                <input class="search-field" type="text" placeholder="e.g. Computer Science" value="Computer Science" />
+                <input class="search-field" type="text" placeholder="e.g. Computer Science" value="Computer Science" id="field_of_study" name="field_of_study" required />
                 <span style="float:left; width:45%;">
                     From Year
-                    <input class="search-field" type="text" placeholder="e.g. 2107" value="2012" />
+                    <input class="search-field" type="text" placeholder="e.g. 2107" value="2012" id="education_start_date" name="education_start_date" required />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date">
                     To Year (or expected)
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="2016" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="2016" id="education_end_date" name="education_end_date" required />
                 </span>
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="education_notes" id="education_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
-                <button class="send">Save</button>
+                <button type="submit" class="send">Save</button>
             </form>
         </div>
     </div>
@@ -365,26 +392,28 @@
             <h2>Add Experience</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Jobseeker/UpdateExperience" method="post">
+                
+                <input class="search-field" type="hidden" id="experience_request_add" name="experience_request" />
                 Title
-                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" name="job_title" required />
                 Company
-                <input class="search-field" type="text" placeholder="e.g. Microsoft" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Microsoft" name="company_name" required />
                 Location
-                <input class="search-field" type="text" placeholder="e.g. Lahore" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Lahore" name="company_location" required />
                 <label for="current-job" id="current-job-checkbox">
-                    <input type="checkbox" class="search-field" /> I currently work here
+                    <input type="checkbox" class="search-field" name="exerience_currently_working"  /> I currently work here
                 </label>
                 <span style="float:left; width:45%;">
                     From
-                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" name="experience_start_date" required />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date" class="end-date-current-job">
                     To
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017" name="experience_end_date" />
                 </span>
 
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="experience_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
                 <button class="send">Save</button>
@@ -399,26 +428,29 @@
             <h2>Edit Experience</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Jobseeker/UpdateExperience" method="post">
+                <input class="search-field" type="hidden" id="experience_id" name="id" />
+                <input class="search-field" type="hidden" id="experience_profile_id" name="profile_id" />
+                <input class="search-field" type="hidden" id="experience_request_update" name="experience_request" />
                 Title
-                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
+                <input class="search-field" type="text" placeholder="e.g. Software Engineer" name="job_title" id="job_title" required />
                 Company
-                <input class="search-field" type="text" placeholder="e.g. Microsoft" value="Microsoft" />
+                <input class="search-field" type="text" placeholder="e.g. Microsoft" name="company_name" id="company_name" required />
                 Location
-                <input class="search-field" type="text" placeholder="e.g. Lahore" value="Lahore" />
+                <input class="search-field" type="text" placeholder="e.g. Lahore" name="company_location" id="company_location" required />
                 <label for="current-job" id="current-job-checkbox">
-                    <input type="checkbox" class="search-field" /> I currently work here
+                    <input type="checkbox" class="search-field" name="exerience_currently_working" id="exerience_currently_working" /> I currently work here
                 </label>
                 <span style="float:left; width:45%;">
                     From
-                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" value="June 2016" />
+                    <input type="text" class="form-last-name" placeholder="2017-02-22"  name="experience_start_date" id="experience_start_date" required />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date" class="end-date-current-job">
                     To
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="December 2016" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017" value="December 2016" name="experience_end_date" id="experience_end_date" />
                 </span>
 
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="experience_notes" id="experience_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
                 <button class="send">Save</button>
@@ -433,25 +465,26 @@
             <h2>Add Project</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Jobseeker/UpdateProject" method="post">
+                <input class="search-field" type="hidden" id="project_request_add" name="project_request" />
                 Title
-                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" name="project_title" />
                 Position
-                <input class="search-field" type="text" placeholder="e.g. Project Manager" value="" />
+                <input class="search-field" type="text" placeholder="e.g. Project Manager" name="position" />
                 URL
-                <input class="search-field" type="text" placeholder="e.g. https://" value="" />
+                <input class="search-field" type="text" placeholder="e.g. https://" name="project_url" />
                 <label for="current-job" id="current-job-checkbox">
-                    <input type="checkbox" class="search-field" /> Currently Working
+                    <input type="checkbox" class="search-field" name="project_currently_working" /> Currently Working
                 </label>
                 <span style="float:left; width:45%;">
                     From
-                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" />
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" name="project_start_date" />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date">
                     To
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017" name="project_end_date" />
                 </span>
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="project_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
                 <button class="send">Save</button>
@@ -466,25 +499,28 @@
             <h2>Edit Project</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Jobseeker/UpdateProject" method="post">
+                <input class="search-field" type="hidden" id="project_id" name="id" />
+                <input class="search-field" type="hidden" id="project_profile_id" name="profile_id" />
+                <input class="search-field" type="hidden" id="project_request_update" name="project_request" />
                 Title
-                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" value="Job Portal Desktop" />
+                <input class="search-field" type="text" placeholder="e.g. Job Portal Desktop" id="project_title" name="project_title" />
                 Position
-                <input class="search-field" type="text" placeholder="e.g. Project Manager" value="Project Manager" />
+                <input class="search-field" type="text" placeholder="e.g. Project Manager" id="position" name="position" />
                 URL
-                <input class="search-field" type="text" placeholder="e.g. https://" value="https://abc.com" />
+                <input class="search-field" type="text" placeholder="e.g. https://" name="project_url" id="project_url" />
                 <label for="current-job" id="current-job-checkbox">
-                    <input type="checkbox" class="search-field" /> Currently Working
+                    <input type="checkbox" class="search-field" name="project_currently_working" id="project_currently_working" /> Currently Working
                 </label>
                 <span style="float:left; width:45%;">
                     From
-                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="datepicker1" name="fromdate" value="June 2015"/>
+                    <input type="text" class="form-last-name" placeholder="2017-02-22" id="project_start_date" name="project_start_date" />
                 </span>
                 <span style="float: right; width: 45%;" id="end-date">
                     To
-                    <input class="search-field" type="text" placeholder="e.g. 2017" value="March 2017" />
+                    <input class="search-field" type="text" placeholder="e.g. 2017" id="project_end_date" name="project_end_date" />
                 </span>
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+                <textarea name="project_notes" id="project_notes" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
                 <button class="send">Save</button>
@@ -500,14 +536,15 @@
             <h2>Add Skill</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateSkill" method="post">
+                <input class="search-field" type="hidden" id="skill_request_add" name="skill_request" />
                 Add a new skill
-                <input class="search-field" type="text" placeholder="" value="" />
+                <input class="search-field" type="text" placeholder="" name="skill_name" />
                 Experience with this skill
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                <select class="form-control md-input" name="skill_experience" style="height:50px;">
                     <option value="">Select One</option>
                     <option value="1">Less than 1 Year</option>
-                    <option value="2">1 Year</option>
+                    <option value="2" selected>1 Year</option>
                     <option value="3">2 Years</option>
                     <option value="4">3 Years</option>
                     <option value="5">4 Years</option>
@@ -527,14 +564,17 @@
             <h2>Add Skill</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateSkill" method="post">
+                <input class="search-field" type="hidden" id="skill_id" name="id" />
+                <input class="search-field" type="hidden" id="skill_profile_id" name="profile_id" />
+                <input class="search-field" type="hidden" id="skill_request_update" name="skill_request" />
                 Add a new skill
-                <input class="search-field" type="text" placeholder="" value="OOP" />
+                <input class="search-field" type="text" placeholder="" id="skill_name" name="skill_name" />
                 Experience with this skill
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                <select class="form-control md-input" name="skill_experience" style="height:50px;">
                     <option value="">Select One</option>
                     <option value="1">Less than 1 Year</option>
-                    <option value="2" selected>1 Year</option>
+                    <option value="2">1 Year</option>
                     <option value="3">2 Years</option>
                     <option value="4">3 Years</option>
                     <option value="5">4 Years</option>
@@ -554,9 +594,10 @@
             <h2>Add Language</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
-                Add a new language
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+            <form action="/JobSeeker/UpdateLanguage" method="post">
+                <input class="search-field" type="hidden" id="language_request_add" name="language_request" />
+                Change language
+                <select class="form-control md-input" name="language_name" style="height:50px;" required>
                     <option value=""> Select One </option>
                     <option value="557"> Albanian </option>
                     <option value="553"> Arabic </option>
@@ -572,7 +613,7 @@
                     <option value="478"> Urdu </option>
                 </select>
                 Proficiency with this language
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                <select class="form-control md-input" name="language_proficiency" style="height:50px;" required>
                     <option value="">Select One</option>
                     <option value="1">Beginner</option>
                     <option value="2">Intermediate</option>
@@ -592,9 +633,12 @@
             <h2>Edit Language</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateLanguage" method="post">
+                <input class="search-field" type="hidden" id="language_id" name="id" />
+                <input class="search-field" type="hidden" id="language_profile_id" name="profile_id" />
+                <input class="search-field" type="hidden" id="language_request_update" name="language_request" />
                 Change language
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                <select class="form-control md-input" name="language_name" id="language_name" style="height:50px;" required>
                     <option value=""> Select One </option>
                     <option value="557"> Albanian </option>
                     <option value="553" selected> Arabic </option>
@@ -610,7 +654,7 @@
                     <option value="478"> Urdu </option>
                 </select>
                 Proficiency with this language
-                <select class="form-control md-input" name="workExp" id="workExp" style="height:50px;">
+                <select class="form-control md-input" name="language_proficiency" id="language_proficiency" style="height:50px;" required>
                     <option value="">Select One</option>
                     <option value="1" selected>Beginner</option>
                     <option value="2">Intermediate</option>
@@ -627,23 +671,21 @@
 <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-edit">
     <div id="">
         <div class="small-dialog-headline">
-            <h2>Edit Profile</h2>
+            <h2>Update Your Video </h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
-                First Name
-                <input class="search-field" type="text" placeholder="e.g. John Doe" value="John Doe" />
-                Title
-                <input class="search-field" type="text" placeholder="e.g. Software Engineer" value="Software Engineer" />
-                Location
-                <input class="search-field" type="text" placeholder="e.g. Lahore, Pakistan" value="Lahore, Pakistan" />
-                My Video Link
-                <input class="search-field" type="text" placeholder="e.g.http://" value="http://youtu.e/ghas" />
-               
-                <div class="clearfix"></div>
-                <div class="divider"></div>
-                <button class="send">Save</button>
-            </form>
+            <form action="/JobSeeker/UpdateVideo" method="post" enctype="multipart/form-data">
+                <label class="upload-btn">
+                    <input type="file" id="profile_video_upload" name="profile_video" accept="video/*" />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input" id="input-name-profile-video">No file selected</span>
+                <div id="dvPreview_profile_video" style="max-height:400px; overflow:hidden; cursor:pointer">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="divider"></div>
+                    <button class="send">Save</button>
+</form>
         </div>
     </div>
 </div>
@@ -651,16 +693,16 @@
 <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-upload">
     <div id="">
         <div class="small-dialog-headline">
-            <h2>Change Picture</h2>
+            <h2>Change Profile Picture</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/JobSeeker/UpdateProfilePicture" method="post" enctype="multipart/form-data">
                 <label class="upload-btn">
-                    <input type="file" multiple id="imageName" />
+                    <input type="file" id="profile_picture_upload" name="profile_picture" />
                     <i class="fa fa-upload"></i> Browse
                 </label>
-                <span class="fake-input" id="input-name">No file selected</span>
-                <div id="dvPreview" style="max-height:400px; overflow:hidden; cursor:pointer">
+                <span class="fake-input" id="input-name-profile-picture">No file selected</span>
+                <div id="dvPreview_profile" style="max-height:400px; overflow:hidden; cursor:pointer">
                     <img src="~/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" />
                 </div>
                 <div class="clearfix"></div>
@@ -674,16 +716,16 @@
 <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cover-upload">
     <div id="">
         <div class="small-dialog-headline">
-            <h2>Change Picture</h2>
+            <h2>Change Cover Photo</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Jobseeker/UpdateCover" method="post" enctype="multipart/form-data">
                 <label class="upload-btn">
-                    <input type="file" multiple id="imageName" />
+                    <input type="file" id="cover_picture_upload" name="cover_picture" />
                     <i class="fa fa-upload"></i> Browse
                 </label>
-                <span class="fake-input" id="input-name">No file selected</span>
-                <div id="dvPreview" style="max-height:400px; overflow:hidden; cursor:pointer">
+                <span class="fake-input" id="input-name-cover-picture">No file selected</span>
+                <div id="dvPreview_cover" style="max-height:400px; overflow:hidden; cursor:pointer">
                     <img src="~/Jobseeker_Cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture" />
                 </div>
                 <div class="clearfix"></div>
@@ -702,7 +744,55 @@
     }
     $(function () {
         
-        $("#imageName").change(function () {
+        $("#profile_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+                   
+                            $("#dvPreview_profile").html("");
+                            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                            if (regex.test(file.name.toLowerCase())) {
+                                /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                                    $("#dvPreview").show();
+                                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                                }
+                                else {*/
+                                if (typeof (FileReader) != "undefined") {
+                                    $("#dvPreview_profile").show();
+                                    $("#dvPreview_profile").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $("#dvPreview_profile img").attr("src", e.target.result);
+                                        
+                                        $('#input-name-profile-picture').text(name);
+                                    }
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    alert("This browser does not support FileReader.");
+                                }
+                                //}
+                            } else {
+                                alert("Please upload a valid image file.");
+                                contactForm.reset();
+                            }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        $("#cover_picture_upload").change(function () {
             var _URL = window.URL || window.webkitURL;
 
             var file, img;
@@ -720,41 +810,73 @@
                     size = size / 1024;
                     //alert(h+w);
                    
-                            $("#dvPreview").html("");
-                            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-                            if (regex.test(file.name.toLowerCase())) {
-                                /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
-                                    $("#dvPreview").show();
-                                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
-                                }
-                                else {*/
-                                if (typeof (FileReader) != "undefined") {
-                                    $("#dvPreview").show();
-                                    $("#dvPreview").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
-                                    var reader = new FileReader();
-                                    reader.onload = function (e) {
-                                        $("#dvPreview img").attr("src", e.target.result);
+                    $("#dvPreview_cover").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                            $("#dvPreview").show();
+                            $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                        }
+                        else {*/
+                        if (typeof (FileReader) != "undefined") {
+                            $("#dvPreview_cover").show();
+                            $("#dvPreview_cover").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $("#dvPreview_cover img").attr("src", e.target.result);
                                         
-                                        $('#input-name').text(name);
-                                    }
-                                    reader.readAsDataURL(file);
-                                } else {
-                                    alert("This browser does not support FileReader.");
-                                }
-                                //}
-                            } else {
-                                alert("Please upload a valid image file.");
-                                contactForm.reset();
+                                $('#input-name-cover-picture').text(name);
                             }
+                            reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
 
                 };
                 img.src = _URL.createObjectURL(file);
             }
-
-
-
-
-
+        });
+        $("#profile_video_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                name = this.files[0].name;
+    
+                    $("#dvPreview_profile_video").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.flv|.avi|.mkv|.wmv)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                            $("#dvPreview").show();
+                            $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                        }
+                        else {*/
+                        if (typeof (FileReader) != "undefined") {
+                            $("#dvPreview_profile_video").show();
+                            $("#dvPreview_profile_video").append("<video  controls='' autoplay='' name='media'><source src='' id='video_here' type='video/mp4'></video>");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                var $source = $('#video_here');
+                                $source[0].src = img;
+                                $source.parent()[0].load();
+                                $('#input-name-profile-video').text(name);
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        //contactForm.reset();
+                    }
+                img = _URL.createObjectURL(this.files[0]);
+            }
         });
     });
 </script>
@@ -775,21 +897,38 @@
         var curDown = false,
             curYPos = 0,
             curXPos = 0;
-        $('#dvPreview').mousemove(function (m) {
+        $('#dvPreview_cover').mousemove(function (m) {
             if (curDown === true) {
-                $('#dvPreview').scrollTop($('#dvPreview').scrollTop() + (curYPos - m.pageY));
-                $('#dvPreview').scrollLeft($('#dvPreview').scrollLeft() + (curXPos - m.pageX));
+                $('#dvPreview_cover').scrollTop($('#dvPreview_cover').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview_cover').scrollLeft($('#dvPreview_cover').scrollLeft() + (curXPos - m.pageX));
             }
         });
 
-        $('#dvPreview').mousedown(function (m) {
+        $('#dvPreview_cover').mousedown(function (m) {
             curDown = true;
             curYPos = m.pageY;
             curXPos = m.pageX;
         });
 
-        $('#dvPreview').mouseup(function () {
+        $('#dvPreview_cover').mouseup(function () {
             curDown = false;
         });
+        $('#dvPreview_profile').mousemove(function (m) {
+            if (curDown === true) {
+                $('#dvPreview_profile').scrollTop($('#dvPreview_profile').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview_profile').scrollLeft($('#dvPreview_profile').scrollLeft() + (curXPos - m.pageX));
+            }
+        });
+
+        $('#dvPreview_profile').mousedown(function (m) {
+            curDown = true;
+            curYPos = m.pageY;
+            curXPos = m.pageX;
+        });
+
+        $('#dvPreview_profile').mouseup(function () {
+            curDown = false;
+        });
+        
     })
 </script>

@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DinJobPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DinJobPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_department_employer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="profile_id" Type="int" />
+          <Property Name="department_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="no_of_employee_in_department" Type="int" Nullable="false" />
+          <Property Name="department_intro" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_education_employee">
           <Key>
             <PropertyRef Name="id" />
@@ -114,6 +125,19 @@
           <Property Name="video_id" Type="varchar(max)" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tb_profile_employer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="company_establishment_date" Type="date" Nullable="false" />
+          <Property Name="profile_picture" Type="varchar(max)" Nullable="false" />
+          <Property Name="cover_picture" Type="varchar(max)" Nullable="false" />
+          <Property Name="video_id" Type="varchar(max)" />
+          <Property Name="summary" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_projects_employee">
           <Key>
             <PropertyRef Name="id" />
@@ -150,6 +174,18 @@
           <Property Name="last_change_password" Type="varchar" MaxLength="100" />
           <Property Name="last_login" Type="datetime" />
         </EntityType>
+        <Association Name="FK_tb_department_employer_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_department_employer" Type="Self.tb_department_employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_department_employer">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_education_employee_tb_profile_employee">
           <End Role="tb_profile_employee" Type="Self.tb_profile_employee" Multiplicity="1" />
           <End Role="tb_education_employee" Type="Self.tb_education_employee" Multiplicity="*" />
@@ -240,6 +276,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_profile_employer_tb_user">
+          <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+          <End Role="tb_profile_employer" Type="Self.tb_profile_employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_profile_employer">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_projects_employee_tb_profile_employee">
           <End Role="tb_profile_employee" Type="Self.tb_profile_employee" Multiplicity="1" />
           <End Role="tb_projects_employee" Type="Self.tb_projects_employee" Multiplicity="*" />
@@ -265,6 +313,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DinJobPortalModelStoreContainer">
+          <EntitySet Name="tb_department_employer" EntityType="Self.tb_department_employer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_education_employee" EntityType="Self.tb_education_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_employee_registration_data" EntityType="Self.tb_employee_registration_data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_employer_registration_data" EntityType="Self.tb_employer_registration_data" Schema="dbo" store:Type="Tables" />
@@ -274,9 +323,14 @@
           <EntitySet Name="tb_languages_employee" EntityType="Self.tb_languages_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_master_masters" EntityType="Self.tb_master_masters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_profile_employee" EntityType="Self.tb_profile_employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_profile_employer" EntityType="Self.tb_profile_employer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_projects_employee" EntityType="Self.tb_projects_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_skills_employee" EntityType="Self.tb_skills_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_department_employer_tb_user" Association="Self.FK_tb_department_employer_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_department_employer" EntitySet="tb_department_employer" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_education_employee_tb_profile_employee" Association="Self.FK_tb_education_employee_tb_profile_employee">
             <End Role="tb_profile_employee" EntitySet="tb_profile_employee" />
             <End Role="tb_education_employee" EntitySet="tb_education_employee" />
@@ -305,6 +359,10 @@
             <End Role="tb_user" EntitySet="tb_user" />
             <End Role="tb_profile_employee" EntitySet="tb_profile_employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_profile_employer_tb_user" Association="Self.FK_tb_profile_employer_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_profile_employer" EntitySet="tb_profile_employer" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_projects_employee_tb_profile_employee" Association="Self.FK_tb_projects_employee_tb_profile_employee">
             <End Role="tb_profile_employee" EntitySet="tb_profile_employee" />
             <End Role="tb_projects_employee" EntitySet="tb_projects_employee" />
@@ -314,8 +372,7 @@
             <End Role="tb_skills_employee" EntitySet="tb_skills_employee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DinJobPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -481,6 +538,8 @@
           <NavigationProperty Name="tb_employee_registration_data" Relationship="Self.FK_tb_employee_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employee_registration_data" />
           <NavigationProperty Name="tb_employer_registration_data" Relationship="Self.FK_tb_employer_registration_data_tb_user" FromRole="tb_user" ToRole="tb_employer_registration_data" />
           <NavigationProperty Name="tb_profile_employee" Relationship="Self.FK_tb_profile_employee_tb_user" FromRole="tb_user" ToRole="tb_profile_employee" />
+          <NavigationProperty Name="tb_department_employer" Relationship="DinJobPortalModel.FK_tb_department_employer_tb_user" FromRole="tb_user" ToRole="tb_department_employer" />
+          <NavigationProperty Name="tb_profile_employer" Relationship="DinJobPortalModel.FK_tb_profile_employer_tb_user" FromRole="tb_user" ToRole="tb_profile_employer" />
         </EntityType>
         <Association Name="FK_tb_education_employee_tb_profile_employee">
           <End Role="tb_profile_employee" Type="Self.tb_profile_employee" Multiplicity="1" />
@@ -645,7 +704,67 @@
             <End Role="tb_profile_employee" EntitySet="tb_profile_employee" />
             <End Role="tb_skills_employee" EntitySet="tb_skills_employee" />
           </AssociationSet>
+          <EntitySet Name="tb_department_employer" EntityType="DinJobPortalModel.tb_department_employer" />
+          <EntitySet Name="tb_profile_employer" EntityType="DinJobPortalModel.tb_profile_employer" />
+          <AssociationSet Name="FK_tb_department_employer_tb_user" Association="DinJobPortalModel.FK_tb_department_employer_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_department_employer" EntitySet="tb_department_employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_profile_employer_tb_user" Association="DinJobPortalModel.FK_tb_profile_employer_tb_user">
+            <End Role="tb_user" EntitySet="tb_user" />
+            <End Role="tb_profile_employer" EntitySet="tb_profile_employer" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tb_department_employer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="profile_id" Type="Int32" />
+          <Property Name="department_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="no_of_employee_in_department" Type="Int32" Nullable="false" />
+          <Property Name="department_intro" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_user" Relationship="DinJobPortalModel.FK_tb_department_employer_tb_user" FromRole="tb_department_employer" ToRole="tb_user" />
+        </EntityType>
+        <EntityType Name="tb_profile_employer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="company_establishment_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="profile_picture" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cover_picture" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="video_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="summary" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_user" Relationship="DinJobPortalModel.FK_tb_profile_employer_tb_user" FromRole="tb_profile_employer" ToRole="tb_user" />
+        </EntityType>
+        <Association Name="FK_tb_department_employer_tb_user">
+          <End Type="DinJobPortalModel.tb_user" Role="tb_user" Multiplicity="1" />
+          <End Type="DinJobPortalModel.tb_department_employer" Role="tb_department_employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_department_employer">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_profile_employer_tb_user">
+          <End Type="DinJobPortalModel.tb_user" Role="tb_user" Multiplicity="1" />
+          <End Type="DinJobPortalModel.tb_profile_employer" Role="tb_profile_employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_profile_employer">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -804,6 +923,32 @@
                 <ScalarProperty Name="is_verified" ColumnName="is_verified" />
                 <ScalarProperty Name="last_change_password" ColumnName="last_change_password" />
                 <ScalarProperty Name="last_login" ColumnName="last_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_department_employer">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_department_employer">
+              <MappingFragment StoreEntitySet="tb_department_employer">
+                <ScalarProperty Name="department_intro" ColumnName="department_intro" />
+                <ScalarProperty Name="no_of_employee_in_department" ColumnName="no_of_employee_in_department" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_profile_employer">
+            <EntityTypeMapping TypeName="DinJobPortalModel.tb_profile_employer">
+              <MappingFragment StoreEntitySet="tb_profile_employer">
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="video_id" ColumnName="video_id" />
+                <ScalarProperty Name="cover_picture" ColumnName="cover_picture" />
+                <ScalarProperty Name="profile_picture" ColumnName="profile_picture" />
+                <ScalarProperty Name="company_establishment_date" ColumnName="company_establishment_date" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

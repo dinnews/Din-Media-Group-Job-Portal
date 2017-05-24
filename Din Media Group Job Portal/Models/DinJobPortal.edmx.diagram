@@ -26,6 +26,10 @@
         <AssociationConnector Association="DinJobPortalModel.FK_tb_profile_employee_tb_user" ManuallyRouted="false" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_projects_employee_tb_profile_employee" ManuallyRouted="false" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_skills_employee_tb_profile_employee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_department_employer" Width="1.875" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_profile_employer" Width="1.875" PointX="3" PointY="22.625" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_department_employer_tb_user" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_profile_employer_tb_user" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

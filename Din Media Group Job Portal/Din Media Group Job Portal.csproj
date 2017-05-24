@@ -157,6 +157,9 @@
       <DependentUpon>DinJobPortal.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjectConstants.cs" />
+    <Compile Include="Models\tb_department_employer.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_education_employee.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -184,6 +187,9 @@
     <Compile Include="Models\tb_profile_employee.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tb_profile_employer.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_projects_employee.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -200,6 +206,7 @@
     <Compile Include="SODailymotionUpload\UploadedResponse.cs" />
     <Compile Include="SODailymotionUpload\UploadRequestResponse.cs" />
     <Compile Include="SODailymotionUpload\UploadResponse.cs" />
+    <Compile Include="UtilityMethods\Master_Master.cs" />
     <Compile Include="UtilityMethods\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -768,6 +775,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\userScripts\scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\userScripts\scripts\custom.js" />
+    <Content Include="Scripts\userScripts\scripts\EditProfile.js" />
     <Content Include="Scripts\userScripts\scripts\headroom.min.js" />
     <Content Include="Scripts\userScripts\scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\userScripts\scripts\jquery.counterup.min.js" />
