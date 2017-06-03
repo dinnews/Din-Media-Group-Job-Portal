@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.model_for_browse_jobs
+@{
     ViewBag.Title = "BrowseJob";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -71,85 +72,34 @@
             </span>
             <div class="clearfix"></div>
             <ul class="job-list full">
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/JobDetails")">
-                        <img src="~/Content/userContent/images/job-list-logo-01.png" alt="">
+                @for(int i=0; i<Model.list_of_jobs.Count; i++)
+                {
+                    var current_job= Model.list_of_jobs.ElementAt(i);
+                    //var employer = Model.employers_profile_list.Find(pro=>pro.user_id==current_job.user_id);
+                    var employer = current_job.tb_user.tb_profile_employer.FirstOrDefault();
+                    var registration = current_job.tb_user.tb_employer_registration_data.FirstOrDefault();
+                    Din_Media_Group_Job_Portal.Models.tb_jobs temp_job = new Din_Media_Group_Job_Portal.Models.tb_jobs();
+                    temp_job.id = current_job.id; 
+                    <li>
+                    <a href="@Url.Action("JobDetails", "JobSeeker", temp_job)">
+                        <img src="~/Employer_Profile_images/@employer.profile_picture" alt="">
                         <div class="job-list-content">
-                            <h4>Marketing Coordinator - SEO / SEM Experience <span class="full-time">Full-Time</span></h4>
+                            <h4>@current_job.job_title <span class="full-time">@current_job.job_type</span></h4>
                             <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> King</span>
-                                <span><i class="fa fa-map-marker"></i> Lahore</span>
-                                <span><i class="fa fa-money"></i>Rs. 60K - 80K</span>
+                                <span><i class="fa fa-briefcase"></i> @registration.company_name</span>
+                                <span><i class="fa fa-map-marker"></i> @current_job.job_location</span>
+                                @if(current_job.hide_salary!=true)
+                                {
+                                      <span><i class="fa fa-money"></i>Rs. @current_job.salary_from - @current_job.salary_to</span>
+                                }
+                                
                             </div>
-                            <p>The SEO/SEM Specialist will work with industry leaders and top retailers to define and deliver best practices through innovative SEO methodologies.</p>
+                            <p>@Html.Raw(Server.HtmlDecode((current_job.job_description.Length > 150 ? current_job.job_description.Substring(0, 150) + "..." : current_job.job_description)))</p>
                         </div>
                     </a>
                     <div class="clearfix"></div>
                 </li>
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/JobDetails")">
-                        <img src="~/Content/userContent/images/job-list-logo-02.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Core PHP Developer for Site Maintenance <span class="part-time">Part-Time</span></h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> Cubico</span>
-                                <span><i class="fa fa-map-marker"></i> Lahore</span>
-                                <span><i class="fa fa-money"></i>Rs. 30K - 80K</span>
-                            </div>
-                            <p>Beginning your career as a PHP Developer will give you a strong foundation that can make you a vital member of the front line team!</p>
-                        </div>
-                    </a>
-                    <div class="clearfix"></div>
-                </li>
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/JobDetails")">
-                        <img src="~/Content/userContent/images/job-list-logo-03.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Restaurant Team Member - Crew <span class="full-time">Full-Time</span></h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-map-marker"></i> Lahore</span>
-                                <span><i class="fa fa-money"></i>Rs. 60K - 80K</span>
-                            </div>
-                            <p>Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!</p>
-                        </div>
-                    </a>
-                    <div class="clearfix"></div>
-                </li>
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/JobDetails")">
-                        <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
-                        <div class="job-list-content">
-                            <h4>Power Systems User Experience Designer  <span class="internship">Internship</span></h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> Hexagon</span>
-                                <span><i class="fa fa-map-marker"></i> Faisalabad</span>
-                                <span><i class="fa fa-money"></i>Rs. 20K - 30K</span>
-                            </div>
-                            <p>Beginning your career with us will give you a strong foundation Power System user experience that can make you a vital member of the front line team!</p>
-                        </div>
-                    </a>
-                    <div class="clearfix"></div>
-                </li>
-
-                <li>
-                    <a href="@Url.Content("~/JobSeeker/JobDetails")">
-                        <img src="~/Content/userContent/images/job-list-logo-04.png" alt="">
-                        <div class="job-list-content">
-                            <h4>iPhone / Android Music App Development <span class="full-time">Full Time</span></h4>
-                            <div class="job-icons">
-                                <span><i class="fa fa-briefcase"></i> Mates</span>
-                                <span><i class="fa fa-map-marker"></i> Lahore</span>
-                                <span><i class="fa fa-money"></i>Rs. 60K - 80K</span>
-                            </div>
-                            <p> Candidate should be experienced in Android App development, REST APIs and knowledge of Android Development environments.</p>
-                        </div>
-                    </a>
-                    <div class="clearfix"></div>
-                </li>
+                }
             </ul>
             <div class="clearfix"></div>
 

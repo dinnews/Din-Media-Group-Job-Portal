@@ -11,17 +11,26 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tb_experience_employee
     {
         public int id { get; set; }
         public int profile_id { get; set; }
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Job title must contain atleast 1 Alphabets")]
         public string job_title { get; set; }
+        
+        
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Location must contain atleast 1 Alphabets")]
         public string company_location { get; set; }
         public bool experience_currently_working { get; set; }
         public Nullable<System.DateTime> experience_start_date { get; set; }
         public Nullable<System.DateTime> experience_end_date { get; set; }
         public string experience_notes { get; set; }
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Name must contain atleast 1 Alphabets")]
         public string company_name { get; set; }
     
         public virtual tb_profile_employee tb_profile_employee { get; set; }

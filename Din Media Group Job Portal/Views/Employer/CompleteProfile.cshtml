@@ -44,80 +44,85 @@
     <div class="container">
         <!-- Submit Page -->
         <div class="sixteen columns">
-            <div class="submit-page">
-                
-                <!-- no of employees -->
-                <div class="form">
-                    <h5>Number of Employees</h5>
-                    <input class="search-field" type="number" placeholder="e.g. 10" value="" />
-                </div>
-                
-                <!-- Title -->
-                <div class="form">
-                    <h5>Date of Establishment of your company</h5>
-                    <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" id="company-establishment" />
-                </div>
-                
-                <!-- Logo -->
-                <div class="form">
-                    <h5>Logo <span></span></h5>
-                    <label class="upload-btn">
-                        <input type="file" multiple />
-                        <i class="fa fa-upload"></i> Browse
-                    </label>
-                    <span class="fake-input">No file selected</span>
-                </div>
-                <div class="form">
-                    <h5>Cover image <span>(optional)</span></h5>
-                    <label class="upload-btn">
-                        <input type="file" multiple />
-                        <i class="fa fa-upload"></i> Browse
-                    </label>
-                    <span class="fake-input">No file selected</span>
-                </div>
-
-                <!-- Video -->
-               
-                <div class="form">
-                    <h5>Upload Video <span>(optional)</span></h5>
-                    <label class="upload-btn">
-                        <input type="file" multiple />
-                        <i class="fa fa-upload"></i> Browse
-                    </label>
-                    <span class="fake-input">No file selected</span>
-                </div>
-
-                <!-- Description -->
-                <div class="form">
-                    <h5>Summary (About company)</h5>
-                    <textarea class="" name="summary" cols="40" rows="6" id="summary" spellcheck="true"></textarea>
-                </div>
-
-
-                <!-- Department -->
-                <div class="form with-line">
-                    <h5>Add Department <span>(optional)</span></h5>
-                    <div class="form-inside">
-
-                        <!-- Add Education -->
-                        <div class="form boxed box-to-clone education-box">
-                            <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-                            Department Name
-                            <input class="search-field" type="text" placeholder="e.g. HR" value="" />
-                            Number of Employees in that Department
-                            <input class="search-field" type="number" placeholder="e.g. 4" value="" />
-                            Deprtment Introduction
-                            <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Write about Department"></textarea>
-                        </div>
-
-                        <a href="#" class="button gray add-education add-box"><i class="fa fa-plus-circle"></i> Add Department</a>
+            <form action="/Employer/CreateProfileFirstTime" method="post" enctype="multipart/form-data">
+                <div class="submit-page">
+                    <div class="form">
+                        <h5>Company Location</h5>
+                        <input class="search-field" type="text" placeholder="e.g. Lahore, Pakistan" value="" id="company_location" name="company_location" />
                     </div>
-                </div>
+                    <!-- no of employees -->
+                    <div class="form">
+                        <h5>Number of Employees</h5>
+                        <input class="search-field" type="number" placeholder="e.g. 10" value="" name="num_of_employees" />
+                    </div>
 
-                <div class="divider margin-top-0 padding-reset"></div>
-                <a href="#" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>
+                    <!-- Title -->
+                    <div class="form">
+                        <h5>Date of Establishment of your company</h5>
+                        <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" id="company-establishment" name="company_establishment_date" />
+                    </div>
+
+                    <!-- Logo -->
+                    <div class="form">
+                        <h5>Logo <span></span></h5>
+                        <label class="upload-btn">
+                            <input type="file" name="profile_picture" />
+                            <i class="fa fa-upload"></i> Browse
+                        </label>
+                        <span class="fake-input">No file selected</span>
+                    </div>
+                    <div class="form">
+                        <h5>Cover image <span>(optional)</span></h5>
+                        <label class="upload-btn">
+                            <input type="file" name="cover_picture" />
+                            <i class="fa fa-upload"></i> Browse
+                        </label>
+                        <span class="fake-input">No file selected</span>
+                    </div>
+
+                    <!-- Video
+
+            <div class="form">
+                <h5>Upload Video <span>(optional)</span></h5>
+                <label class="upload-btn">
+                    <input type="file" multiple />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input">No file selected</span>
             </div>
-        </div>
+                 -->
+                    <!-- Description -->
+                    <div class="form">
+                        <h5>Summary (About company)</h5>
+                        <textarea class="" name="summary" cols="40" rows="6" id="summary" spellcheck="true"></textarea>
+                    </div>
+
+
+                    <!-- Department -->
+                    <div class="form with-line">
+                        <h5>Add Department <span>(optional)</span></h5>
+                        <div class="form-inside">
+
+                            <!-- Add Education -->
+                            <div class="form boxed box-to-clone education-box">
+                                <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+                                Department Name
+                                <input class="search-field" type="text" placeholder="e.g. HR" value="" name="department_name" />
+                                Number of Employees in that Department
+                                <input class="search-field" type="number" placeholder="e.g. 4" value="" name="no_of_employee_in_department" />
+                                Deprtment Introduction
+                                <textarea name="department_intro" id="desc" cols="30" rows="10" placeholder="Write about Department"></textarea>
+                            </div>
+
+                            <a href="#" class="button gray add-education add-box"><i class="fa fa-plus-circle"></i> Add Department</a>
+                        </div>
+                    </div>
+
+                    <div class="divider margin-top-0 padding-reset"></div>
+                    <button type="submit" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+            </form>
+</div>
     </div>
 
     <!-- Footer

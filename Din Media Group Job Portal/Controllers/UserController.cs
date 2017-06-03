@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 
 namespace Din_Media_Group_Job_Portal.Controllers
@@ -21,7 +22,22 @@ namespace Din_Media_Group_Job_Portal.Controllers
         
         public ActionResult Home()
         {
-            return View();
+            
+            //tb_user session_user;
+            model_for_browse_jobs view_model = new model_for_browse_jobs();
+            try
+            {
+                view_model.list_of_jobs = db.tb_jobs.Include(pro => pro.tb_user).Include(j => j.tb_user.tb_profile_employer).Include(j => j.tb_user.tb_employer_registration_data).ToList();
+
+                return View(view_model);
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
         }
 
         #region Signup, Validation and verification

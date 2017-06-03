@@ -11,12 +11,15 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tb_skills_employee
     {
         public int id { get; set; }
         public int profile_id { get; set; }
+        [Required]
         public string skill_name { get; set; }
+        [Required]
         public string skill_experience { get; set; }
     
         public virtual tb_profile_employee tb_profile_employee { get; set; }

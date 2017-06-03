@@ -179,11 +179,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                    if (profile_picture != null && profile_picture.ContentLength > 0)
                        try
                        {
-                           Guid guidValue = Guid.NewGuid();
-                           MD5 md5 = MD5.Create();
-                           Guid hashed = new Guid(md5.ComputeHash(guidValue.ToByteArray()));
-
-                           string new_profile_name = hashed.ToString() + Path.GetExtension(profile_picture.FileName);
+                           string new_profile_name = existing_user_data.email + Path.GetExtension(profile_picture.FileName);
 
                            string path = Path.Combine(Server.MapPath("~/Jobseeker_Profile_images"), new_profile_name );
                            profile_picture.SaveAs(path);
@@ -200,11 +196,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                    if (cover_picture != null && cover_picture.ContentLength > 0)
                        try
                        {
-                           Guid guidValue = Guid.NewGuid();
-                           MD5 md5 = MD5.Create();
-                           Guid hashed = new Guid(md5.ComputeHash(guidValue.ToByteArray()));
-
-                           string new_cover_name = hashed.ToString() + Path.GetExtension(cover_picture.FileName);
+                           string new_cover_name = existing_user_data.email + Path.GetExtension(cover_picture.FileName);
                            string path = Path.Combine(Server.MapPath("~/Jobseeker_Cover_images"), new_cover_name );
                            cover_picture.SaveAs(path);
                            employee_profile.cover_picture = new_cover_name;
@@ -220,6 +212,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                    if (video != null && video.ContentLength > 0)
                        try
                        {
+                           System.Net.ServicePointManager.Expect100Continue = false;
                            MainUploader up = new MainUploader();
                            string video_id = up.startUplaod(video);
                            employee_profile.video_id = video_id;
@@ -236,25 +229,22 @@ namespace Din_Media_Group_Job_Portal.Controllers
                }
 
                employee_profile.user_id = existing_user_data.id;
-                List<tb_education_employee> employee_education_list = new  List<tb_education_employee>();
-                List<tb_experience_employee> employee_experience_list = new  List<tb_experience_employee>();
-                List<tb_external_url_employee> employee_url_list = new  List<tb_external_url_employee>();
-                List<tb_skills_employee> employee_skill_list = new  List<tb_skills_employee>();
-                List<tb_projects_employee> employee_project_list = new  List<tb_projects_employee>();
-                List<tb_languages_employee> employee_languages_list = new  List<tb_languages_employee>();
-                employee_experience_list.Add(experience);
-                employee_profile.tb_experience_employee = employee_experience_list;
-               employee_education_list.Add(education);
+               List<tb_skills_employee> employee_skill_list = objUtility.GetSkillList(existing_user_data.id, Request["skill_name"], Request["skill_experience"]);
+               List<tb_projects_employee> employee_project_list = objUtility.GetProjectList(existing_user_data.id, Request["project_title"], Request["position"], Request["project_url"], Request["project_currently_working"], Request["project_start_date"], Request["project_end_date"], Request["project_notes"]);
+               List<tb_experience_employee> employee_experience_list = objUtility.GetExperienceList(existing_user_data.id, Request["job_title"], Request["company_location"], Request["experience_currently_working"], Request["experience_start_date"], Request["experience_end_date"], Request["experience_notes"], Request["company_name"]);
+               List<tb_education_employee> employee_education_list = objUtility.GetEducationList(existing_user_data.id, Request["degree_title"], Request["institution_name"], Request["field_of_study"], Request["education_start_date"], Request["education_end_date"], Request["education_notes"]);
+               List<tb_external_url_employee> employee_url_list = objUtility.GetUrlList(existing_user_data.id, Request["url_name"], Request["url"]);
+               List<tb_languages_employee> employee_languages_list = objUtility.GetLanguageList(existing_user_data.id, Request["language_name"], Request["language_proficiency"]);
+
                employee_profile.tb_education_employee = employee_education_list;
-               employee_url_list.Add(employee_urls);
-               employee_profile.tb_external_url_employee= employee_url_list;
-               employee_skill_list.Add(skills);
-               employee_profile.tb_skills_employee = employee_skill_list;
-               employee_project_list.Add(projects);
-               employee_profile.tb_projects_employee = employee_project_list;
-               employee_languages_list.Add(languages);
+               employee_profile.tb_experience_employee = employee_experience_list;
+               employee_profile.tb_external_url_employee = employee_url_list;
                employee_profile.tb_languages_employee = employee_languages_list;
+               employee_profile.tb_projects_employee = employee_project_list;
+               employee_profile.tb_skills_employee = employee_skill_list;
+
                TryValidateModel(employee_profile);
+              
                 if (ModelState.IsValid)
                 {
                     try
@@ -270,7 +260,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         objUtility = new UtilityMethods.Utility();
                         objUtility.SaveException_for_ExceptionLog(e);
                         ViewBag.Exception = e.Message;
-                        return View("DbError");
+                        return RedirectToAction("DbError", "User", e);
                     }
                 }
                 
@@ -280,7 +270,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 objUtility = new UtilityMethods.Utility();
                 objUtility.SaveException_for_ExceptionLog(e);
                 ViewBag.Exception = e.Message;
-                return View("Error");
+                return RedirectToAction("DbError", "User", e);
             }
             return View();
         }
@@ -903,13 +893,166 @@ namespace Din_Media_Group_Job_Portal.Controllers
         #endregion
         public ActionResult BrowseJob()
         {
-            return View();
+            List<tb_master_masters> master = Master_Master.master_list;
+            //tb_user session_user;
+            model_for_browse_jobs view_model = new model_for_browse_jobs();
+            try
+            {
+
+                if (master.Find(e => e.id == 10).visibility == false)
+                {
+                    return RedirectToAction("Home", "User");
+                }
+                view_model.list_of_jobs = db.tb_jobs.Include(j => j.tb_user).Include(j=>j.tb_user.tb_profile_employer).Include(j=>j.tb_user.tb_employer_registration_data).ToList();
+                
+                return View(view_model);
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
         }
-        public ActionResult JobDetails()
+        public ActionResult JobDetails(int id)
         {
-            return View();
+            List<tb_master_masters> master = Master_Master.master_list;
+            tb_user session_user;
+            tb_profile_employee profile;
+            try
+            {
+                
+                session_user = (tb_user)Session["user"];
+                if(master.Find(e=>e.id==10).visibility==false)
+                {
+                    return RedirectToAction("Home", "User");
+                }
+                if (session_user != null)
+                {
+                    if (session_user.is_active == false || session_user.is_verified == false)
+                    {
+                        ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                        return RedirectToAction("VerifyEmail", "User");
+                    }
+                    else
+                    {
+                        // Logic for CVs////////////////
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro => pro.tb_education_employee)
+                            .Include(pro => pro.tb_experience_employee)
+                            .Include(pro => pro.tb_external_url_employee)
+                            .Include(pro => pro.tb_languages_employee)
+                            .Include(pro => pro.tb_projects_employee)
+                            .Include(pro => pro.tb_skills_employee)
+                            .Include(pro=>pro.tb_cvs_employee)
+                            .FirstOrDefault();
+                        if (profile == null)
+                        {
+                            return RedirectToAction("CreateProfile");
+                        }
+                        else if(profile.tb_cvs_employee.Count<1)
+                        {
+                            return RedirectToAction("ManageResume");
+                        }
+                        else
+                        {
+                            session_user.tb_profile_employee.Clear();
+                            session_user.tb_profile_employee.Add(profile);
+                            tb_jobs clicked_job;
+                            clicked_job = db.tb_jobs.Include(j => j.tb_user).Where(j => j.id == id).Include(j => j.tb_apply_job).Include(j => j.tb_user.tb_profile_employer).Include(j => j.tb_user.tb_employer_registration_data).FirstOrDefault();
+                            return View(clicked_job);
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
+            return RedirectToAction("MyAccount", "User");
+           
         }
-       
+       public ActionResult ApplyforJob(tb_apply_job application)
+        {
+            List<tb_master_masters> master = Master_Master.master_list;
+            tb_user session_user;
+            tb_profile_employee profile;
+            try
+            {
+
+                session_user = (tb_user)Session["user"];
+                if (master.Find(e => e.id == 10).visibility == false)
+                {
+                    return RedirectToAction("Home", "User");
+                }
+                if (session_user != null)
+                {
+                    if (session_user.is_active == false || session_user.is_verified == false)
+                    {
+                        ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                        return RedirectToAction("VerifyEmail", "User");
+                    }
+                    else
+                    {
+                        // Logic for CVs////////////////
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro => pro.tb_education_employee)
+                            .Include(pro => pro.tb_experience_employee)
+                            .Include(pro => pro.tb_external_url_employee)
+                            .Include(pro => pro.tb_languages_employee)
+                            .Include(pro => pro.tb_projects_employee)
+                            .Include(pro => pro.tb_skills_employee)
+                            .Include(pro => pro.tb_cvs_employee)
+                            .FirstOrDefault();
+                        if (profile == null)
+                        {
+                            return RedirectToAction("CreateProfile");
+                        }
+                        else if (profile.tb_cvs_employee.Count < 1)
+                        {
+                            return RedirectToAction("ManageResume");
+                        }
+                        else
+                        {
+                            application.profile_id = profile.id;
+                            application.application_time = DateTime.Now;
+                            if (ModelState.IsValid)
+                            {
+
+                                db.tb_apply_job.Add(application);
+                                db.SaveChanges();
+                                int id = application.id;
+                            }
+                            session_user.tb_profile_employee.Clear();
+                            session_user.tb_profile_employee.Add(profile);
+                            tb_jobs clicked_job;
+                            clicked_job = db.tb_jobs.Include(j => j.tb_user).Where(j => j.id == application.job_id).Include(j=>j.tb_apply_job).Include(j => j.tb_user.tb_profile_employer).Include(j => j.tb_user.tb_employer_registration_data).FirstOrDefault();
+                            return View("JobDetails",clicked_job);
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
+            return RedirectToAction("MyAccount", "User");
+        }
         public ActionResult CreateProfile()
         {
             tb_user session_user;
@@ -952,7 +1095,135 @@ namespace Din_Media_Group_Job_Portal.Controllers
         }
         public ActionResult ManageResume()
         {
-            return View();
+            List<tb_master_masters> master = Master_Master.master_list;
+            tb_user session_user;
+            tb_profile_employee profile;
+            try
+            {
+
+                session_user = (tb_user)Session["user"];
+                if (master.Find(e => e.id == 1).visibility == false)
+                {
+                    return RedirectToAction("Home", "User");
+                }
+                if (session_user != null)
+                {
+                    if (session_user.is_active == false || session_user.is_verified == false)
+                    {
+                        ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                        return RedirectToAction("VerifyEmail", "User");
+                    }
+                    else
+                    {
+                        // Logic for CVs////////////////
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro => pro.tb_education_employee)
+                            .Include(pro => pro.tb_experience_employee)
+                            .Include(pro => pro.tb_external_url_employee)
+                            .Include(pro => pro.tb_languages_employee)
+                            .Include(pro => pro.tb_projects_employee)
+                            .Include(pro => pro.tb_skills_employee)
+                            .Include(pro => pro.tb_cvs_employee)
+                            .FirstOrDefault();
+                        if (profile == null)
+                        {
+                            return RedirectToAction("CreateProfile");
+                        }
+                        else
+                        {
+                            session_user.tb_profile_employee.Clear();
+                            session_user.tb_profile_employee.Add(profile);
+                            return View(session_user);
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
+            return RedirectToAction("MyAccount", "User");
+        }
+        [HttpPost]
+        public ActionResult UpdateResume(tb_cvs_employee cv, HttpPostedFileBase cv_file_name)
+        {
+            List<tb_master_masters> master = Master_Master.master_list;
+            tb_user session_user;
+            tb_profile_employee profile;
+            try
+            {
+
+                session_user = (tb_user)Session["user"];
+                if (master.Find(e => e.id == 1).visibility == false)
+                {
+                    return RedirectToAction("Home", "User");
+                }
+                if (session_user != null)
+                {
+                    if (session_user.is_active == false || session_user.is_verified == false)
+                    {
+                        ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                        return RedirectToAction("VerifyEmail", "User");
+                    }
+                    else
+                    {
+                        // Logic for CVs////////////////
+                        profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                            .Include(pro => pro.tb_education_employee)
+                            .Include(pro => pro.tb_experience_employee)
+                            .Include(pro => pro.tb_external_url_employee)
+                            .Include(pro => pro.tb_languages_employee)
+                            .Include(pro => pro.tb_projects_employee)
+                            .Include(pro => pro.tb_skills_employee)
+                            .Include(pro => pro.tb_cvs_employee)
+                            .FirstOrDefault();
+                        if (profile == null)
+                        {
+                            return RedirectToAction("CreateProfile");
+                        }
+                        else
+                        {
+                            Guid guidValue = Guid.NewGuid();
+                            MD5 md5 = MD5.Create();
+                            Guid hashed = new Guid(md5.ComputeHash(guidValue.ToByteArray()));
+                            string new_file_name = hashed.ToString() + Path.GetExtension(cv_file_name.FileName);
+                            var fileToUpload = Path.Combine(Server.MapPath("~/Jobseeker_CV_file"), new_file_name);
+                            cv_file_name.SaveAs(fileToUpload);
+                            cv.cv_file_name = new_file_name;
+                            cv.profile_id = profile.id;
+                            cv.cv_upload_date = DateTime.Now;
+                            if(ModelState.IsValid)
+                            {
+                                
+                                db.tb_cvs_employee.Add(cv);
+                                db.SaveChanges();
+                                int id = cv.id;
+                            }
+                            session_user.tb_profile_employee.Clear();
+                            session_user.tb_profile_employee.Add(profile);
+                            return View("ManageResume", session_user);
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                objUtility = new UtilityMethods.Utility();
+                objUtility.SaveException_for_ExceptionLog(e);
+                ViewBag.Exception = e.Message;
+                return RedirectToAction("DbError", "User", e);
+            }
         }
         
         public ActionResult AccountSetting()
@@ -1015,6 +1286,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         }
                         else
                         {
+                            session_user.tb_profile_employee.Clear();
                             session_user.tb_profile_employee.Add(profile);
                             return View(session_user);
                         }

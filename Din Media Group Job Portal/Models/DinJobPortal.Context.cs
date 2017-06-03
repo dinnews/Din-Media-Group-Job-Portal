@@ -37,7 +37,10 @@ namespace Din_Media_Group_Job_Portal.Models
         public virtual DbSet<tb_projects_employee> tb_projects_employee { get; set; }
         public virtual DbSet<tb_skills_employee> tb_skills_employee { get; set; }
         public virtual DbSet<tb_user> tb_user { get; set; }
-        public virtual DbSet<tb_department_employer> tb_department_employer { get; set; }
         public virtual DbSet<tb_profile_employer> tb_profile_employer { get; set; }
+        public virtual DbSet<tb_department_employer> tb_department_employer { get; set; }
+        public virtual DbSet<tb_jobs> tb_jobs { get; set; }
+        public virtual DbSet<tb_apply_job> tb_apply_job { get; set; }
+        public virtual DbSet<tb_cvs_employee> tb_cvs_employee { get; set; }
     }
 }

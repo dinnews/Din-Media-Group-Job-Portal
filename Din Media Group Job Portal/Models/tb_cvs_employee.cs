@@ -12,20 +12,23 @@ namespace Din_Media_Group_Job_Portal.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_department_employer
+    public partial class tb_cvs_employee
     {
-        public tb_department_employer()
+        public tb_cvs_employee()
         {
-            this.tb_jobs = new HashSet<tb_jobs>();
+            this.tb_apply_job = new HashSet<tb_apply_job>();
         }
     
         public int id { get; set; }
         public int profile_id { get; set; }
-        public string department_name { get; set; }
-        public int no_of_employee_in_department { get; set; }
-        public string department_intro { get; set; }
+        public string cv_name { get; set; }
+        public string cv_catagory { get; set; }
+        public string cv_file_name { get; set; }
+        public Nullable<bool> is_cv_hidden { get; set; }
+        public Nullable<bool> is_cv_deleted { get; set; }
+        public Nullable<System.DateTime> cv_upload_date { get; set; }
     
-        public virtual tb_profile_employer tb_profile_employer { get; set; }
-        public virtual ICollection<tb_jobs> tb_jobs { get; set; }
+        public virtual ICollection<tb_apply_job> tb_apply_job { get; set; }
+        public virtual tb_profile_employee tb_profile_employee { get; set; }
     }
 }

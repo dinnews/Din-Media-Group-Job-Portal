@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "ManageResume";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -26,7 +27,7 @@
                     <ul>
                         <li>You are here:</li>
                         <li><a href="#">Home</a></li>
-                        <li>Candidate Dashboard</li>
+                        <li>Manage Resume</li>
                     </ul>
                 </nav>
             </div>
@@ -53,31 +54,26 @@
 
                     <th>Actions</th>
                 </tr>
+                @{
+                    List<Din_Media_Group_Job_Portal.Models.tb_cvs_employee> cvs_list = new List<Din_Media_Group_Job_Portal.Models.tb_cvs_employee>();
+                    cvs_list = Model.tb_profile_employee.FirstOrDefault().tb_cvs_employee.ToList();
+                    for(int i=0; i<cvs_list.Count; i++)
+                    {
+                        Din_Media_Group_Job_Portal.Models.tb_cvs_employee current_cv = cvs_list.ElementAt(i);
+                        <!-- Item #1 -->
+                          <tr>
+                            <td class="title"><a href="#">@current_cv.cv_name</a></td>
+                            <td>@current_cv.cv_catagory</td>
+                            <td>@current_cv.cv_upload_date</td>
+                            <td class="action">
+                                <a href=".cv-update" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i> Edit</a>
+                                <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
+                                <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                            </td>
+                         </tr>
 
-                <!-- Item #1 -->
-                <tr>
-                    <td class="title"><a href="#">Danish Taimoor</a></td>
-                    <td>Front End Web Developer</td>
-                    <td>September 30, 2015</td>
-                    <td class="action">
-                        <a href=".cv-update" class="popup-with-zoom-anim"><i class="fa fa-pencil"></i> Edit</a>
-                        <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-                        <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-                    </td>
-                </tr>
-
-                <!-- Item #1 -->
-                <tr>
-                    <td class="title"><a href="#">Danish Taimoor</a></td>
-                    <td>Logo Designer</td>
-                    <td>August 12, 2015</td>
-                    <td class="action">
-                        <a href=".cv-update" class="popup-with-zoom-anim"><i class=" fa fa-pencil"></i> Edit</a>
-                        <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-                        <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-                    </td>
-                </tr>
-
+                    }   
+                }
             </table>
 
             <br>
@@ -91,14 +87,14 @@
                     <h2>Add Your CV</h2>
                 </div>
                 <div class="small-dialog-content">
-                    <form action="#" method="get">
+                    <form action="/JobSeeker/UpdateResume" method="post" enctype="multipart/form-data">
                         <label for="CV-Name">
                             CV Name:
-                            <input type="text" placeholder="QA CV" value="" />
+                            <input type="text" placeholder="e.g. QA CV" value="" name="cv_name"/>
                         </label>
                         <label for="cv-catagory">
                             Select Visibility:
-                            <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single">
+                            <select id="cv-catagory" data-placeholder="Choose Category" class="chosen-select-no-single" name="cv_catagory">
                                 <option value="Default">Default</option>
                                 <option value="Public">Public</option>
                                 <option value="Private">Private</option>
@@ -106,10 +102,10 @@
                             </select>
                         </label>
                         <!-- Upload CV -->
-                        <div class="upload-info"><strong>Upload your CV </strong> <span>Max. file size: 5MB</span></div>
+                        <div class="upload-info"><strong>Upload your CV </strong> <span>Max. file size: 10MB</span></div>
                         <div class="clearfix"></div>
                         <label class="upload-btn">
-                            <input type="file" multiple />
+                            <input type="file" multiple name="cv_file_name" />
                             <i class="fa fa-upload"></i> Browse
                         </label>
                         <span class="fake-input">No file selected</span>

@@ -156,7 +156,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DinJobPortal.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\model_for_browse_jobs.cs" />
     <Compile Include="Models\ProjectConstants.cs" />
+    <Compile Include="Models\required.cs" />
+    <Compile Include="Models\tb_apply_job.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_cvs_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_department_employer.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -176,6 +184,9 @@
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_external_url_employee.cs">
+      <DependentUpon>DinJobPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_jobs.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_languages_employee.cs">
@@ -498,8 +509,9 @@
     <Content Include="Content\userContent\images\blog1.jpg" />
     <Content Include="Content\userContent\images\blog4.jpg" />
     <Content Include="Content\userContent\images\blog5.jpg" />
-    <Content Include="Content\userContent\images\gallery11-big.jpg" />
+    <Content Include="Content\userContent\images\logo2.png" />
     <Content Include="Content\userContent\images\logo.png" />
+    <Content Include="Content\userContent\images\gallery11-big.jpg" />
     <Content Include="Content\userContent\images\bg\navy_blue.png" />
     <Content Include="Content\userContent\images\bg\noise_pattern_with_crosslines.png" />
     <Content Include="Content\userContent\images\bg\purty_wood.png" />
@@ -537,7 +549,6 @@
     <Content Include="Content\userContent\images\logo-07.png" />
     <Content Include="Content\userContent\images\logo.ico" />
     <Content Include="Content\userContent\images\logo-21.png" />
-    <Content Include="Content\userContent\images\logo2.png" />
     <Content Include="Content\userContent\images\recent-post-01.jpg" />
     <Content Include="Content\userContent\images\recent-post-01.png" />
     <Content Include="Content\userContent\images\recent-post-02.jpg" />
@@ -868,7 +879,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Employer_Cover_images\" />
+    <Folder Include="Employer_Profile_images\" />
     <Folder Include="Jobseeker_Cover_images\" />
+    <Folder Include="Jobseeker_CV_file\" />
     <Folder Include="JobSeeker_Profile_images\" />
     <Folder Include="Jobseeker_Videos\" />
   </ItemGroup>

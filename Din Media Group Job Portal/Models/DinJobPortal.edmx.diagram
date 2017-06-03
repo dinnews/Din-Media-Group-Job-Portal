@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1e788e162fa445b1a422e7c0ba2473df" Name="Diagram1">
+      <Diagram DiagramId="1e788e162fa445b1a422e7c0ba2473df" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="DinJobPortalModel.tb_education_employee" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_employee_registration_data" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_employer_registration_data" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
@@ -26,10 +26,19 @@
         <AssociationConnector Association="DinJobPortalModel.FK_tb_profile_employee_tb_user" ManuallyRouted="false" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_projects_employee_tb_profile_employee" ManuallyRouted="false" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_skills_employee_tb_profile_employee" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DinJobPortalModel.tb_department_employer" Width="1.875" PointX="3" PointY="12.5" />
         <EntityTypeShape EntityType="DinJobPortalModel.tb_profile_employer" Width="1.875" PointX="3" PointY="22.625" />
-        <AssociationConnector Association="DinJobPortalModel.FK_tb_department_employer_tb_user" />
         <AssociationConnector Association="DinJobPortalModel.FK_tb_profile_employer_tb_user" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_department_employer" Width="1.5" PointX="5.625" PointY="29" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_department_employer_tb_profile_employer" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_jobs" Width="1.5" PointX="7.875" PointY="27.25" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_jobs_tb_department_employer" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_jobs_tb_user" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_apply_job" Width="1.5" PointX="10.125" PointY="24.25" />
+        <EntityTypeShape EntityType="DinJobPortalModel.tb_cvs_employee" Width="1.5" PointX="5.25" PointY="32.875" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_apply_job_tb_cvs_employee" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_apply_job_tb_jobs" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_apply_job_tb_profile_employee" />
+        <AssociationConnector Association="DinJobPortalModel.FK_tb_cvs_employee_tb_profile_employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

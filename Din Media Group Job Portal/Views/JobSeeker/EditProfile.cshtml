@@ -72,7 +72,7 @@
     
     <!-- Content
     ================================================== -->
-    <div class="container">
+    <div class="container" id="page_container">
         <!-- Recent Jobs -->
         <div class="eight columns" id="summary_div">
             <div class="padding-right">
@@ -93,7 +93,7 @@
         <!-- Widgets -->
         @if (Model.tb_profile_employee.FirstOrDefault().video_id != null)
         {
-             <div class="eight columns">
+            <div class="eight columns video_div">
                  <script src="https://api.dmcdn.net/all.js"></script>
                  <div id="player" style="height:300px;"></div>
                  <script>
@@ -105,6 +105,7 @@
                              autoplay: true,
                              mute: true,
                              "sharing-enable": false,
+                             related:0,
                              "ui-logo": false
                          }
                      });
@@ -881,16 +882,29 @@
     });
 </script>
 <script>
+    if ($('#page_container').has('.video_div'))
+    {
+        var summary_height = $('#summary_div').height();
+        var education_height = $('.video_div').height();
+        if (education_height < summary_height) {
+            $('.video_div').height(summary_height);
+        }
+        else if (summary_height < education_height) {
+            $('#summary_div').height(education_height);
+        }
+    }
+    else {
+        var summary_height = $('#summary_div').height();
+        var education_height = $('#education_div').height();
+        if (education_height < summary_height) {
+            $('#education_div').height(summary_height);
+        }
+        else if (summary_height < education_height) {
+            $('#summary_div').height(education_height);
+        }
+    }
     
-    var summary_height = $('#summary_div').height();
-    var education_height = $('#education_div').height();
-    if (education_height < summary_height) {
-        $('#education_div').height(summary_height);
-    }
-    else if (summary_height < education_height) {
-        $('#summary_div').height(education_height);
-    }
-       // alert(ab);
+ 
        
  
     $(function () {
