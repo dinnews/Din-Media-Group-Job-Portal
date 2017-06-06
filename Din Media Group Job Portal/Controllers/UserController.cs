@@ -49,8 +49,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
             {
                 string interests = fulltime + "," + parttime + "," + internship + "," + govt;
 
-                //harcoded job_interest///////
-                /// didn't get any idea to vlaidate
+            
                 employee.job_interest = interests;
                 List<tb_employee_registration_data> emp = new List<tb_employee_registration_data>();
                 emp.Add(employee);
@@ -171,14 +170,15 @@ namespace Din_Media_Group_Job_Portal.Controllers
         #endregion
 
         [HttpPost]
-         public ActionResult MyAccount(string email, string password, string rememberme)
+        public ActionResult MyAccount(string userName, string password, string rememberme)
         {
-            
+           // userName = "bcsf13m040@pucit.edu.pk";
             string encPassword = encryption.encryptPassword(password);
+           //  encPassword = "wJ1XLNFHO40sB1imz3f6Y7OqOW3uKu6xly/P1dr+yac=";
             tb_user user_from_db_to_verify;
             try
             {
-                user_from_db_to_verify = db.tb_user.Where(user => (user.email == email && user.password == encPassword)).FirstOrDefault<tb_user>();
+                user_from_db_to_verify = db.tb_user.Where(user => (user.email == userName && user.password == encPassword)).FirstOrDefault<tb_user>();
                
                 if (user_from_db_to_verify!=null)
                 {
@@ -234,7 +234,6 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 objUtility.SaveException_for_ExceptionLog(e);
                 ViewBag.Exception = e.Message;
                 return View("DbError");
-                
             }
             //return View("MyAccount");
            
