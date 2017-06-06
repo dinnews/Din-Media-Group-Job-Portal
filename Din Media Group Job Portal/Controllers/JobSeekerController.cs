@@ -212,7 +212,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                    if (video != null && video.ContentLength > 0)
                        try
                        {
-                           System.Net.ServicePointManager.Expect100Continue = false;
+                          // System.Net.ServicePointManager.Expect100Continue = false;
                            MainUploader up = new MainUploader();
                            string video_id = up.startUplaod(video);
                            employee_profile.video_id = video_id;
