@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+
+@{
     ViewBag.Title = "PostJob";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -55,320 +57,377 @@ tinymce.init({
 
         <!-- Submit Page -->
         <div class="sixteen columns">
-            <div class="submit-page">
+            <form action="/Employer/SaveJob" method="post" enctype="multipart/form-data">
+                <div class="submit-page">
 
-                <!-- Notice
-                <div class="notification notice closeable margin-bottom-40">
-                    <p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
-                </div>
-                     -->
-
-                <!-- Title -->
-                <div class="form">
-                    <h5>Job Title</h5>
-                    <input class="search-field" type="text" placeholder="" value="" />
-                </div>
-                <!-- Description -->
-                <div class="form">
-                    <h5>Description</h5>
-                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true" style="border:1px solid;"></textarea>
-                </div>
-                <!-- Choose Category -->
-                <div class="form">
-                    <div class="select">
-                        <h5>Category</h5>
-                        <select data-placeholder="Choose Categories" class="chosen-select" multiple>
-                            <option value="1">Web Developers</option>
-                            <option value="2">Mobile Developers</option>
-                            <option value="3">Designers & Creatives</option>
-                            <option value="4">Writers</option>
-                            <option value="5">Virtual Assistants</option>
-                            <option value="6">Customer Service Agents</option>
-                            <option value="7">Sales & Marketing Experts</option>
-                            <option value="8">Accountants & Consultants</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form">
-                    <div class="select">
-                        <h5>Required Career Level</h5>
-                        <select data-placeholder="Choose Career Level" class="chosen-select">
-                            <option value="685">Intern/Student</option>
-                            <option value="868">Entry Level</option>
-                            <option value="693">Experienced Professional</option>
-                            <option value="698">Department Head</option>
-                            <option value="697">GM / CEO / Country Head / President</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form">
-                    <h5>Required SKill</h5>
-                    <select data-placeholder="Select Skills" class="chosen-select" multiple>
-                        <option value="">Adobe Photoshop</option>
-                        <option value="">PHP</option>
-                        <option value="">HTML</option>
-                        <option value="">CSS</option>
-                        <option value="">JavaScript</option>
-                        <option value="">jQuery</option>
-                        <option value="">MySQL</option>
-                        <option value="">WordPress</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <h5>Salary Range (Monthly) </h5>
-
-                    <span style="float:right; width:48%;">
-
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option selected="selected" value="">To (PKR)</option>
-                            <option value="5000">5000</option>
-                            <option value="7000">7000</option>
-                            <option value="8000">8000</option>
-                        </select>
-                    </span>
-                    <span style="float:left; width:48%;">
-
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option selected="selected" value="">From (PKR)</option>
-                            <option value="5000">5000</option>
-                            <option value="7000">7000</option>
-                            <option value="8000">8000</option>
-                        </select>
-                    </span>
-                   <br />
-                </div>
-                <div class="checkbox noerrchckbx">
-                    <label>
-                        <input type="checkbox" name="flagSalaryRange" value="yes">
-                        <span class="glyphicon glyphicon-ok"></span> Hide the salary range from appearing on your job post
-                    </label>
-                </div>
-                <div class="margin-top-20"></div>
-                <div class="form">
-                    <div class="select">
-                        <h5>Select Department</h5>
-                        <select data-placeholder="Choose Department" class="chosen-select">
-                            <option value="685">HR</option>
-                            
-                        </select>
-                    </div>
-                </div>
-                <!-- Location -->
-                <div class="form">
-                    <h5>Location <span>(optional)</span></h5>
-                    <select data-placeholder="Select Locations" class="chosen-select" multiple>
-                        <option value="">Lahore</option>
-                        <option value="">Karachi</option>
-                        <option value="">Peshawar</option>
-                        <option value="">Multan</option>
-                        <option value="">Sukkur</option>
-                        <option value="">Islamabad</option>
-                        <option value="">Kasur</option>
-                        <option value="">Faislaabad</option>
-                    </select>
-                </div>
-
-                <!-- Job Type -->
-                <div class="form">
-                    <h5>Job Type</h5>
-                    <select data-placeholder="Full-Time" class="chosen-select-no-single">
-                        <option value="1">Full-Time</option>
-                        <option value="2">Part-Time</option>
-                        <option value="2">Internship</option>
-                        <option value="2">Govt Job</option>
-                    </select>
-                </div>
-
-                <!-- available positions -->
-                <div class="form">
-                    <h5>Position Available</h5>
-                    <input class="search-field" type="number" placeholder="1" value="" min="1" />
-                   
-                </div>
-               
-                <!-- Gender requirementl -->
-                <div class="form">
-                    <h5>Gender Requirement</h5>
-                    <select data-placeholder="No preference" class="chosen-select">
-                        <option value="685">No preference</option>
-                        <option value="868">Female</option>
-                        <option value="693">Male</option>
-                       
-                    </select>
-                </div>
-
-                <!-- TClosing Date -->
-                <div class="form">
-                    <h5>Closing Date <span>(optional)</span></h5>
-                    <input data-role="date" type="text" id="datepicker1" readonly>
-                    <p class="note">Deadline for new applicants.</p>
-                </div>
-
-
-                <!-- Company Details -->
-                <div class="divider"><h3>Applicant Requirements</h3></div>
-
-                <!-- Company Name -->
-                <div class="form">
-                    <h5>Required Qualification</h5>
-                    <select data-placeholder="Select degree level" class="chosen-select">
-
-                        <option value="">Select degree level*</option>
-                        <option value="836">Non-Matriculation</option>
-                        <option value="838">Matriculation/O-Level</option>
-                        <option value="840">Intermediate/A-Level</option>
-                        <option value="369">Bachelors</option>
-                        <option value="373">Masters</option>
-                        <option value="842">MPhil/MS</option>
-                        <option value="375">PHD/Doctorate</option>
-                        <option value="846">Certification</option>
-                        <option value="371">Diploma</option>
-                        <option value="1243">Short Course</option>
-
-                    </select>
-                </div>
-
-                <!-- Specific Degree Title -->
-                <div class="form">
-                    <h5>Specific Degree Title</h5>
-                    <input type="text" placeholder="e.g. Software Engineer">
-                </div>
-
-                <!--years of experince-->
-                <div class="form">
-                    <h5>Years of Experience </h5>
-
-                    <span style="float:right; width:48%;">
-
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option value="" id="minExpLabel">Max</option>
-                            <option value="713">Fresh</option>
-                            <option value="715">Less than 1 Year</option>
-                            <option value="717">1 Year</option>
-                            <option value="719">2 Years</option>
-                            <option value="721">3 Years</option>
-                            <option value="723">4 Years</option>
-                            <option value="725">5 Years</option>
-                            <option value="727">6 Years</option>
-                            <option value="729">7 Years</option>
-                            <option value="731">8 Years</option>
-                            <option value="733">9 Years</option>
-                            <option value="735">10+ Years</option>
-                        </select>
-                    </span>
-                    <span style="float:left; width:48%;">
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option value="" id="minExpLabel">Min</option>
-                            <option value="713">Fresh</option>
-                            <option value="715">Less than 1 Year</option>
-                            <option value="717">1 Year</option>
-                            <option value="719">2 Years</option>
-                            <option value="721">3 Years</option>
-                            <option value="723">4 Years</option>
-                            <option value="725">5 Years</option>
-                            <option value="727">6 Years</option>
-                            <option value="729">7 Years</option>
-                            <option value="731">8 Years</option>
-                            <option value="733">9 Years</option>
-                            <option value="735">10+ Years</option>
-                        </select>
-                    </span>
-                    <br /><br />
-                </div>
-                <!-- more info on experience  -->
-                <div class="form">
-                    <h5>More Info on Experience <span>(optional)</span></h5>
-                    <input type="text" placeholder="Briefly describe your experience">
-                </div>
-
-                <!-- Video -->
-                <div class="form">
-                    <h5>Age Requirement <span>(optional)</span></h5>
-                    <span style="float:right; width:48%;">
-
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option value="" id="minAgeLabel">Max</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </select>
-                    </span>
-                    <span style="float:left; width:48%;">
-                        <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                            <option value="" id="minAgeLabel">Min</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </select>
-                    </span>
-                    <br /><br />
-                </div>
-                <!--<div class="divider"><h3>Refine Your Applicant Pool</h3></div>
-                
-                <div class="form">
-                    <h5>Pre-filter Applicants<span>(optional)</span></h5>
-                    <div class="row">
-                        <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />Gender
-                        <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Experience
-                        <input class="checkboxes" type="checkbox" name="internship" id="interests" />Degree Level
-                        <input class="checkboxes" type="checkbox" name="Govt" id="interests" />Age
-                        <input class="checkboxes" type="checkbox" name="Govt" id="interests" />City
-                    </div>
-                    <p>Limit applications based on the following filters -select all that apply.</p>
-                </div>-->
-                <!-- Question
-                <div class="divider"></div>
-                
-                <div class="container">
-                    <div class="eleven columns">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" class="scrnquz" name="testQuestions" id="testQuestions">
-                                <span class="glyphicon glyphicon-ok"></span> Screen your applicants further with custom questions
-                            </label>
-                            
-                        </div>
-                    </div>
-                    <div class="five columns">
-                        <div class="text-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Attaching questions to your job post can help ensure that only the most serious candidates apply for the role, and reduce your time to hire.">
-                            
-                            <div class="lrnmrtxt s-14"><a href="javascript:void(0)">Learn more</a></div>
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="divider margin-top-0"></div>
-                <a href="#" class="button big margin-top-5" style="margin-right:20px;">Post Job</a>
-                <a href="#" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>
-
-
+                    <!-- Notice
+            <div class="notification notice closeable margin-bottom-40">
+                <p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
             </div>
+                 -->
+                    <!-- Title -->
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ContainsKey("job_title"))
+                    {
+                        <span style="color:red">
+
+                            @ViewData.ModelState["job_title"].Errors[0].ErrorMessage
+
+                        </span>
+                    }
+                    <div class="form">
+                        <h5>Job Title</h5>
+                        <input class="search-field" type="text" placeholder="" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_jobs.FirstOrDefault().job_title }" name="job_title" />
+                    </div>
+                    <!-- Description -->
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ContainsKey("job_description"))
+                    {
+                        <span style="color:red">
+
+                            @ViewData.ModelState["job_description"].Errors[0].ErrorMessage
+
+                        </span>
+                    }
+                    <div class="form">
+                        <h5>Description</h5>
+                        <textarea class="WYSIWYG" name="job_description" cols="40" rows="3" id="summary" spellcheck="true" style="border:1px solid;">@if (!ViewData.ModelState.IsValid)
+{ @Model.tb_jobs.FirstOrDefault().job_description }</textarea>
+                    </div>
+                    <!-- Choose Category -->
+                    <div class="form">
+                        @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ContainsKey("job_catagory"))
+                        {
+                            <span style="color:red">
+
+                                @ViewData.ModelState["job_catagory"].Errors[0].ErrorMessage
+
+                            </span>
+                        }
+                        @if (!ViewData.ModelState.IsValid&& !ViewData.ModelState.ContainsKey("job_catagory"))
+                        {
+                            var a = Model.tb_jobs.FirstOrDefault().job_catagory.Split(',');
+                            for (int i = 0; i < a.Length; i++ )
+                            {
+                                <script>
+                                    $('#job_catagory option[value="@a[i]"]').attr('selected', true);
+                                </script>
+                                
+                            
+                            }
+                            
+                        }
+                        <div class="select">
+                            <h5>Category</h5>
+                            <select data-placeholder="Choose Categories" class="chosen-select" multiple name="job_catagory" id="job_catagory">
+                                <option value="Web Developers">Web Developers</option>
+                                <option value="Mobile Developers">Mobile Developers</option>
+                                <option value="Designers & Creatives">Designers & Creatives</option>
+                                <option value="Writers">Writers</option>
+                                <option value="Virtual Assistants">Virtual Assistants</option>
+                                <option value="Customer Service Agents">Customer Service Agents</option>
+                                <option value="Sales & Marketing Experts">Sales & Marketing Experts</option>
+                                <option value="Accountants & Consultants">Accountants & Consultants</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form">
+                       
+                        <div class="select">
+                            <h5>Required Career Level</h5>
+                            <select data-placeholder="Choose Career Level" class="chosen-select" name="required_career_level">
+                                <option value="Intern">Intern/Student</option>
+                                <option value="Entry Level">Entry Level</option>
+                                <option value="Experienced Professional">Experienced Professional</option>
+                                <option value="Department Head<">Department Head</option>
+                                <option value="GM / CEO / Country Head / President">GM / CEO / Country Head / President</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form">
+                        @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ContainsKey("required_skill"))
+                        {
+                            <span style="color:red">
+
+                                @ViewData.ModelState["required_skill"].Errors[0].ErrorMessage
+
+                            </span>
+                        }
+                        <h5>Required SKill</h5>
+                        <select data-placeholder="Select Skills" class="chosen-select" multiple name="required_skill">
+                            <option value="Adobe Photoshop">Adobe Photoshop</option>
+                            <option value="PHP">PHP</option>
+                            <option value="HTML">HTML</option>
+                            <option value="CSS">CSS</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="jQuery">jQuery</option>
+                            <option value="MySQL">MySQL</option>
+                            <option value="WordPress">WordPress</option>
+                        </select>
+                    </div>
+                    <div class="form">
+                        <h5>Salary Range (Monthly) </h5>
+
+                        <span style="float:right; width:48%;">
+
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="salary_to">
+                                <option selected="selected" value="">To (PKR)</option>
+                                <option value="5000">5000</option>
+                                <option value="7000">7000</option>
+                                <option value="8000">8000</option>
+                            </select>
+                        </span>
+                        <span style="float:left; width:48%;">
+
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="salary_from">
+                                <option selected="selected" value="">From (PKR)</option>
+                                <option value="5000">5000</option>
+                                <option value="7000">7000</option>
+                                <option value="8000">8000</option>
+                            </select>
+                        </span>
+                        <br />
+                    </div>
+                    <div class="checkbox noerrchckbx">
+                        <label>
+                            <input type="checkbox" name="hide_salary" >
+                            <span class="glyphicon glyphicon-ok"></span> Hide the salary range from appearing on your job post
+                        </label>
+                    </div>
+                    <div class="margin-top-20"></div>
+                    <div class="form">
+                        <div class="select">
+                            <h5>Select Department</h5>
+                            <select data-placeholder="Choose Department" class="chosen-select" name="deapartment_id">
+                                @{
+                                    for (int i = 0; i < Model.tb_profile_employer.FirstOrDefault().tb_department_employer.Count; i++)
+                                    {
+                                        
+                                        <option value="@Model.tb_profile_employer.FirstOrDefault().tb_department_employer.ElementAt(i).id">
+                                            @Model.tb_profile_employer.FirstOrDefault().tb_department_employer.ElementAt(i).department_name
+                                        </option>
+                                    }
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Location -->
+                    <div class="form">
+                        <h5>Location <span>(optional)</span></h5>
+                        <select data-placeholder="Select Locations" class="chosen-select" multiple name="job_location">
+                            <option value="Lahore">Lahore</option>
+                            <option value="Karachi">Karachi</option>
+                            <option value="Peshawar">Peshawar</option>
+                            <option value="Multan">Multan</option>
+                            <option value="Sukkur">Sukkur</option>
+                            <option value="Islamabad">Islamabad</option>
+                            <option value="Kasur">Kasur</option>
+                            <option value="Faislaabad">Faislaabad</option>
+                        </select>
+                    </div>
+
+                    <!-- Job Type -->
+                    <div class="form">
+                        <h5>Job Type</h5>
+                        <select data-placeholder="Full-Time" class="chosen-select-no-single" name="job_type">
+                            <option value="Full-Time">Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Govt Job">Govt Job</option>
+                        </select>
+                    </div>
+
+                    <!-- available positions -->
+                    <div class="form">
+                        <h5>Position Available</h5>
+                        <input class="search-field" type="number" placeholder="1" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_jobs.FirstOrDefault().num_of_positions }" min="1" name="no_of_positions" />
+
+                    </div>
+
+                    <!-- Gender requirementl -->
+                    <div class="form">
+                        <h5>Gender Requirement</h5>
+                        <select data-placeholder="No preference" class="chosen-select" name="gender_preference">
+                            <option value="">No preference</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+
+                        </select>
+                    </div>
+
+                    <!-- TClosing Date -->
+                    <div class="form">
+                        <h5>Closing Date <span>(optional)</span></h5>
+                        <input data-role="date" type="text" id="datepicker1" readonly name="closing_date" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_jobs.FirstOrDefault().closing_date }">
+                        <p class="note">Deadline for new applicants.</p>
+                    </div>
+
+
+                    <!-- Company Details -->
+                    <div class="divider"><h3>Applicant Requirements</h3></div>
+
+                    <!-- Company Name -->
+                    <div class="form">
+                        <h5>Required Qualification</h5>
+                        <select data-placeholder="Select degree level" class="chosen-select" name="required_qualification">
+
+                            <option value="">Select degree level*</option>
+                            <option value="Non-Matriculation">Non-Matriculation</option>
+                            <option value="Matriculation/O-Level">Matriculation/O-Level</option>
+                            <option value="Intermediate/A-Level">Intermediate/A-Level</option>
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Masters">Masters</option>
+                            <option value="MPhil/MS">MPhil/MS</option>
+                            <option value="PHD/Doctorate">PHD/Doctorate</option>
+                            <option value="Certification">Certification</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Short Course">Short Course</option>
+
+                        </select>
+                    </div>
+
+                    <!-- Specific Degree Title -->
+                    <div class="form">
+                        <h5>Specific Degree Title</h5>
+                        <input type="text" placeholder="e.g. Software Engineer" name="specific_degree_title" value="@if (!ViewData.ModelState.IsValid) { @Model.tb_jobs.FirstOrDefault().specific_degree_title }">
+                    </div>
+
+                    <!--years of experince-->
+                    <div class="form">
+                        <h5>Years of Experience </h5>
+
+                        <span style="float:right; width:48%;">
+
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="experience_max" required>
+                                <option value="" id="minExpLabel">Max</option>
+                                <option value="Fresh">Fresh</option>
+                                <option value="Less than 1 Year">Less than 1 Year</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                                <option value="3 Years">3 Years</option>
+                                <option value="4 Years">4 Years</option>
+                                <option value="5 Years">5 Years</option>
+                                <option value="6 Years">6 Years</option>
+                                <option value="7 Years">7 Years</option>
+                                <option value="8 Years">8 Years</option>
+                                <option value="9 Years">9 Years</option>
+                                <option value="10+ Years">10+ Years</option>
+                            </select>
+                        </span>
+                        <span style="float:left; width:48%;">
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="experience_min" required>
+                                <option value="" id="minExpLabel">Min</option>
+                                <option value="Fresh">Fresh</option>
+                                <option value="Less than 1 Year">Less than 1 Year</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                                <option value="3 Years">3 Years</option>
+                                <option value="4 Years">4 Years</option>
+                                <option value="5 Years">5 Years</option>
+                                <option value="6 Years">6 Years</option>
+                                <option value="7 Years">7 Years</option>
+                                <option value="8 Years">8 Years</option>
+                                <option value="9 Years">9 Years</option>
+                                <option value="10+ Years">10+ Years</option>
+                            </select>
+                        </span>
+                        <br /><br />
+                    </div>
+                    <!-- more info on experience
+            <div class="form">
+                <h5>More Info on Experience <span>(optional)</span></h5>
+                <input type="text" placeholder="Briefly describe your experience">
+            </div>
+                  -->
+                    <!-- Video -->
+                    <div class="form">
+                        <h5>Age Requirement <span>(optional)</span></h5>
+                        <span style="float:right; width:48%;">
+
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="age_max">
+                                <option value="" id="minAgeLabel">Max</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </select>
+                        </span>
+                        <span style="float:left; width:48%;">
+                            <select data-placeholder="Choose Category" class="chosen-select-no-single" name="age_min">
+                                <option value="" id="minAgeLabel">Min</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </select>
+                        </span>
+                        <br /><br />
+                    </div>
+                    <!--<div class="divider"><h3>Refine Your Applicant Pool</h3></div>
+
+            <div class="form">
+                <h5>Pre-filter Applicants<span>(optional)</span></h5>
+                <div class="row">
+                    <input class="checkboxes" type="checkbox" name="fulltime" id="interests" />Gender
+                    <input class="checkboxes" type="checkbox" name="parttime" id="interests" />Experience
+                    <input class="checkboxes" type="checkbox" name="internship" id="interests" />Degree Level
+                    <input class="checkboxes" type="checkbox" name="Govt" id="interests" />Age
+                    <input class="checkboxes" type="checkbox" name="Govt" id="interests" />City
+                </div>
+                <p>Limit applications based on the following filters -select all that apply.</p>
+            </div>-->
+                    <!-- Question
+            <div class="divider"></div>
+
+            <div class="container">
+                <div class="eleven columns">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" class="scrnquz" name="testQuestions" id="testQuestions">
+                            <span class="glyphicon glyphicon-ok"></span> Screen your applicants further with custom questions
+                        </label>
+
+                    </div>
+                </div>
+                <div class="five columns">
+                    <div class="text-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Attaching questions to your job post can help ensure that only the most serious candidates apply for the role, and reduce your time to hire.">
+
+                        <div class="lrnmrtxt s-14"><a href="javascript:void(0)">Learn more</a></div>
+                    </div>
+                </div>
+            </div> -->
+
+                    <div class="divider margin-top-0"></div>
+                    <button type="submit" class="button big margin-top-5" style="margin-right:20px;">Post Job</button>
+                   <!-- <a href="#" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>-->
+
+
+                </div>
+            </form>
         </div>
 
     </div>

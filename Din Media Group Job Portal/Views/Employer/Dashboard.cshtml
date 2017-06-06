@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -51,30 +52,30 @@
     <div class="container">
         <br />
         <div class="twelve columns">
-            <div id="titlebar" class="resume photo-bg custom-dashboard-cover" style=" background: url(/Content/userContent/images/job-page-photo.jpg)">
+            <div id="titlebar" class="resume photo-bg custom-dashboard-cover" style="background: url(/Employer_cover_images/@Model.tb_profile_employer.FirstOrDefault().cover_picture)">
                 <div class="container twelve columns">
 
                     <div class="twelve columns">
-                        <a href=".profile-upload" class="popup-with-zoom-anim button" style=" float: right;  top: 5px; margin-right: 10px; "><i class="fa fa-upload"></i> Change Cover</a>
+                        <a href=".cover-upload" class="popup-with-zoom-anim button" style=" float: right;  top: 5px; margin-right: 10px; "><i class="fa fa-upload"></i> Change Cover</a>
                         <div class="resume-titlebar">
                             <a href=".profile-upload" class="popup-with-zoom-anim">
-                                <img src="~/Content/userContent/images/blog-post-03.jpg" alt="" title="Click to change Profile Picture">
+                                <img src="~/Employer_Profile_images/@Model.tb_profile_employer.FirstOrDefault().profile_picture" alt="" title="Click to change Profile Picture">
                             </a>
 
                             <div class="resumes-list-content">
                                 <h4 style="color:white;">
-                                    Muhammad Iqbal
+                                    @Model.tb_employer_registration_data.FirstOrDefault().first_name @Model.tb_employer_registration_data.FirstOrDefault().last_name
                                     <!--<a href="#" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>-->
-                                    <span style="color:white;">Microsoft (Lahore, Pakistan)</span>
+                                    <span style="color:white;">@Model.tb_employer_registration_data.FirstOrDefault().company_name  (@Model.tb_profile_employer.FirstOrDefault().company_location)</span>
                                 </h4>
                                 <p class="nine columns" style="background-color: rgba(211, 211, 211, 0.5); padding-right: 10px; padding-left: 10px; color:white;">
-                                    The control is ready to accept user interaction and for external method calls. If you want to interact with the control, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired. Alternatively, you can listen for a ready event on the dashboard holding the control and call control methods only after the event was fired.
+                                    @Html.Raw(Server.HtmlDecode(Model.tb_profile_employer.FirstOrDefault().summary))
                                 </p>
                                 <div style="background-color:lightgrey; padding-right:10px;" class="ten columns">
 
                                 </div>
-                                <span class="icons" style="color:white;"><i class="fa fa-group"></i> No of Employees: 10</span>
-                                <span class="icons" style="color:white;"><i class="fa fa-building-o"></i> No of Departments: 2</span>
+                                <span class="icons" style="color:white;"><i class="fa fa-group"></i> No of Employees: 2</span>
+                                <span class="icons" style="color:white;"><i class="fa fa-building-o"></i> No of Departments: @Model.tb_profile_employer.FirstOrDefault().tb_department_employer.Count</span>
                                 <span class="icons" style="color:white;"><i class="fa fa-star-half-full"></i> Profile Reviews: 10</span>
                                 <div class="clearfix"></div>
 
@@ -261,7 +262,7 @@
                         <a class="button" href="@Url.Content("~/Employer/ManageJobs")">View All Posted Jobs</a>
 
                     </nav>
-                    0
+                    
                 </div>
                 <div class="clearfix"></div>
 
@@ -332,22 +333,41 @@
 <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup profile-upload">
     <div id="">
         <div class="small-dialog-headline">
-            <h2>Change Picture</h2>
+            <h2>Change Profile Picture</h2>
         </div>
         <div class="small-dialog-content">
-            <form action="#" method="get">
+            <form action="/Employer/UpdateProfilePicture" method="post" enctype="multipart/form-data">
                 <label class="upload-btn">
-                    <input type="file" multiple id="imageName" />
+                    <input type="file" id="profile_picture_upload" name="profile_picture" />
                     <i class="fa fa-upload"></i> Browse
                 </label>
-                <span class="fake-input" id="input-name">No file selected</span>
-              
-                    
-                        
-                        <div class="ten columns" id="dvPreview" style="max-height: 400px; overflow: hidden; cursor: pointer;">
-                            <img src="~/Content/userContent/images/blog-post-03.jpg" style="width:100%;" />
-                        </div>
-               
+                <span class="fake-input" id="input-name-profile-picture">No file selected</span>
+                <div id="dvPreview_profile" style="max-height:400px; overflow:hidden; cursor:pointer">
+                    <img src="~/Employer_Profile_images/@Model.tb_profile_employer.FirstOrDefault().profile_picture" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="divider"></div>
+                <button class="send">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup cover-upload">
+    <div id="">
+        <div class="small-dialog-headline">
+            <h2>Change Cover Photo</h2>
+        </div>
+        <div class="small-dialog-content">
+            <form action="/Employer/UpdateCover" method="post" enctype="multipart/form-data">
+                <label class="upload-btn">
+                    <input type="file" id="cover_picture_upload" name="cover_picture" />
+                    <i class="fa fa-upload"></i> Browse
+                </label>
+                <span class="fake-input" id="input-name-cover-picture">No file selected</span>
+                <div id="dvPreview_cover" style="max-height:400px; overflow:hidden; cursor:pointer">
+                    <img src="~/Employer_Cover_images/@Model.tb_profile_employer.FirstOrDefault().cover_picture" />
+                </div>
                 <div class="clearfix"></div>
                 <div class="divider"></div>
                 <button class="send">Save</button>
@@ -357,13 +377,63 @@
 </div>
 
 <script language="javascript" type="text/javascript">
+
+
     function resizeImg(img, height, width) {
         img.height = height;
         img.width = width;
     }
     $(function () {
 
-        $("#imageName").change(function () {
+        $("#profile_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+
+                    $("#dvPreview_profile").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                            $("#dvPreview").show();
+                            $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                        }
+                        else {*/
+                        if (typeof (FileReader) != "undefined") {
+                            $("#dvPreview_profile").show();
+                            $("#dvPreview_profile").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $("#dvPreview_profile img").attr("src", e.target.result);
+
+                                $('#input-name-profile-picture').text(name);
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        $("#cover_picture_upload").change(function () {
             var _URL = window.URL || window.webkitURL;
 
             var file, img;
@@ -381,7 +451,7 @@
                     size = size / 1024;
                     //alert(h+w);
 
-                    $("#dvPreview").html("");
+                    $("#dvPreview_cover").html("");
                     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
                     if (regex.test(file.name.toLowerCase())) {
                         /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
@@ -390,13 +460,13 @@
                         }
                         else {*/
                         if (typeof (FileReader) != "undefined") {
-                            $("#dvPreview").show();
-                            $("#dvPreview").append("<img  style=' pointer-events: none; width:100%; height:'400px'' />");
+                            $("#dvPreview_cover").show();
+                            $("#dvPreview_cover").append("<img  style=' pointer-events: none;height:'400px' width:'250px'' />");
                             var reader = new FileReader();
                             reader.onload = function (e) {
-                                $("#dvPreview img").attr("src", e.target.result);
+                                $("#dvPreview_cover img").attr("src", e.target.result);
 
-                                $('#input-name').text("2425905779930697125_n.jpg");
+                                $('#input-name-cover-picture').text(name);
                             }
                             reader.readAsDataURL(file);
                         } else {
@@ -411,33 +481,82 @@
                 };
                 img.src = _URL.createObjectURL(file);
             }
+        });
+        $("#profile_video_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                name = this.files[0].name;
 
-
-
-
-
+                $("#dvPreview_profile_video").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.flv|.avi|.mkv|.wmv)$/;
+                if (regex.test(file.name.toLowerCase())) {
+                    /*if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                        $("#dvPreview").show();
+                        $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                    }
+                    else {*/
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview_profile_video").show();
+                        $("#dvPreview_profile_video").append("<video  controls='' autoplay='' name='media'><source src='' id='video_here' type='video/mp4'></video>");
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var $source = $('#video_here');
+                            $source[0].src = img;
+                            $source.parent()[0].load();
+                            $('#input-name-profile-video').text(name);
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                    //}
+                } else {
+                    alert("Please upload a valid image file.");
+                    //contactForm.reset();
+                }
+                img = _URL.createObjectURL(this.files[0]);
+            }
         });
     });
 </script>
+
 <script>
     $(function () {
         var curDown = false,
             curYPos = 0,
             curXPos = 0;
-        $('#dvPreview').mousemove(function (m) {
+        $('#dvPreview_cover').mousemove(function (m) {
             if (curDown === true) {
-                $('#dvPreview').scrollTop($('#dvPreview').scrollTop() + (curYPos - m.pageY));
-                $('#dvPreview').scrollLeft($('#dvPreview').scrollLeft() + (curXPos - m.pageX));
+                $('#dvPreview_cover').scrollTop($('#dvPreview_cover').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview_cover').scrollLeft($('#dvPreview_cover').scrollLeft() + (curXPos - m.pageX));
             }
         });
 
-        $('#dvPreview').mousedown(function (m) {
+        $('#dvPreview_cover').mousedown(function (m) {
             curDown = true;
             curYPos = m.pageY;
             curXPos = m.pageX;
         });
 
-        $('#dvPreview').mouseup(function () {
+        $('#dvPreview_cover').mouseup(function () {
+            curDown = false;
+        });
+        $('#dvPreview_profile').mousemove(function (m) {
+            if (curDown === true) {
+                $('#dvPreview_profile').scrollTop($('#dvPreview_profile').scrollTop() + (curYPos - m.pageY));
+                $('#dvPreview_profile').scrollLeft($('#dvPreview_profile').scrollLeft() + (curXPos - m.pageX));
+            }
+        });
+
+        $('#dvPreview_profile').mousedown(function (m) {
+            curDown = true;
+            curYPos = m.pageY;
+            curXPos = m.pageX;
+        });
+
+        $('#dvPreview_profile').mouseup(function () {
             curDown = false;
         });
     })

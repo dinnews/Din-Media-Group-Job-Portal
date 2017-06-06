@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using Newtonsoft.Json;
 using SO_Dailymotion_Upload;
+using System.Security.Cryptography;
 
 namespace Din_Media_Group_Job_Portal.SODailymotionUpload
 {
@@ -20,7 +21,12 @@ namespace Din_Media_Group_Job_Portal.SODailymotionUpload
             Authorize(accessToken);
 
             Console.WriteLine("Access token is " + accessToken);
-            var fileToUpload = Path.Combine(HttpContext.Current.Server.MapPath("~/Jobseeker_Videos"), "1234" + Path.GetExtension(Video_File.FileName));
+            Guid guidValue = Guid.NewGuid();
+            MD5 md5 = MD5.Create();
+            Guid hashed = new Guid(md5.ComputeHash(guidValue.ToByteArray()));
+
+            string new_file_name = hashed.ToString() + Path.GetExtension(Video_File.FileName);
+            var fileToUpload = Path.Combine(HttpContext.Current.Server.MapPath("~/Jobseeker_Videos"), new_file_name);
             Video_File.SaveAs(fileToUpload);
             
             Console.WriteLine("File to upload is " + fileToUpload);

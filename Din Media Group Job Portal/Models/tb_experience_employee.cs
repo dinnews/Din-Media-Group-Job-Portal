@@ -20,9 +20,8 @@ namespace Din_Media_Group_Job_Portal.Models
         [Required]
         [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Job title must contain atleast 1 Alphabets")]
         public string job_title { get; set; }
-        [Required]
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Name must contain atleast 1 Alphabets")]
-        public string company_mame { get; set; }
+        
+        
         [Required]
         [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Location must contain atleast 1 Alphabets")]
         public string company_location { get; set; }
@@ -30,6 +29,8 @@ namespace Din_Media_Group_Job_Portal.Models
         public Nullable<System.DateTime> experience_start_date { get; set; }
         public Nullable<System.DateTime> experience_end_date { get; set; }
         public string experience_notes { get; set; }
+        [Required]
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Company Name must contain atleast 1 Alphabets")]
         public string company_name { get; set; }
     
         public virtual tb_profile_employee tb_profile_employee { get; set; }

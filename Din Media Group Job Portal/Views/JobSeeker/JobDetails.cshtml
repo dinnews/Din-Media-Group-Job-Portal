@@ -1,9 +1,14 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_jobs
+
+@{
     ViewBag.Title = "JobDetails";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-
+@if(Model==null)
+{
+    Response.Redirect("~/JobSeeker/BrowseJob");
+}
 <script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
 <link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
 <style>
@@ -26,14 +31,19 @@
     <script>
         $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
     </script>
-
+    @{
+        
+        //var employer = Model.employers_profile_list.Find(pro=>pro.user_id==current_job.user_id);
+        var employer = Model.tb_user.tb_profile_employer.FirstOrDefault();
+        var registration = Model.tb_user.tb_employer_registration_data.FirstOrDefault();
+    
     <!-- Titlebar
     ================================================== -->
     <div id="titlebar" class="photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
         <div class="container">
             <div class="ten columns">
-                <span><a href="browse-jobs.html">Restaurant / Food Service</a></span>
-                <h2>Restaurant Team Member - Crew <span class="full-time">Full-Time</span></h2>
+                <span><a href="browse-jobs.html">@Model.job_catagory</a></span>
+                <h2>@Model.job_title <span class="full-time">@Model.job_type</span></h2>
             </div>
             <div class="six columns">
                 <a href="#" class="button white"><i class="fa fa-star"></i> Bookmark This Job</a>
@@ -52,45 +62,16 @@
 
                 <!-- Company Info -->
                 <div class="company-info">
-                    <img src="~/Content/userContent/images/company-logo.png" alt="">
+                    <img src="~/Employer_Profile_images/@employer.profile_picture" alt="">
                     <div class="content">
-                        <h4>King LLC</h4>
-                        <span><a href="#"><i class="fa fa-link"></i> Website</a></span>
-                        <span><a href="#"><i class="fa fa-twitter"></i> kingrestaurants</a></span>
+                        <h4>@registration.company_name</h4>
+                        <span><a href="#"><i class="fa fa-map-marker"></i> @Model.job_location</a></span>
+                       
                     </div>
                     <div class="clearfix"></div>
                 </div>
 
-                <p class="margin-reset">
-                    The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!
-                </p>
-
-                <br>
-                <p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
-
-                <ul class="list-1">
-                    <li>
-                        Executing the Food Service program, including preparing and presenting our wonderful food offerings
-                        to hungry customers on the go!
-                    </li>
-                    <li>Greeting customers in a friendly manner and suggestive selling and sampling items to help increase sales.</li>
-                    <li>
-                        Keeping our Store food area looking terrific and ready for our valued customers by managing product
-                        inventory, stocking, cleaning, etc.
-                    </li>
-                    <li>We’re looking for associates who enjoy interacting with people and working in a fast-paced environment!</li>
-                </ul>
-
-                <br>
-
-                <h4 class="margin-bottom-10">Job Requirment</h4>
-
-                <ul class="list-1">
-                    <li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
-                    <li>Must be available to work required shifts including weekends, evenings and holidays.</li>
-                    <li>Must be able to perform repeated bending, standing and reaching.</li>
-                    
-                </ul>
+               @Html.Raw(Server.HtmlDecode(Model.job_description))
 
             </div>
         </div>
@@ -109,35 +90,52 @@
                         <li>
                             <i class="fa fa-map-marker"></i>
                             <div>
-                                <strong>Location:</strong>
-                                <span>25-B Gulberg III, Lahore</span>
+                                <strong>Comapny Location:</strong>
+                                <span>@employer.company_location</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa fa-user"></i>
                             <div>
                                 <strong>Job Title:</strong>
-                                <span>Food Service Specialist</span>
+                                <span>@Model.job_title</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa fa-clock-o"></i>
                             <div>
-                                <strong>Hours:</strong>
-                                <span>40h / week (Monday-Friday)</span>
+                                <strong>Required Qualification</strong>
+                                <span>@Model.required_qualification</span>
                             </div>
                         </li>
-                        <li>
+                        @if(Model.hide_salary!=false)
+                        {
+                           <li>
                             <i class="fa fa-money"></i>
                             <div>
-                                <strong>Rate:</strong>
-                                <span>Rs. 20K - 40K </span>
+                                <strong>Salary</strong>
+                                <span>Rs. @Model.salary_from - @Model.salary_to </span>
                             </div>
-                        </li>
+                            </li>   
+                        }
+                        
                     </ul>
-
-
-                    <a href="#small-dialog" class="popup-with-zoom-anim button">Apply For This Job</a>
+                    
+                    @{
+                        Din_Media_Group_Job_Portal.Models.tb_user session_user;
+                        Din_Media_Group_Job_Portal.Models.tb_apply_job application;
+                        session_user = (Din_Media_Group_Job_Portal.Models.tb_user)Session["user"];
+                        application = Model.tb_apply_job.ToList().Find(pro => pro.profile_id == session_user.tb_profile_employee.FirstOrDefault().id);
+                       if(application!=null)
+                       {
+                           <a href="#" class="button">You Already Applied</a>
+                       }
+                       else
+                       {
+                           <a href="#small-dialog" class="popup-with-zoom-anim button">Apply For This Job</a>
+                       }
+                    }
+                    
 
                     <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
                         <div class="small-dialog-headline">
@@ -145,71 +143,85 @@
                         </div>
 
                         <div class="small-dialog-content">
-                            <form action="#" method="get">
+                            <form action="/JobSeeker/ApplyforJob" method="post">
+                                <input type="hidden" name="job_id" value="@Model.id" />
                                 <label for="catagory">
-                                    <select data-placeholder="Expected Salary" class="chosen-select-no-single">
+                                    <select data-placeholder="Expected Salary" class="chosen-select-no-single" name="expected_salary">
                                         <option value="">Epected Salary</option>
-                                        <option value="10000">10000-15000</option>
-                                        <option value="10000">16000-20000</option>
-                                        <option value="10000">20000-25000</option>
-                                        <option value="10000">26000-30000</option>
-                                        <option value="10000">31000-35000</option>
-                                        <option value="10000">36000-40000</option>
-                                        <option value="10000">41000-50000</option>
-                                        <option value="10000">51000-60000</option>
-                                        <option value="10000">61000-80000</option>
+                                        <option value="10000-15000">10000-15000</option>
+                                        <option value="16000-20000">16000-20000</option>
+                                        <option value="20000-25000">20000-25000</option>
+                                        <option value="26000-30000">26000-30000</option>
+                                        <option value="31000-35000">31000-35000</option>
+                                        <option value="36000-40000">36000-40000</option>
+                                        <option value="41000-50000">41000-50000</option>
+                                        <option value="51000-60000">51000-60000</option>
+                                        <option value="61000-80000">61000-80000</option>
                                     </select>
                                 </label>
                                 <label for="currently-working">
-                                    <select data-placeholder="Currently Working" class="chosen-select-no-single" id="currently-working">
+                                    <select data-placeholder="Currently Working" class="chosen-select-no-single" id="currently-working" name="is_employee_currently_working">
                                         <option value="">Currently Working</option>
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                        
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+
                                     </select>
                                 </label>
                                 <label id="current-work" class="form-row form-row-wide" style="display:none;">
                                     <span style="float:right">
                                         <label for="working-time">
                                             Working Duration:
-                                            <select class=" chosen-select-no-single" name="workExp" id="workExp">
+                                            <select class=" chosen-select-no-single" name="work_duration" id="workExp">
                                                 <option value="">Select One</option>
-                                                <option value="1">Less than 1 Year</option>
-                                                <option value="2">1 Year</option>
-                                                <option value="3">2 Years</option>
-                                                <option value="4">3 Years</option>
-                                                <option value="5">4 Years</option>
-                                                <option value="6">5+ Years</option>
+                                                <option value="Less than 1 Year">Less than 1 Year</option>
+                                                <option value="1 Year">1 Year</option>
+                                                <option value="2 Year">2 Years</option>
+                                                <option value="3 Year">3 Years</option>
+                                                <option value="4 Year">4 Years</option>
+                                                <option value="5+ Year">5+ Years</option>
                                             </select>
                                         </label>
                                         <label for="working-time">
                                             Availability (if you are selected):
-                                            <input type="text" name="last-name" class="form-last-name" placeholder="2017-02-22" id="datepicker1" data-date-format="mm/dd/yy" />
+                                            <input type="text" name="availability" class="form-last-name" placeholder="2017-02-22" id="datepicker1" data-date-format="mm/dd/yy" />
                                         </label>
                                     </span>
                                     <span style="float:left">
                                         <label for="working-time">
                                             Comapny Name:
-                                            <input type="text" name="last-name" class="form-last-name" placeholder="e.g. Din Media Group" />
+                                            <input type="text" name="last_company_name" class="form-last-name" placeholder="e.g. Din Media Group" />
                                         </label>
                                         <label for="working-time">
                                             Current Salary:
-                                            <input type="text" name="last-name" class="form-last-name" placeholder="e.g. 20000" />
+                                            <input type="text" name="current_salary" class="form-last-name" placeholder="e.g. 20000" />
                                         </label>
                                     </span>
                                     
                                 </label>
-                                <textarea placeholder="Your message / cover letter sent to the employer"></textarea>
+                                <textarea placeholder="Your message / cover letter sent to the employer" name="cover_letter"></textarea>
 
                                 <!-- Upload CV -->
                                     <div class="nine columns" id="select_cv">
                                             Select CV:
-                                           <select data-placeholder="Choose Category" class="chosen-select-no-single">
-                                                <option>Select</option>
-                                                <option>Default</option>
-                                                <option>abc</option>
+                                           <select data-placeholder="Choose Category" class="chosen-select-no-single" name="cv_id">
+                                               @{
+                                                   Din_Media_Group_Job_Portal.Models.tb_user user;
+                                                   user = (Din_Media_Group_Job_Portal.Models.tb_user)Session["user"];
+                                                   List<Din_Media_Group_Job_Portal.Models.tb_cvs_employee> cvs_list = new List<Din_Media_Group_Job_Portal.Models.tb_cvs_employee>();
+                                                   cvs_list = user.tb_profile_employee.FirstOrDefault().tb_cvs_employee.ToList();
+                                                   if(cvs_list.Count<1)
+                                                   {
+                                                       Response.Redirect("/JobSeeker/ManageResume");
+                                                   }
+                                                   for (int i = 0; i < cvs_list.Count; i++ )
+                                                   {
+                                                       Din_Media_Group_Job_Portal.Models.tb_cvs_employee current_cv = cvs_list.ElementAt(i);
+                                                        <option value="@current_cv.id">@current_cv.cv_name</option>
+                                                   }
+                                               }
                                             </select>
                                         </div>
+                                <!--
                                 <strong>OR</strong>
                                     <div class="col-sm-3">
                                         
@@ -219,6 +231,7 @@
                                         </label>
                                         <span class="fake-input">No file selected</span>
                                     </div>
+                                  -->
                                 <div class="clearfix"></div>
 
                                 <div class="divider"></div>
@@ -238,7 +251,7 @@
 
 
     </div>
-
+    }
 
     <!-- Footer
     ================================================== -->
@@ -257,7 +270,7 @@
         $('#currently-working').change(function () {
             var optionSelected = $(this).find("option:selected");
             var valueSelected = optionSelected.val();
-            if (valueSelected.toUpperCase() == "YES") {
+            if (valueSelected.toUpperCase() == "TRUE") {
                 $('#current-work').show();
             }
             else {

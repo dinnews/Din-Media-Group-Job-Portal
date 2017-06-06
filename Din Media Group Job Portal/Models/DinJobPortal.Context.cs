@@ -25,18 +25,22 @@ namespace Din_Media_Group_Job_Portal.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tb_education_employee> tb_education_employee { get; set; }
         public virtual DbSet<tb_employee_registration_data> tb_employee_registration_data { get; set; }
         public virtual DbSet<tb_employer_registration_data> tb_employer_registration_data { get; set; }
-        public virtual DbSet<tb_user> tb_user { get; set; }
         public virtual DbSet<tb_exception> tb_exception { get; set; }
-        public virtual DbSet<tb_verification_code> tb_verification_code { get; set; }
-        public virtual DbSet<tb_master_masters> tb_master_masters { get; set; }
-        public virtual DbSet<tb_education_employee> tb_education_employee { get; set; }
         public virtual DbSet<tb_experience_employee> tb_experience_employee { get; set; }
         public virtual DbSet<tb_external_url_employee> tb_external_url_employee { get; set; }
         public virtual DbSet<tb_languages_employee> tb_languages_employee { get; set; }
+        public virtual DbSet<tb_master_masters> tb_master_masters { get; set; }
         public virtual DbSet<tb_profile_employee> tb_profile_employee { get; set; }
         public virtual DbSet<tb_projects_employee> tb_projects_employee { get; set; }
         public virtual DbSet<tb_skills_employee> tb_skills_employee { get; set; }
+        public virtual DbSet<tb_user> tb_user { get; set; }
+        public virtual DbSet<tb_profile_employer> tb_profile_employer { get; set; }
+        public virtual DbSet<tb_department_employer> tb_department_employer { get; set; }
+        public virtual DbSet<tb_jobs> tb_jobs { get; set; }
+        public virtual DbSet<tb_apply_job> tb_apply_job { get; set; }
+        public virtual DbSet<tb_cvs_employee> tb_cvs_employee { get; set; }
     }
 }

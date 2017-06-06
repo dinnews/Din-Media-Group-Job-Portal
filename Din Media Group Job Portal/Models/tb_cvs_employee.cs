@@ -11,17 +11,24 @@ namespace Din_Media_Group_Job_Portal.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
-    public partial class tb_skills_employee
+    public partial class tb_cvs_employee
     {
+        public tb_cvs_employee()
+        {
+            this.tb_apply_job = new HashSet<tb_apply_job>();
+        }
+    
         public int id { get; set; }
         public int profile_id { get; set; }
-        [Required]
-        public string skill_name { get; set; }
-        [Required]
-        public string skill_experience { get; set; }
+        public string cv_name { get; set; }
+        public string cv_catagory { get; set; }
+        public string cv_file_name { get; set; }
+        public Nullable<bool> is_cv_hidden { get; set; }
+        public Nullable<bool> is_cv_deleted { get; set; }
+        public Nullable<System.DateTime> cv_upload_date { get; set; }
     
+        public virtual ICollection<tb_apply_job> tb_apply_job { get; set; }
         public virtual tb_profile_employee tb_profile_employee { get; set; }
     }
 }

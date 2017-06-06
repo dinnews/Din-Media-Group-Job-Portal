@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "Edit Profile";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -16,25 +17,7 @@
         });
     });
 </script>
-<script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=tpp2hu82f0f6trwgjx40rllvlhq14lrg9j7jqb8reqbnh26b"></script>
-<script>
-    /*
-tinymce.init({
-    selector: '#summary',
-    menubar: ''
-});*/
-</script>
-<script>
-    $(function () {
-        // Replace all textarea tags with SCEditor
-        $('#summary').sceditor({
-            plugins: 'bbcode',
-            style: '/Content/userContent/css/jquery.sceditor.default.min.css',
-            emoticonsRoot: "/emoticons/",
-            emoticonsEnabled: false
-        });
-    });
-</script>
+
 <div id="wrapper">
 
 
@@ -62,42 +45,52 @@ tinymce.init({
     <div class="container">
         <!-- Submit Page -->
         <div class="sixteen columns">
-            <div class="submit-page">
+            <form action="/Employer/UpdateProfile" method="post" enctype="multipart/form-data">
+                <div class="submit-page">
+                    <div class="form">
 
-                <!-- no of employees -->
-                <div class="form">
-                    <h5>Number of Employees</h5>
-                    <input class="search-field" type="number" placeholder="e.g. 10" value="" />
+                        <h5>Company Location</h5>
+                        <span style="color:red;">@ViewBag.Location</span>
+                        <input class="search-field" type="text" placeholder="e.g. Lahore, Pakistan" value="@Model.tb_profile_employer.FirstOrDefault().company_location" id="company_location" name="company_location" />
+                    </div>
+                    <!-- no of employees -->
+                    <div class="form">
+                        <h5>Number of Employees</h5>
+                        <span style="color:red;">@ViewBag.Employees</span>
+                        <input class="search-field" type="number" placeholder="e.g. 10" value="@Model.tb_profile_employer.FirstOrDefault().no_of_employees" name="no_of_employees" />
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form">
+                        <h5>Date of Establishment of your company</h5>
+                        <span style="color:red;">@ViewBag.Date</span>
+                        <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="@Model.tb_profile_employer.FirstOrDefault().company_establishment_date" id="company-establishment" name="company_establishment_date" />
+                    </div>
+
+                    <!-- Video
+
+                    <div class="form">
+                        <h5>Upload Video <span>(optional)</span></h5>
+                        <label class="upload-btn">
+                            <input type="file" multiple />
+                            <i class="fa fa-upload"></i> Browse
+                        </label>
+                        <span class="fake-input">No file selected</span>
+                    </div> -->
+
+                    <!-- Description -->
+                    <div class="form">
+                        <h5>Summary (About company)</h5>
+                        <span style="color:red;">@ViewBag.Summary</span>
+                        <textarea class="" name="summary" cols="40" rows="5" id="summary" spellcheck="true">@Model.tb_profile_employer.FirstOrDefault().summary</textarea>
+                    </div>
+
+
+
+                    <div class="divider margin-top-0 padding-reset"></div>
+                    <button type="submit" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></button>
                 </div>
-
-                <!-- Title -->
-                <div class="form">
-                    <h5>Date of Establishment of your company</h5>
-                    <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" id="company-establishment" />
-                </div>
-
-                <!-- Video -->
-
-                <div class="form">
-                    <h5>Upload Video <span>(optional)</span></h5>
-                    <label class="upload-btn">
-                        <input type="file" multiple />
-                        <i class="fa fa-upload"></i> Browse
-                    </label>
-                    <span class="fake-input">No file selected</span>
-                </div>
-
-                <!-- Description -->
-                <div class="form">
-                    <h5>Summary (About company)</h5>
-                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
-                </div>
-
-
-
-                <div class="divider margin-top-0 padding-reset"></div>
-                <a href="#" class="button big margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+                </form>
         </div>
     </div>
 

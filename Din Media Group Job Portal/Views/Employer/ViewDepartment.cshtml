@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "View Departments";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -46,34 +47,31 @@
             <p class="margin-bottom-25">Department is a functional organization within your company, e.g. Finance, IT, HR. You can add and manage departments for your company in this area. As you create accounts for employees within your company, you can specify what department they belong to and assign rights accordingly.</p>
 
             <table class="manage-table resumes responsive-table">
-
                 <tr>
-                    <th><i class="fa fa-user"></i> Department Name</th>
+                    <th><i class="fa fa-user"></i></th>
                     <th><i class="fa fa-file-text"></i> Details</th>
                     <th><i class="fa fa-pencil"></i> Edit</th>
                     <th><i class="fa fa-eye-slash"></i> Hide</th>
                     <th><i class="fa fa-remove"></i> Remove</th>
                 </tr>
-
-                <!-- Item #1 -->
-                <tr>
-                    <td class="title">Hr</td>
+                @{
+                    List<Din_Media_Group_Job_Portal.Models.tb_department_employer> departments = Model.tb_profile_employer.FirstOrDefault().tb_department_employer.ToList();
+                    for (int i =0; i < departments.Count; i++)
+                    {
+                        
+                      
+                     <tr>
+                    <td class="title">@departments.ElementAt(i).department_name</td>
                     <td><a href="@Url.Content("~/Employer/DepartmentDetails")">View Detail</a></td>
                     <td><a href=".department-edit" class="popup-with-zoom-anim" > Edit</a></td>
                     <td><a href=""> Hide</a></td>
                     <td><a href=""> Remove</a></td>
 
                 </tr>
-
-                <tr>
-                    <td class="title">Hr</td>
-                    <td><a href="@Url.Content("~/Employer/DepartmentDetails")">View Detail</a></td>
-                    <td><a href=".department-edit" class="popup-with-zoom-anim"> Edit</a></td>
-                    <td><a href=""> Hide</a></td>
-                    <td><a href=""> Remove</a></td>
-
-                </tr>
-
+                    }
+                
+                 }
+                
             </table>
 
             <br>

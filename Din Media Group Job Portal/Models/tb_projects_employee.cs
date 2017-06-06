@@ -18,11 +18,15 @@ namespace Din_Media_Group_Job_Portal.Models
         public int id { get; set; }
         public int profile_id { get; set; }
         [Required]
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Project title must contain atleast 1 Alphabets")]
+        
+        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Title must contain atleast 1 Alphabets")]
         public string project_title { get; set; }
+        [Required]
         [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Position must contain atleast 1 Alphabets")]
         public string position { get; set; }
+
         public string project_url { get; set; }
+
         public bool project_currently_working { get; set; }
         public Nullable<System.DateTime> project_start_date { get; set; }
         public Nullable<System.DateTime> project_end_date { get; set; }
