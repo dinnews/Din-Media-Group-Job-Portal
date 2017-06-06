@@ -39,7 +39,7 @@ namespace Din_Media_Group_Job_Portal.Models
         public string cover_picture { get; set; }
         [Required]
         [AllowHtml]
-        [RegularExpression(@"^(?![\W_]+$)(?!\d+$)[a-zA-Z0-9 .&',_-]+$", ErrorMessage = "Summary must contain atleast 1 Alphabets")]
+        
         public string summary { get; set; }
         [Required]
         [RegularExpression(@"^[\d-]+$", ErrorMessage = "Mobile Number format is 9999-1234567 (Only Digits Allowed)")]

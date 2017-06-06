@@ -170,7 +170,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
         #endregion
 
         [HttpPost]
-        public ActionResult MyAccount(string userName, string password, string rememberme)
+        public ActionResult MyAccount(string email, string password, string rememberme)
         {
            // userName = "bcsf13m040@pucit.edu.pk";
             string encPassword = encryption.encryptPassword(password);
@@ -178,7 +178,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
             tb_user user_from_db_to_verify;
             try
             {
-                user_from_db_to_verify = db.tb_user.Where(user => (user.email == userName && user.password == encPassword)).FirstOrDefault<tb_user>();
+                user_from_db_to_verify = db.tb_user.Where(user => (user.email == email && user.password == encPassword)).FirstOrDefault<tb_user>();
                
                 if (user_from_db_to_verify!=null)
                 {

@@ -158,7 +158,6 @@
     </Compile>
     <Compile Include="Models\model_for_browse_jobs.cs" />
     <Compile Include="Models\ProjectConstants.cs" />
-    <Compile Include="Models\required.cs" />
     <Compile Include="Models\tb_apply_job.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
