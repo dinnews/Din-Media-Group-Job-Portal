@@ -66,13 +66,13 @@ tinymce.init({
                 
                 <!-- no of employees -->
                 <div class="form">
-                    <h5>Number of Employees</h5>
-                    <input class="search-field" type="number" placeholder="e.g. 10" value="" />
+                    <h5>Number of Employees <span id="errror_noOfEmployees" style="color:red;float:right"></span></h5>
+                    <input class="search-field" type="number" placeholder="e.g. 10" value="" id="numberOfEmployees" onblur="numberOfEmployeesValidation()" />
                 </div>
                 
                 <!-- Title -->
                 <div class="form">
-                    <h5>Date of Establishment of your company</h5>
+                    <h5>Date of Establishment of your company <span id="errror_dateOfEstablishment" style="color:red;float:right"></span></h5>
                     <input class="search-field" type="text" placeholder="e.g. 03/22/2017" value="" id="company-establishment" />
                 </div>
                 

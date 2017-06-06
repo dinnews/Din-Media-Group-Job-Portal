@@ -297,7 +297,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                     return RedirectToAction("MyAccount", "User");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

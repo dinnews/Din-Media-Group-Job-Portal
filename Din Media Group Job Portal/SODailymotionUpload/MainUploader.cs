@@ -96,12 +96,18 @@ namespace Din_Media_Group_Job_Portal.SODailymotionUpload
             var request = WebRequest.Create("https://api.dailymotion.com/oauth/token");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
+            
+            //var requestString = String.Format("grant_type=password&client_id={0}&client_secret={1}&username={2}&password={3}",
+            //    HttpUtility.UrlEncode(SettingsProvider.Key),
+            //    HttpUtility.UrlEncode(SettingsProvider.Secret),
+            //    HttpUtility.UrlEncode(SettingsProvider.Username),
+            //    HttpUtility.UrlEncode(SettingsProvider.Password)); ***********************Changes by Saleem************************
 
             var requestString = String.Format("grant_type=password&client_id={0}&client_secret={1}&username={2}&password={3}",
-                HttpUtility.UrlEncode(SettingsProvider.Key),
-                HttpUtility.UrlEncode(SettingsProvider.Secret),
-                HttpUtility.UrlEncode(SettingsProvider.Username),
-                HttpUtility.UrlEncode(SettingsProvider.Password));
+                HttpUtility.UrlEncode("3b2a68e42a7e5bf2dda2"),
+                HttpUtility.UrlEncode("4879dc27390019b8210447c362c98369a74244d9"),
+                HttpUtility.UrlEncode("dinnewsgroup"),
+                HttpUtility.UrlEncode("dinnews123"));
 
             var requestBytes = Encoding.UTF8.GetBytes(requestString);
 
@@ -125,9 +131,14 @@ namespace Din_Media_Group_Job_Portal.SODailymotionUpload
 
         private static void Authorize(string accessToken)
         {
-            var authorizeUrl = String.Format("https://api.dailymotion.com/oauth/authorize?response_type=code&client_id={0}&scope=read+write+manage_videos+delete&redirect_uri={1}",
-                HttpUtility.UrlEncode(SettingsProvider.Key),
-                HttpUtility.UrlEncode(SettingsProvider.CallbackUrl));
+            
+            //var authorizeUrl = String.Format("https://api.dailymotion.com/oauth/authorize?response_type=code&client_id={0}&scope=read+write+manage_videos+delete&redirect_uri={1}",
+            //    HttpUtility.UrlEncode(SettingsProvider.Key),
+            //    HttpUtility.UrlEncode(SettingsProvider.CallbackUrl));***************************Changes By Saleem******************
+
+                  var authorizeUrl = String.Format("https://api.dailymotion.com/oauth/authorize?response_type=code&client_id={0}&scope=read+write+manage_videos+delete&redirect_uri={1}",
+                HttpUtility.UrlEncode("3b2a68e42a7e5bf2dda2"),
+                HttpUtility.UrlEncode("http://localhost/[dynamic_part]*"));
 
             Console.WriteLine("We need permissions to upload. Press enter to open web browser.");
             //Console.ReadLine();

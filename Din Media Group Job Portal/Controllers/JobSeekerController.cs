@@ -226,6 +226,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                employee_project_list.Add(projects);
                employee_languages_list.Add(languages);
                TryValidateModel(employee_profile);
+              
                 if (ModelState.IsValid)
                 {
                     try
@@ -253,7 +254,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                 ViewBag.Exception = e.Message;
                 return View("Error");
             }
-            return View();
+           return RedirectToAction("CreateProfile");
         }
        #endregion
        public ActionResult Catagories()

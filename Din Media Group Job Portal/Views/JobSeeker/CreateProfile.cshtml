@@ -6,6 +6,7 @@
 
 <script type="text/javascript" src="/Content/datepicker/jquery-ui.js"></script>
 <link type="text/css" href="/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/FormValidations/CreateProfileValidations.js"></script>
 <style>
     .ui-datepicker {
         position: relative;
@@ -57,8 +58,8 @@
 
 
                 <div class="form">
-                    <h5>Mobile No</h5>
-                    <input class="search-field" type="text" placeholder="____-_______" value="" name="mobile" />
+                    <h5>Mobile No(e.g 033399887799) <span id="error_mobile" style="color:red;float:right"></span></h5>
+                    <input class="search-field" type="text" placeholder="____-_______" name="mobile" id="mobile" onblur="MobileNoValidation()" />
                 </div>
                 <!-- Email 
                 <div class="form">
@@ -77,17 +78,17 @@
         </div> -->
                 <!-- Logo -->
                 <div class="form">
-                    <h5>Profile Photo <span>(optional)</span></h5>
+                    <h5>Profile Photo <span>(optional)</span> <span id="error_ProfilePhoto" style="color:red;float:right"></span></h5>
                     <label class="upload-btn">
-                        <input type="file" name="profile_picture" />
+                        <input type="file" name="profile_picture" id="profile_picture"  />
                         <i class="fa fa-upload"></i> Browse
                     </label>
                     <span class="fake-input">No file selected</span>
                 </div>
                 <div class="form">
-                    <h5>Cover Photo <span>(optional)</span></h5>
+                    <h5>Cover Photo <span>(optional)</span> <span id="error_CoverPhoto" style="color:red;float:right"></span></h5>
                     <label class="upload-btn">
-                        <input type="file" name="cover_picture" />
+                        <input type="file" name="cover_picture" id="cover_picture" />
                         <i class="fa fa-upload"></i> Browse
                     </label>
                     <span class="fake-input">No file selected</span>
@@ -106,24 +107,24 @@
 
                 <!-- Description -->
                 <div class="form">
-                    <h5>Summary (About you)</h5>
-                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+                    <h5>Summary (About you, more than 50 words) <span id="error_Summary" style="color:red;float:right"></span></h5>
+                    <textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true" onblur="SummaryValidation()"></textarea>
                 </div>
 
                 <!-- Add URLs -->
                 <div class="form with-line">
-                    <h5>URL(s) <span>(optional)</span></h5>
+                    <h5>URL/s <span class="note">(optionally provide links to any of your websites or social network profiles)</span></h5>
                     <div class="form-inside">
 
                         <!-- Adding URL(s) -->
                         <div class="form boxed box-to-clone url-box">
                             <a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-                            <input class="search-field" type="text" placeholder="Name" value="" name="url_name"/>
-                            <input class="search-field" type="text" placeholder="http://" value="" name="url"/>
+                            <span id="error_urlname" style="color:red;float:right"></span><input class="search-field" type="text" placeholder="Name" value="" name="url_name" id="url_name" onblur="UrlNameValidation()" />
+                            <span id="error_url" style="color:red;float:right"></span><input class="search-field" type="text" placeholder="http://" value="" name="url" id="url" onblur="UrlValidation()" />
                         </div>
 
                         <a href="#" class="button gray add-url add-box"><i class="fa fa-plus-circle"></i> Add URL</a>
-                        <p class="note">Optionally provide links to any of your websites or social network profiles.</p>
+                        <p class="note"></p>
                     </div>
                 </div>
 

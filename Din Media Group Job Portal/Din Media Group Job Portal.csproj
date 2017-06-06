@@ -755,6 +755,8 @@
     <Content Include="Scripts\adminScripts\js\select2.min.js" />
     <Content Include="Scripts\adminScripts\js\toggles.min.js" />
     <Content Include="Scripts\adminScripts\js\wysihtml5-0.3.0.min.js" />
+    <Content Include="Scripts\FormValidations\CompleteProfileEmployerValidations.js" />
+    <Content Include="Scripts\FormValidations\CreateProfileValidations.js" />
     <Content Include="Scripts\FormValidations\EmployeeSignUpValidations.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -792,9 +794,10 @@
     <Content Include="Scripts\userScripts\scripts\tinymce.min.js" />
     <Content Include="Scripts\userScripts\scripts\waypoints.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="secret.xml" />
     <Content Include="SODailymotionUpload\secret.xml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
