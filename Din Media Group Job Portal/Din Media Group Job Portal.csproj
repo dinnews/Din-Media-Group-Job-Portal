@@ -158,7 +158,6 @@
     </Compile>
     <Compile Include="Models\model_for_browse_jobs.cs" />
     <Compile Include="Models\ProjectConstants.cs" />
-    <Compile Include="Models\required.cs" />
     <Compile Include="Models\tb_apply_job.cs">
       <DependentUpon>DinJobPortal.tt</DependentUpon>
     </Compile>
@@ -810,7 +809,9 @@
     <Content Include="Scripts\userScripts\scripts\tinymce.min.js" />
     <Content Include="Scripts\userScripts\scripts\waypoints.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="SODailymotionUpload\secret.xml" />
+    <Content Include="SODailymotionUpload\secret.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
