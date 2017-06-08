@@ -672,7 +672,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                     db.Entry(profile).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     Session["user"] = session_user;
-                    return RedirectToAction("EditProfile");
+                    return RedirectToAction("Dashboard");
 
                 }
                 else
@@ -722,7 +722,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                             session_user.tb_profile_employer.Clear();
                             session_user.tb_profile_employer.Add(pr);
                             Session["user"] = session_user;
-                            return RedirectToAction("EditProfile");
+                            return RedirectToAction("Dashboard");
 
                         }
 

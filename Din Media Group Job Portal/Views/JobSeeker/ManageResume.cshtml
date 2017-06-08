@@ -105,10 +105,10 @@
                         <div class="upload-info"><strong>Upload your CV </strong> <span>Max. file size: 10MB</span></div>
                         <div class="clearfix"></div>
                         <label class="upload-btn">
-                            <input type="file" multiple name="cv_file_name" />
+                            <input type="file" multiple name="cv_file_name" id="profile_picture_upload" />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-profile-picture">No file selected</span>
                         <div class="divider"></div>
                         <button class="send">Save CV</button>
                     </form>
@@ -161,3 +161,41 @@
 
 </div>
 <!-- Wrapper / End -->
+<script>
+    $(function () {
+
+        $("#profile_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    size = size / 1024;
+                    //  $("#dvPreview_profile").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        if (typeof (FileReader) != "undefined") {
+
+                            $('#input-name-profile-picture').text(name);
+                            //reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+    });
+</script>
