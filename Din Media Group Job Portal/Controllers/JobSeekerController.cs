@@ -281,7 +281,54 @@ namespace Din_Media_Group_Job_Portal.Controllers
         }
        public ActionResult Dashboard()
        {
-           return View();
+           List<tb_master_masters> master = Master_Master.master_list;
+           tb_user session_user;
+           tb_profile_employee profile;
+           try
+           {
+               session_user = (tb_user)Session["user"];
+               if (session_user != null)
+               {
+                   if (session_user.is_active == false || session_user.is_verified == false)
+                   {
+                       ViewBag.ErrorMessage = "You have not verified your account yet Kindly CHeck your email";
+                   }
+                   else
+                   {
+                       profile = db.tb_profile_employee.Where(pro => pro.email == session_user.email)
+                           .Include(pro => pro.tb_education_employee)
+                           .Include(pro => pro.tb_experience_employee)
+                           .Include(pro => pro.tb_external_url_employee)
+                           .Include(pro => pro.tb_languages_employee)
+                           .Include(pro => pro.tb_projects_employee)
+                           .Include(pro => pro.tb_skills_employee)
+                           .FirstOrDefault();
+                       if (profile == null)
+                       {
+                           return RedirectToAction("CreateProfile");
+                       }
+                       else
+                       {
+                           session_user.tb_profile_employee.Clear();
+                           session_user.tb_profile_employee.Add(profile);
+
+                           return View(session_user);
+                       }
+                   }
+               }
+               else
+               {
+                   return RedirectToAction("MyAccount", "User");
+               }
+           }
+           catch (Exception e)
+           {
+               objUtility = new UtilityMethods.Utility();
+               objUtility.SaveException_for_ExceptionLog(e);
+               ViewBag.Exception = e.Message;
+               return RedirectToAction("DbError", "User", e);
+           }
+           return RedirectToAction("MyAccount", "User");
        }
         public ActionResult UserProfile()
         {
@@ -313,6 +360,7 @@ namespace Din_Media_Group_Job_Portal.Controllers
                         }
                         else
                         {
+                            session_user.tb_profile_employee.Clear();
                             session_user.tb_profile_employee.Add(profile);
                             
                             return View(session_user);

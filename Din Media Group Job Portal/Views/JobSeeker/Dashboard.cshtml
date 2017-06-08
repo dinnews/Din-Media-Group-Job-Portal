@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -18,20 +19,20 @@
         <div class="sixteen columns" style="margin-bottom:0;">
             <!-- Content
             ================================================== -->
-            <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
+            <div id="titlebar" class="resume photo-bg" style="background: url(/Jobseeker_cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture) no-repeat;background-size: 100% 100%;">
                 <div class="container">
                     <div class="ten columns">
                         <div class="resume-titlebar">
-                            <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
+                            <img src="~/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" alt="">
                             <div class="resumes-list-content">
                                 <h4 style="color:white;">
-                                    Danish Taimoor
-                                    <span style="color:white;">UX/UI Graphic Designer</span>
+                                    @Model.tb_employee_registration_data.FirstOrDefault().first_name  @Model.tb_employee_registration_data.FirstOrDefault().last_name
+                                    <span style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().job_title</span>
 
                                 </h4>
-                                <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i> Gulberg, Lahore</span>
+                                <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i> @Model.tb_employee_registration_data.FirstOrDefault().location</span>
                                 <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
-                                <div class="skills">
+                                <div class="skills" style="display:none">
                                     <span>JavaScript</span>
                                     <span>PHP</span>
                                     <span>WordPress</span>

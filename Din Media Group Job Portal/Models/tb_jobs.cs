@@ -12,6 +12,7 @@ namespace Din_Media_Group_Job_Portal.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     
     public partial class tb_jobs
     {
@@ -23,6 +24,7 @@ namespace Din_Media_Group_Job_Portal.Models
         public int id { get; set; }
         public int user_id { get; set; }
         [Required]
+        [AllowHtml]
         public string job_description { get; set; }
         [Required]
         public string job_catagory { get; set; }

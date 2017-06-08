@@ -1,10 +1,18 @@
-﻿@{
+﻿@model Din_Media_Group_Job_Portal.Models.tb_user
+
+@{
     ViewBag.Title = "Job Portal || A Project of Din Media Group";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-
+<script type="text/javascript" src="/Scripts/userScripts/scripts/EditProfile.js"></script>
+<style>
+    .profil-heading {
+        color: #0079d6;
+        font-size: x-large;
+    }
+</style>
 <div id="wrapper">
-   
+
     <!-- Header
     ================================================== -->
     <header class="sticky-header full-width">
@@ -14,20 +22,27 @@
     <script>
         $(".sticky-header #logo a img").attr("src", "/Content/userContent/images/logo.png");
     </script>
+
     <!-- Titlebar
     ================================================== -->
-    <div id="titlebar" class="resume photo-bg" style="background: url(/Content/userContent/images/job-page-photo.jpg)">
+
+    <div id="titlebar" class="resume photo-bg" style="background: url(/Jobseeker_cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture) no-repeat;background-size: 100% 100%;">
+
         <div class="container">
+
             <div class="ten columns">
                 <div class="resume-titlebar">
-                    <img src="~/Content/userContent/images/resumes-list-avatar-01.png" alt="">
+                    <a href="#" class="">
+                        <img src="/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" alt="">
+                    </a>
                     <div class="resumes-list-content">
                         <h4 style="color:white;">
-                            Danish Taimoor
-                            <span style="color:white;">UX/UI Graphic Designer</span>
+                            @Model.tb_employee_registration_data.FirstOrDefault().first_name  @Model.tb_employee_registration_data.FirstOrDefault().last_name
+
+                            <span style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().job_title</span>
 
                         </h4>
-                        <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i>Gulberg, Lahore</span>
+                        <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i>@Model.tb_employee_registration_data.FirstOrDefault().location</span>
                         <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
                         <div class="skills">
                             <span>JavaScript</span>
@@ -42,184 +57,218 @@
 
             <div class="six columns">
                 <div class="two-buttons">
-                    <a href="#small-dialog" class="popup-with-zoom-anim button"><i class="fa fa-envelope"></i> Send Message</a>
+                    <a href="/JobSeeker/EditProfile" class="button" style="width:150px;"><i class="fa fa-upload"></i> Edit Profile</a>
 
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
-                        <div class="small-dialog-headline">
-                            <h2>Send Message to Danish</h2>
-                        </div>
-
-                        <div class="small-dialog-content">
-                            <form action="#" method="post">
-                                <input type="text" placeholder="Full Name" value="" />
-                                <input type="text" placeholder="Email Address" value="" />
-                                <textarea placeholder="Message"></textarea>
-
-                                <button class="send">Submit Query</button>
-                            </form>
-                        </div>
-
-                    </div>
-                    <a href="#" class="button dark"><i class="fa fa-star"></i> Bookmark This Resume</a>
+                    <a href="#" class="button dark" style="width:150px;"><i class="fa fa-print"></i> Print Profile</a>
                 </div>
             </div>
-
         </div>
+        <span style="float:right; bottom:10px; display:none;">
+            <a href=".cover-upload" class="button popup-with-zoom-anim">
+                <i class="fa fa-upload">Edit Cover</i>
+            </a>
+        </span>
     </div>
-
 
     <!-- Content
     ================================================== -->
-    <div class="container">
+    <div class="container" id="page_container">
         <!-- Recent Jobs -->
-        <div class="eight columns">
+        <div class="eight columns" id="summary_div">
             <div class="padding-right">
-                <h3 class="margin-bottom-15">About Me</h3>
-                <p class="margin-reset">
-                    The Food Service Specialist ensures outstanding customer service is provided to food customers and that all food offerings meet the required stock levels and presentation standards. Beginning your career as a Food Steward will give you a strong foundation in Speedway’s food segment that can make you a vital member of the front line team!
-                </p>
-                <br>
-                <p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
-                <ul class="list-1">
-                    <li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
-                    <li>Must be available to work required shifts including weekends, evenings and holidays.</li>
-                    <li>Must be able to perform repeated bending, standing and reaching.</li>
-                    <li>Must be able to occasionally lift up to 50 pounds</li>
-                </ul>
+                <span style="float:left;">
+                    <strong class="margin-bottom-15 profil-heading">About Me</strong>
+                </span>
+                <br />
+                <div id="summary_text">
+
+                </div>
+                @Html.Raw(Server.HtmlDecode(Model.tb_profile_employee.FirstOrDefault().summary))
+
 
             </div>
         </div>
+        <!-- Widgets -->
+        @if (Model.tb_profile_employee.FirstOrDefault().video_id != null)
+        {
+            <div class="eight columns video_div">
+                <script src="https://api.dmcdn.net/all.js"></script>
+                <div id="player" style="height:300px;"></div>
+                <script>
+                    var player = DM.player(document.getElementById("player"), {
+                        video: "@Model.tb_profile_employee.FirstOrDefault().video_id",
+                        width: "100%",
+                        height: "100%",
+                        params: {
+                            autoplay: true,
+                            mute: true,
+                            "sharing-enable": false,
+                            related: 0,
+                            "ui-logo": false
+                        }
+                    });
+                </script>
+            </div>
+        }
 
 
         <!-- Widgets -->
-        <div class="eight columns">
-
-            <h3 class="margin-bottom-20">Education</h3>
-
+        <div class="eight columns" id="education_div">
+            <span style="float:left;">
+                <strong class="margin-bottom-15 profil-heading">Education</strong>
+            </span>
+            <br />
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
-                    <small class="date">2012 - 2015</small>
-                    <strong>Bsc Computing at College of Science Lahore</strong>
-                </dt>
-                <dd>
-                    <p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
-                </dd>
-                <dt>
-                    <small class="date">2006 - 2010</small>
-                    <strong>GCSE something at King Edward Lahore</strong>
-                </dt>
-                <dd>
-                    <p>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</p>
-                </dd>
-                <dt>
-                    <small class="date">2004 - 2006</small>
-                    <strong>Test 2 at Test</strong>
-                </dt>
-                <dd>
-                    <p>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</p>
-                </dd>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_education_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_education_employee edu = Model.tb_profile_employee.FirstOrDefault().tb_education_employee.ElementAt(i);
+
+                    <dt>
+                        
+                        <span>
+                            <small class="date">@edu.education_start_date - @edu.education_end_date</small>
+                            <strong>@edu.degree_title @edu.field_of_study at @edu.institution_name</strong>
+                        </span>
+
+                    </dt>
+                    <dd>
+                        @if (edu.education_notes != null)
+                        {
+
+                            <p> @edu.education_notes </p>
+                        }
+
+                    </dd>
+                }
+
+
             </dl>
         </div>
-       
+
         <div class="eight columns">
 
-            <h3 class="margin-bottom-20">Experience</h3>
-
+            <span style="float:left;">
+                <strong class="margin-bottom-15 profil-heading">Exprience</strong>
+            </span>
+            <br />
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
-                    <small class="date">Feb 2012 - Jan 2013</small><br />
-                    <small>.NET Developer</small>
-                    <strong>Microsoft pvt. Ltd.</strong>
-                </dt>
-                <dd>
-                    Experience at Microsoft was mind blowing and had great opportunity to learn and move forward.
-                </dd>
-                <dt>
-                    <small class="date">Feb 2014 - Jan 2015</small><br />
-                    <small>.NET Developer</small>
-                    <strong>Texel Pvt. Ltd.</strong>
-                </dt>
-                <dd>
-                    Experience at Texel was mind blowing and had great opportunity to learn and move forward.
-                </dd>
-                <dt>
-                    <small class="date">Feb 2015 - Jan 2016</small><br />
-                    <small>Project Manager</small>
-                    <strong>PlanX pvt. Ltd.</strong>
-                </dt>
-                <dd>
-                    Experience at Planx was mind blowing and had great opportunity to learn and move forward.
-                </dd>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_experience_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_experience_employee exp = Model.tb_profile_employee.FirstOrDefault().tb_experience_employee.ElementAt(i);
+                    <dt>
+                        
+                        <span>
+                            <small class="date">
+                                @if (exp.experience_start_date != null)
+                                {@exp.experience_start_date} - @if (@exp.experience_currently_working) { Write("Present"); }
+                                else if (exp.experience_end_date != null)
+                                {@exp.experience_end_date}
+
+                            </small><br />
+                            <small>@exp.job_title</small>
+                            <strong>@exp.company_name, @exp.company_location</strong>
+                        </span>
+                    </dt>
+                    <dd>
+                        @if (exp.experience_notes != null)
+                        {
+
+                            <p> @exp.experience_notes </p>
+                        }
+                    </dd>
+
+                }
+
+
             </dl>
         </div>
         <div class="eight columns">
 
-            <h3 class="margin-bottom-20">Projects</h3>
-
+            <span style="float:left;">
+                <strong class="margin-bottom-15 profil-heading">Projects</strong>
+            </span>
+            <br />
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
-                    <small class="date">Jun 2016 - Aug 2016</small> <br />
-                    <strong>Magnetic character recognition From Cheques</strong>
-                </dt>
-                <dd>
-                    <b>Project Manager at College of Science Lahore</b><br />
-                    <small>Completeing this project was considered a high achievement for us</small>
-                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
-                </dd>
-                <dt>
-                    <small class="date">Jun 2015 - Aug 2015</small> <br />
-                    <strong>Barcode Recognition from images</strong>
-                </dt>
-                <dd>
-                    <b>Project Manager at College of Science Lahore</b><br />
-                    <small>Completeing this project was considered a high achievement for us</small>
-                    <p> <a href="http://www.google.com" target="_blank">Link of Project</a></p>
-                </dd>
-                
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_projects_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_projects_employee proj = Model.tb_profile_employee.FirstOrDefault().tb_projects_employee.ElementAt(i);
+                    <dt>
+                        
+                        <span>
+                            <small class="date">@if (proj.project_start_date != null)
+                            {@proj.project_start_date} - @if (@proj.project_currently_working) { Write("Present"); }
+                            else if (proj.project_end_date != null)
+                            {@proj.project_end_date}</small> <br />
+                            <small>@proj.project_title</small>
+                            <strong>@proj.position</strong>
+                        </span>
+
+                    </dt>
+                    <dd>
+                        @if (proj.project_notes != null)
+                        {
+
+                            <p> @proj.project_notes </p>
+                        }
+                        <p> <a href="@if (proj.project_url.IsEmpty()) { Write("#"); }else{@proj.project_url}" target="_blank">Link of Project</a></p>
+                    </dd>
+
+
+                }
+
+
             </dl>
         </div>
 
         <!-- Languages and Skilss-->
-        <div class="nine columns">
+        <div class="eight columns">
 
-            <h3 class="margin-bottom-20">Skills</h3>
-
+            <span style="float:left;">
+                <strong class="margin-bottom-15 profil-heading">Skills</strong>
+            </span>
+            <br />
             <!-- Resume Table -->
             <dl class="resume-table">
-                <dt>
-                    <strong class="date">Data Structure<small> - 3 years Experience</small></strong>
-                </dt>
-                <dt>
-                    <strong class="date">Image Processing<small> - Less than one year Experience</small></strong>
-                </dt>
-                <dt>
-                    <strong class="date">Asp.NET MVC<small> - 5+ years Experience</small></strong>
-                </dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_skills_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_skills_employee skill = Model.tb_profile_employee.FirstOrDefault().tb_skills_employee.ElementAt(i);
+                    <dt>
+                        
+                        <span>
+                            <strong class="date">@skill.skill_name<small> - @skill.skill_experience</small></strong>
+                        </span>
+                    </dt>
+                }
 
             </dl>
         </div>
         <div class="seven columns">
 
-            <h3 class="margin-bottom-20">Languages</h3>
-
+            <span style="float:left;">
+                <strong class="margin-bottom-15 profil-heading">Languages</strong>
+            </span>
+            <br />
             <!-- Resume Table -->
             <dl class="resume-table">
-               
-                <dt>
-                    <strong class="date">Urdu<small> - Beginner</small></strong>
-                </dt>
-                <dt>
-                    <strong class="date">Balochi<small> - Expert</small></strong>
-                </dt>
-                <dt>
-                    <strong class="date">English<small> - Intermediate</small></strong>
-                </dt>
+                @for (int i = 0; i < Model.tb_profile_employee.FirstOrDefault().tb_languages_employee.Count; i++)
+                {
+                    Din_Media_Group_Job_Portal.Models.tb_languages_employee language = Model.tb_profile_employee.FirstOrDefault().tb_languages_employee.ElementAt(i);
+                    <dt>
+                        
+                        <span>
+                            <strong class="date">@language.language_name<small> - @language.language_proficiency</small></strong>
+                        </span>
+                    </dt>
+
+                }
+
+
             </dl>
         </div>
-        
+
     </div>
 
     <!-- Footer
@@ -232,3 +281,25 @@
     <div id="backtotop"><a href="#"></a></div>
 
 </div>
+<script>
+    if ($('#page_container').has('.video_div')) {
+        var summary_height = $('#summary_div').height();
+        var education_height = $('.video_div').height();
+        if (education_height < summary_height) {
+            $('.video_div').height(summary_height);
+        }
+        else if (summary_height < education_height) {
+            $('#summary_div').height(education_height);
+        }
+    }
+    else {
+        var summary_height = $('#summary_div').height();
+        var education_height = $('#education_div').height();
+        if (education_height < summary_height) {
+            $('#education_div').height(summary_height);
+        }
+        else if (summary_height < education_height) {
+            $('#summary_div').height(education_height);
+        }
+    }
+</script>

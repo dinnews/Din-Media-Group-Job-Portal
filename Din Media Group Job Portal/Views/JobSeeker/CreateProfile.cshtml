@@ -79,18 +79,18 @@
                     <div class="form">
                         <h5>Profile Photo <span>(optional)</span></h5>
                         <label class="upload-btn">
-                            <input type="file" name="profile_picture"  required/>
+                            <input type="file" id="profile_picture_upload" name="profile_picture" required />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-profile-picture">No file selected</span>
                     </div>
                     <div class="form">
                         <h5>Cover Photo <span>(optional)</span></h5>
                         <label class="upload-btn">
-                            <input type="file" name="cover_picture" required />
+                            <input type="file" id="cover_picture_upload" name="cover_picture" required />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-cover-picture">No file selected</span>
                     </div>
 
                     <!-- Email -->
@@ -98,10 +98,10 @@
                         <h5>Video <span>(optional)</span></h5>
 
                         <label class="upload-btn">
-                            <input class="search-field" type="file" placeholder="A link to a video about you" value="" name="video" />
+                            <input class="search-field" type="file" id="profile_video_upload" name="video" />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-profile-video">No file selected</span>
                     </div>
 
                     <!-- Description -->
@@ -314,5 +314,103 @@
             }
         });
 
+    });
+</script>
+<script>
+    $(function () {
+
+        $("#profile_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    size = size / 1024;
+                  //  $("#dvPreview_profile").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        if (typeof (FileReader) != "undefined") {
+                           
+                            $('#input-name-profile-picture').text(name);
+                            //reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        $("#cover_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                       
+                        if (typeof (FileReader) != "undefined") {
+                            $('#input-name-cover-picture').text(name);
+                            //reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        $("#profile_video_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                name = this.files[0].name;
+
+                $("#dvPreview_profile_video").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.flv|.avi|.mkv|.wmv)$/;
+                if (regex.test(file.name.toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                            $('#input-name-profile-video').text(name);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                    //}
+                } else {
+                    alert("Please upload a valid image file.");
+                    //contactForm.reset();
+                }
+                img = _URL.createObjectURL(this.files[0]);
+            }
+        });
+      
     });
 </script>

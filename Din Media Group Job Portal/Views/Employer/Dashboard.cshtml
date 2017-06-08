@@ -52,7 +52,7 @@
     <div class="container">
         <br />
         <div class="twelve columns">
-            <div id="titlebar" class="resume photo-bg custom-dashboard-cover" style="background: url(/Employer_cover_images/@Model.tb_profile_employer.FirstOrDefault().cover_picture)">
+            <div id="titlebar" class="resume photo-bg custom-dashboard-cover" style="background: url(/Employer_cover_images/@Model.tb_profile_employer.FirstOrDefault().cover_picture) no-repeat;background-size: 100% 100%;">
                 <div class="container twelve columns">
 
                     <div class="twelve columns">
@@ -86,12 +86,12 @@
                 </div>
             </div>
             <div class="twelve columns">
-                <h4>Profile Status</h4>
+                <h4>Dashboard Status</h4>
                 <div id="myProgress" class="five columns">
                     <div id="myBar">10%</div>
                 </div>
                 <div class="six columns" style=" line-height: 15px;">
-                    <a href="@Url.Content("~/Employer/EditProfile")" style=" line-height: 15px;">Edit profile</a>
+                    <a href="@Url.Content("~/Employer/EditProfile")" style=" line-height: 15px;">Edit Dashboard</a>
                 </div>
                 <br />
             </div>

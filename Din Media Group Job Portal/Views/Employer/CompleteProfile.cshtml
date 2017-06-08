@@ -35,7 +35,7 @@
     <div id="titlebar" class="single submit-page" style="background: url(/Employer_images/cover_images/edit_cover.jpg) fixed border-box; background-size: contain; background-size: cover; ">
         <div class="container" style="background-color: rgba(211, 211, 211, 0.5);">
             <div class="sixteen columns">
-                <h2><i class="fa fa-plus-circle"></i> Complete Profile</h2>
+                <h2><i class="fa fa-plus-circle"></i> Complete Dashboard</h2>
             </div>
         </div>
     </div>
@@ -66,18 +66,18 @@
                     <div class="form">
                         <h5>Logo <span></span></h5>
                         <label class="upload-btn">
-                            <input type="file" name="profile_picture" />
+                            <input type="file" name="profile_picture" id="profile_picture_upload" />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-profile-picture">No file selected</span>
                     </div>
                     <div class="form">
                         <h5>Cover image <span>(optional)</span></h5>
                         <label class="upload-btn">
-                            <input type="file" name="cover_picture" />
+                            <input type="file" name="cover_picture" id="cover_picture_upload" />
                             <i class="fa fa-upload"></i> Browse
                         </label>
-                        <span class="fake-input">No file selected</span>
+                        <span class="fake-input" id="input-name-cover-picture">No file selected</span>
                     </div>
 
                     <!-- Video
@@ -136,3 +136,78 @@
 
 </div>
 <!-- Wrapper / End -->
+<script>
+    $(function () {
+
+        $("#profile_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    size = size / 1024;
+                    //  $("#dvPreview_profile").html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+                        if (typeof (FileReader) != "undefined") {
+
+                            $('#input-name-profile-picture').text(name);
+                            //reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        $("#cover_picture_upload").change(function () {
+            var _URL = window.URL || window.webkitURL;
+
+            var file, img;
+            var h, w, size, name;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    //alert(this.width + " " + this.height);
+                    h = this.height;
+                    w = this.width;
+                    size = file.size;
+                    name = file.name;
+                    //alert(name);
+                    //alert(size);
+                    size = size / 1024;
+                    //alert(h+w);
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    if (regex.test(file.name.toLowerCase())) {
+
+                        if (typeof (FileReader) != "undefined") {
+                            $('#input-name-cover-picture').text(name);
+                            //reader.readAsDataURL(file);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                        //}
+                    } else {
+                        alert("Please upload a valid image file.");
+                        contactForm.reset();
+                    }
+
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        
+    });
+</script>

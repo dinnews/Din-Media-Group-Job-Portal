@@ -26,25 +26,26 @@
     <!-- Titlebar
     ================================================== -->
     
-    <div id="titlebar" class="resume photo-bg" style="background: url(/Jobseeker_cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture)">
-        
+    <div id="titlebar" class="resume photo-bg" style="background: url(/Jobseeker_cover_images/@Model.tb_profile_employee.FirstOrDefault().cover_picture) no-repeat;background-size: 100% 100%;">
+
         <div class="container">
-            
+
             <div class="ten columns">
                 <div class="resume-titlebar">
                     <a href=".profile-upload" class="popup-with-zoom-anim">
                         <img src="/Jobseeker_Profile_images/@Model.tb_profile_employee.FirstOrDefault().profile_picture" alt="" title="Click to change Profile Picture">
-                    </a> 
-                 
+                    </a>
+
                     <div class="resumes-list-content">
-                      <h4 style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().first_name  @Model.tb_employee_registration_data.FirstOrDefault().last_name
-                          <a href=".profile-edit" class="popup-with-zoom-anim" style="margin-left:40px;"><i class="fa fa-pencil"></i></a>
-                        <span style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().job_title</span>
-                         
-                      </h4>
+                        <h4 style="color:white;">
+                            @Model.tb_employee_registration_data.FirstOrDefault().first_name  @Model.tb_employee_registration_data.FirstOrDefault().last_name
+                            <a href=".profile-edit" class="popup-with-zoom-anim" style="margin-left:40px; display:none;"><i class="fa fa-pencil"></i></a>
+                            <span style="color:white;">@Model.tb_employee_registration_data.FirstOrDefault().job_title</span>
+
+                        </h4>
                         <span class="icons" style="color:white;"><i class="fa fa-map-marker"></i>@Model.tb_employee_registration_data.FirstOrDefault().location</span>
-                        <span class="icons" style="color:white;"><a href="#" style="color:white;"><i class="fa fa-link"></i> My Video</a></span>
-                        <div class="skills">
+                        <span class="icons" style="color:white;"><a href=".profile-edit" class="popup-with-zoom-anim" style="color:white;"><i class="fa fa-link"></i> Update Video</a></span>
+                        <div class="skills" style="display:none">
                             <span>JavaScript</span>
                             <span>PHP</span>
                             <span>WordPress</span>
@@ -59,7 +60,7 @@
                 <div class="two-buttons">
                     <a href=".cover-upload" class="popup-with-zoom-anim button" style="width:150px;"><i class="fa fa-upload"></i> Change Cover</a>
 
-                    <a href="#" class="button dark" style="width:150px;" ><i class="fa fa-print"></i> Print Profile</a>
+                    <a href="#" class="button dark" style="width:150px;"><i class="fa fa-print"></i> Print Profile</a>
                 </div>
             </div>
         </div>
@@ -133,7 +134,7 @@
                     <dt>
                     <span style="float:right;">
                         
-                        <a href=".education-edit" class="popup-with-zoom-anim" onclick="UpdateEducation(@edu.id, @edu.profile_id, '@edu.institution_name' , '@edu.degree_title.ToString()', '@edu.field_of_study', '@edu.education_start_date.ToString()', '@edu.education_end_date.ToString()')"><i class="fa fa-pencil"></i></a>
+                        <a href=".education-edit" class="popup-with-zoom-anim" onclick="UpdateEducation(@edu.id, @edu.profile_id, '@edu.institution_name' , '@edu.degree_title.ToString()', '@edu.field_of_study', '@edu.education_start_date.ToString()', '@edu.education_end_date.ToString()', '@edu.education_notes')"><i class="fa fa-pencil"></i></a>
                     </span>
                     <span >
                         <small class="date">@edu.education_start_date - @edu.education_end_date</small>
